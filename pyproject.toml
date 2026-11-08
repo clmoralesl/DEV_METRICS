@@ -7,7 +7,16 @@ name = "devmetrics"
 version = "0.1.0"
 description = "Agente LLM y pipeline RAG para perfilar desarrolladores por arquetipos"
 requires-python = ">=3.11"
-dependencies = ["python-dotenv", "requests"]
+dependencies = [
+    "python-dotenv",
+    "requests",
+    "httpx",
+    "langchain-core>=1.7.5,<2",
+    "langchain-google-genai>=4.4,<5",
+    "langchain-ollama>=1.1,<2",
+    "fastembed>=0.9,<1",
+    "truststore",
+]
 
 [project.optional-dependencies]
 dev = ["pytest", "ruff"]

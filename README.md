@@ -26,6 +26,48 @@ copy .env.example .env        # Linux/macOS: cp .env.example .env
 
 Completar en `.env` las claves indicadas en `.env.example` (nunca versionar `.env`).
 
+## Modelos de lenguaje y embeddings
+
+El paquete `devmetrics.llm` ofrece una interfaz unica (`ClienteLLM`) sobre LangChain con dos proveedores: Gemini (principal) y Ollama (respaldo local). Ante red caida, clave invalida o cupo agotado, reintenta con espera creciente (maximo 2 reintentos) y conmuta al respaldo; si ambos fallan, informa la causa de cada uno.
+
+### Clave de Google AI Studio (Gemini)
+
+1. Entrar a https://aistudio.google.com/apikey con una cuenta Google y crear una clave (la capa gratuita basta).
+2. Copiarla en `.env` como `GOOGLE_API_KEY=...`. El archivo `.env` esta ignorado por Git; nunca subir la clave.
+
+### Ollama (respaldo local)
+
+1. Instalar desde https://ollama.com/download (Windows: `OllamaSetup.exe`).
+2. Descargar un modelo pequeno: `ollama pull qwen3:0.6b`.
+3. Si Ollama corre en otra direccion, definir `OLLAMA_HOST` en `.env`.
+
+### Seleccion por variables de entorno (todas opcionales)
+
+- `DEVMETRICS_LLM_PROVIDER`: `gemini` (por defecto) u `ollama`.
+- `DEVMETRICS_LLM_FALLBACK`: `ollama` (por defecto), `gemini` o `none`.
+- `DEVMETRICS_GEMINI_MODEL` (por defecto `gemini-3.5-flash-lite`) y `DEVMETRICS_OLLAMA_MODEL` (por defecto `qwen3:0.6b`).
+- `DEVMETRICS_LLM_TEMPERATURE` (0.0), `DEVMETRICS_LLM_MAX_TOKENS` (1024) y `DEVMETRICS_LLM_MAX_RETRIES` (2).
+- Un 429 se trata como cupo agotado: no se reintenta y se conmuta al respaldo (no distingue el limite por minuto del diario). Las respuestas vacias tambien conmutan.
+
+```python
+from devmetrics.llm import ClienteLLM
+print(ClienteLLM().invocar("Responde solo: listo"))
+```
+
+### Embeddings locales
+
+`ModeloEmbeddings` usa `paraphrase-multilingual-MiniLM-L12-v2` mediante fastembed (ONNX, sin torch). La primera llamada descarga el modelo (unos 220 MB) a la cache local. Usa el almacen de certificados del sistema (`truststore`), necesario si un antivirus o proxy inspecciona HTTPS.
+
+### Pruebas de integracion (opcionales)
+
+Se omiten por defecto. Para ejecutarlas, con la clave, Ollama y el modelo listos:
+
+```
+set DEVMETRICS_INTEGRACION=1
+set DEVMETRICS_OLLAMA_MODEL=qwen3:0.6b
+python -m pytest tests/test_llm_integracion.py -rs
+```
+
 ## Verificacion
 
 ```
