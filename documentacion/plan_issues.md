@@ -53,17 +53,18 @@ Etiquetas: infraestructura, hito-0. Tamano: M. Depende de: ninguno.
 #### #3 Analisis del caso y requisitos
 Etiquetas: documentacion, hito-1. Tamano: M. Depende de: 1.
 - `documentacion/analisis.md`: actores (reclutador, lider de proyecto), requisitos funcionales y no funcionales numerados, casos de uso, consultas tipo, y criterios de aceptacion medibles.
+- Incluir como caso de uso al desarrollador de poca actividad (por ejemplo, quien estudia y trabaja) y un requisito de no forzar una clase cuando la evidencia es insuficiente; el perfil se expresa como mezcla con nivel de confianza.
 - Criterio de aceptacion: cada requisito se traza a una funcionalidad y a una prueba prevista.
 
 #### #4 Modelo de arquetipos y senales de actividad
 Etiquetas: dominio, hito-1. Tamano: M. Depende de: 3.
-- Definir Druid, Cleric y Bard con senales observables: por ejemplo, proporcion de cambios en infraestructura y base de datos, revisiones de codigo y correccion de bugs, documentacion y frontend, colaboracion en PR.
-- Funcion pura que calcula un puntaje por clase a partir de metadatos, con empates y datos insuficientes definidos.
-- Criterio de aceptacion: pruebas unitarias de limites (sin actividad, una sola clase dominante, empate); servira como referencia para validar al LLM en el issue 13.
+- Definir Druid, Cleric y Bard con senales observables que no dependan de prefijos de commit: rutas de archivos tocados (diccionario configurable), tipo de cambio de cada commit, revisiones y comentarios en PR ajenos, issues atendidos, y volumen y diversidad de la actividad.
+- Funcion pura que calcula una mezcla (puntajes por clase que suman 1), la clase dominante solo si supera a la segunda por un margen minimo, un nivel de confianza segun el volumen y los casos "mixto" y "datos insuficientes". Umbrales (margen, minimo de commits) justificados con datos de la muestra.
+- Criterio de aceptacion: pruebas unitarias de limites (sin actividad, poca actividad, una sola clase dominante, empate, mezcla); servira como referencia para validar al LLM en el issue 13.
 
 #### #5 Biblioteca de prompts versionada
 Etiquetas: prompts, hito-1. Tamano: M. Depende de: 3.
-- Prompts en `prompts/` con los cinco componentes de la unidad (rol, tarea, formato, restricciones, entrada): sistema, clasificacion de arquetipo y recomendacion con evidencia.
+- Prompts en `prompts/` con los cinco componentes de la unidad (rol, tarea, formato, restricciones, entrada): sistema, tipo de cambio de un commit (correccion, funcionalidad, documentacion, infraestructura, refactor u otro, sin depender del prefijo), clasificacion de arquetipo con mezcla y confianza, y recomendacion con evidencia.
 - Comparacion documentada de zero-shot, few-shot (3 a 5 ejemplos) y chain-of-thought sobre un mismo conjunto de casos, con tokens consumidos y consistencia de formato.
 - Criterio de aceptacion: cada prompt tiene version, objetivo, resultados de validacion y salida estructurada comprobable por prueba.
 
@@ -77,7 +78,7 @@ Etiquetas: rag, hito-2. Tamano: S. Depende de: 2.
 
 #### #7 Ingesta externa desde la API de GitHub
 Etiquetas: rag, hito-2. Tamano: L. Depende de: 2.
-- Obtener commits, PR, revisiones e issues de repositorios publicos elegidos; paginacion, manejo de limite de tasa, cache local en `data/` y normalizacion a un esquema propio.
+- Obtener commits (con los archivos que toca cada uno), PR, revisiones e issues de repositorios publicos elegidos; paginacion, manejo de limite de tasa, cache local en `data/` y normalizacion a un esquema propio.
 - Fixtures grabados para pruebas sin red.
 - Criterio de aceptacion: ingesta reproducible por script; pruebas con respuestas vacias, repositorio inexistente y limite de tasa.
 
@@ -112,8 +113,8 @@ Etiquetas: agente, hito-3. Tamano: M. Depende de: 5, 11.
 
 #### #13 Clasificacion por arquetipos con razonamiento
 Etiquetas: agente, hito-3. Tamano: M. Depende de: 4, 5, 12.
-- Clasificacion con chain-of-thought y salida estructurada validada; comparacion con el puntaje del issue 4 y registro de discrepancias.
-- Criterio de aceptacion: conjunto etiquetado de al menos 15 desarrolladores y porcentaje de acuerdo reportado.
+- Clasificacion con chain-of-thought y salida estructurada validada con mezcla por clase, clase dominante (o "mixto"), nivel de confianza y evidencias citadas; comparacion con la mezcla del issue 4 y registro de discrepancias.
+- Criterio de aceptacion: conjunto etiquetado de 15 desarrolladores (5 por clase) y porcentaje de acuerdo reportado de la clase dominante; ademas al menos 4 desarrolladores de poca actividad en los que el agente debe informar confianza baja o evidencia insuficiente.
 
 #### #14 Interfaz de consola con streaming
 Etiquetas: interfaz, hito-3. Tamano: S. Depende de: 12.
@@ -129,7 +130,7 @@ Etiquetas: documentacion, hito-4. Tamano: M. Depende de: 11.
 
 #### #16 Conjunto de evaluacion y metricas
 Etiquetas: evaluacion, hito-4. Tamano: L. Depende de: 12.
-- 20 a 30 preguntas con perfil esperado y fuentes esperadas en `tests/casos_agente.json`.
+- 20 a 30 preguntas con perfil esperado y fuentes esperadas en `tests/casos_agente.json`, incluyendo preguntas sobre desarrolladores de poca actividad donde lo esperado es confianza baja o evidencia insuficiente.
 - Script que calcula context precision, context recall, faithfulness y answer relevancy, y deja una tabla en `documentacion/pruebas.md`; trazas opcionales con LangSmith. Las metricas de generacion usan un LLM como juez: cachear respuestas y acotar el numero de preguntas segun el limite del proveedor elegido.
 - Criterio de aceptacion: una sola orden regenera la tabla.
 
