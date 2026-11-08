@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "rutas": {
+    "pruebas": ["(^|/)(tests?|__tests__|spec)/", "(^|/)test_[^/]*$", "_test\\.[a-z]+$", "\\.(test|spec)\\.[jt]sx?$"],
+    "documentacion": ["\\.(md|mdx|rst|txt|adoc)$", "(^|/)docs?/", "(^|/)(readme|changelog|license|contributing)"],
+    "infraestructura": [
+      "\\.(tf|tfvars|hcl|sql|ya?ml|toml|ini|sh)$",
+      "(^|/)dockerfile",
+      "docker-compose",
+      "(^|/)\\.github/",
+      "(^|/)(k8s|kubernetes|helm|charts|ansible|terraform|migrations?|db|database|infra|deploy|kustomize)/"
+    ],
+    "frontend": ["\\.(tsx|jsx|css|scss|sass|less|vue|svelte|html|astro)$", "(^|/)(frontend|ui|components|styles|public)/"]
+  },
+  "palabras": {
+    "correccion": ["fix", "bug", "patch", "crash", "regression", "hotfix", "corrige", "arregla", "error"],
+    "refactor": ["refactor", "cleanup", "rename", "simplify", "reorganiza"],
+    "funcionalidad": ["feat", "add", "implement", "support", "agrega", "implementa"]
+  },
+  "pesos": {
+    "druid": {"infraestructura": 1.0},
+    "bard": {"documentacion": 1.0, "frontend": 1.0, "comentarios": 0.25},
+    "cleric": {"correccion": 0.4, "revisiones": 0.4, "pruebas": 0.1, "issues": 0.1}
+  },
+  "saturacion": {"revisiones": 100, "comentarios": 50, "issues": 20},
+  "umbrales": {
+    "margen_minimo": 0.2,
+    "evidencia_minima": 0.4,
+    "minimo_eventos": 10,
+    "confianza_media": 30,
+    "confianza_alta": 100
+  }
+}
