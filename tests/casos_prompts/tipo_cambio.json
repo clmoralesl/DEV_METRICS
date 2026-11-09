@@ -1,0 +1,22 @@
+[
+  {"id": "T01", "mensaje": "fix: actualizar la guía de instalación", "archivos": ["README.md", "docs/instalacion.md"], "esperado": "documentacion"},
+  {"id": "T02", "mensaje": "feat: agregar imagen base", "archivos": ["Dockerfile", ".dockerignore"], "esperado": "infraestructura"},
+  {"id": "T03", "mensaje": "Corrige el cálculo del total cuando el carrito está vacío", "archivos": ["src/carrito/total.py", "tests/test_total.py"], "esperado": "correccion"},
+  {"id": "T04", "mensaje": "Agrega exportación de reportes a CSV", "archivos": ["src/reportes/exportar.py", "tests/test_exportar.py"], "esperado": "funcionalidad"},
+  {"id": "T05", "mensaje": "Extrae la validación de correo a una función", "archivos": ["src/usuarios/validacion.py"], "esperado": "refactor"},
+  {"id": "T06", "mensaje": "Merge branch 'main' into rama-trabajo", "archivos": [], "esperado": "otro"},
+  {"id": "T07", "mensaje": "Sube versión de requests a 2.32", "archivos": ["requirements.txt"], "esperado": "infraestructura"},
+  {"id": "T08", "mensaje": "refactor: soporte de paginación en el listado", "archivos": ["src/api/listado.py", "tests/test_listado.py"], "esperado": "funcionalidad"},
+  {"id": "T09", "mensaje": "Evita excepción al recibir token vencido", "archivos": ["src/auth/tokens.py"], "esperado": "correccion"},
+  {"id": "T10", "mensaje": "Documenta los parámetros del endpoint de pagos", "archivos": ["docs/api/pagos.md"], "esperado": "documentacion"},
+  {"id": "T11", "mensaje": "Configura el pipeline de pruebas en GitHub Actions", "archivos": [".github/workflows/ci.yml"], "esperado": "infraestructura"},
+  {"id": "T12", "mensaje": "Renombra variables para mayor claridad", "archivos": ["src/analisis/metricas.py"], "esperado": "refactor"},
+  {"id": "T13", "mensaje": "Corrige el menú que se desborda en pantallas pequeñas", "archivos": ["frontend/src/estilos/menu.css", "frontend/src/componentes/Menu.tsx"], "esperado": "correccion"},
+  {"id": "T14", "mensaje": "Nueva pantalla de perfil con gráfico de actividad", "archivos": ["frontend/src/pantallas/Perfil.tsx", "frontend/src/componentes/Grafico.tsx"], "esperado": "funcionalidad"},
+  {"id": "T15", "mensaje": "wip", "archivos": ["src/util/ayudas.py"], "esperado": "otro"},
+  {"id": "T16", "mensaje": "Agrega validación de formato al campo teléfono", "archivos": ["src/formularios/telefono.py", "tests/test_telefono.py"], "esperado": "funcionalidad"},
+  {"id": "T17", "mensaje": "Añade índice a la tabla de pedidos", "archivos": ["migraciones/0007_indice_pedidos.sql"], "esperado": "infraestructura"},
+  {"id": "T18", "mensaje": "Elimina código muerto del módulo de importación", "archivos": ["src/importador/conversor.py"], "esperado": "refactor"},
+  {"id": "T19", "mensaje": "Soluciona la pérdida de sesión al refrescar la página", "archivos": ["frontend/src/sesion.ts"], "esperado": "correccion"},
+  {"id": "T20", "mensaje": "feat: actualizar el glosario del proyecto", "archivos": ["docs/glosario.md"], "esperado": "documentacion"}
+]
