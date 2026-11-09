@@ -1,0 +1,65 @@
+{
+  "/repos/acme/demo/commits": [
+    [
+      {"sha": "a1", "author": {"login": "dev-alfa"}},
+      {"sha": "a2", "author": {"login": "dev-beta"}}
+    ],
+    [
+      {"sha": "a3", "author": null}
+    ]
+  ],
+  "/repos/acme/demo/commits/a1": {
+    "sha": "a1",
+    "author": {"login": "dev-alfa"},
+    "commit": {"message": "fix: corregir login", "author": {"date": "2026-10-01T10:00:00Z"}},
+    "files": [
+      {"filename": "src/auth.py", "additions": 5, "deletions": 2},
+      {"filename": "tests/test_auth.py", "additions": 10, "deletions": 0}
+    ]
+  },
+  "/repos/acme/demo/commits/a2": {
+    "sha": "a2",
+    "author": {"login": "dev-beta"},
+    "commit": {"message": "docs: guia de uso", "author": {"date": "2026-10-02T10:00:00Z"}},
+    "files": [{"filename": "README.md", "additions": 20, "deletions": 1}]
+  },
+  "/repos/acme/demo/commits/a3": {
+    "sha": "a3",
+    "author": null,
+    "commit": {"message": "chore: ajustes", "author": {"date": "2026-10-03T10:00:00Z"}}
+  },
+  "/repos/acme/demo/pulls": [
+    [
+      {"number": 1, "user": {"login": "dev-alfa"}, "title": "Corregir login", "state": "closed",
+       "created_at": "2026-10-01T11:00:00Z", "merged_at": "2026-10-02T09:00:00Z"},
+      {"number": 2, "user": {"login": "dev-beta"}, "title": "Guia de uso", "state": "open",
+       "created_at": "2026-10-02T11:00:00Z", "merged_at": null}
+    ]
+  ],
+  "/repos/acme/demo/pulls/1/reviews": [
+    [{"user": {"login": "dev-beta"}, "state": "APPROVED", "submitted_at": "2026-10-01T15:00:00Z"}]
+  ],
+  "/repos/acme/demo/pulls/2/reviews": [[]],
+  "/repos/acme/demo/issues": [
+    [
+      {"number": 3, "user": {"login": "dev-gamma"}, "title": "Error al iniciar", "state": "open",
+       "created_at": "2026-10-03T08:00:00Z", "assignees": [{"login": "dev-alfa"}]},
+      {"number": 1, "user": {"login": "dev-alfa"}, "title": "Corregir login", "state": "closed",
+       "created_at": "2026-10-01T11:00:00Z", "assignees": [], "pull_request": {}}
+    ]
+  ],
+  "/repos/acme/demo/issues/comments": [
+    [
+      {"user": {"login": "dev-alfa"}, "created_at": "2026-10-03T09:00:00Z",
+       "issue_url": "https://api.github.com/repos/acme/demo/issues/3"},
+      {"user": {"login": "dev-gamma"}, "created_at": "2026-10-03T10:00:00Z",
+       "issue_url": "https://api.github.com/repos/acme/demo/issues/3"}
+    ]
+  ],
+  "/repos/acme/demo/pulls/comments": [
+    [
+      {"user": {"login": "dev-beta"}, "created_at": "2026-10-01T14:00:00Z",
+       "pull_request_url": "https://api.github.com/repos/acme/demo/pulls/1"}
+    ]
+  ]
+}
