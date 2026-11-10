@@ -11,7 +11,7 @@ VARIABLES = {
     "tipo_cambio": {"mensaje": "Corrige un fallo", "archivos": "- src/a.py"},
     "clasificacion_arquetipo": {"alias": "dev_a", "evidencia": "[c1] commit en db/"},
     "recomendacion": {"consulta": "quien sirve", "contexto": "[p1] perfil"},
-    "sistema": {"historial": "(vacio)", "consulta": "hola"},
+    "sistema": {"contexto": "[1] dato", "historial": "(vacio)", "consulta": "hola"},
 }
 
 
@@ -224,6 +224,7 @@ def test_los_ejemplos_few_shot_cumplen_el_validador():
         ("tipo_cambio", "mensaje", "commit"),
         ("clasificacion_arquetipo", "evidencia", "evidencia"),
         ("recomendacion", "contexto", "contexto"),
+        ("sistema", "contexto", "contexto"),
         ("sistema", "historial", "historial"),
         ("sistema", "consulta", "consulta"),
     ],
