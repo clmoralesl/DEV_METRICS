@@ -61,11 +61,13 @@ def _metadatos(doc: Document) -> dict:
     return meta
 
 
-def _normalizar(chunk: Document) -> Document:
-    faltan = [k for k in ("id", *CLAVES_GRUPO) if not chunk.metadata.get(k)]
+def _normalizar(chunk: Document, claves_grupo: tuple[str, ...]) -> Document:
+    faltan = [k for k in ("id", *claves_grupo) if not chunk.metadata.get(k)]
     if faltan:
         raise ValueError(f"el chunk no tiene los metadatos obligatorios: {', '.join(faltan)}")
-    meta = {**chunk.metadata, "desarrollador": str(chunk.metadata["desarrollador"]).casefold()}
+    meta = dict(chunk.metadata)
+    if "desarrollador" in meta:
+        meta["desarrollador"] = str(meta["desarrollador"]).casefold()
     return Document(page_content=chunk.page_content, metadata=meta)
 
 
@@ -75,15 +77,13 @@ def _donde(condiciones: list[dict]) -> dict | None:
     return condiciones[0] if len(condiciones) == 1 else {"$and": condiciones}
 
 
-def _grupo(meta: dict) -> dict:
-    return {k: meta[k] for k in CLAVES_GRUPO}
-
-
 class IndiceVectorial:
     """Coleccion Chroma de chunks. Sin `ruta` vive en memoria (pruebas); con ruta, persiste.
 
     Los embeddings los calcula `embeddings` (no Chroma), de modo que se reutiliza el modelo
-    local del issue 6 y la consulta usa el mismo espacio vectorial.
+    local del issue 6 y la consulta usa el mismo espacio vectorial. `claves_grupo` define los
+    metadatos que identifican un grupo de chunks (por defecto los de los perfiles; la fuente
+    interna usa otros), que es la unidad de sincronizacion de `indexar`.
     """
 
     def __init__(
@@ -91,8 +91,12 @@ class IndiceVectorial:
         embeddings: Embeddings,
         ruta: str | None = RUTA_POR_DEFECTO,
         coleccion: str = COLECCION,
+        claves_grupo: tuple[str, ...] = CLAVES_GRUPO,
     ):
+        if not claves_grupo:
+            raise ValueError("se requiere al menos una clave de grupo")
         self._emb = embeddings
+        self._claves = tuple(claves_grupo)
         ajustes = Settings(anonymized_telemetry=False)
         if ruta is None:
             self._cliente = chromadb.EphemeralClient(settings=ajustes)
@@ -116,19 +120,19 @@ class IndiceVectorial:
         aparecen en `chunks` no se tocan (para retirarlos, `eliminar`). El texto y los metadatos
         cuentan para detectar cambios.
         """
-        chunks = [_normalizar(c) for c in chunks]
+        chunks = [_normalizar(c, self._claves) for c in chunks]
         ids = [c.metadata["id"] for c in chunks]
         if len(set(ids)) != len(ids):
             raise ValueError("hay chunks con id repetido")
         por_grupo: dict[tuple, list[Document]] = {}
         for c in chunks:
-            clave = tuple(c.metadata[k] for k in CLAVES_GRUPO)
+            clave = tuple(c.metadata[k] for k in self._claves)
             por_grupo.setdefault(clave, []).append(c)
 
         nuevos = actualizados = sin_cambios = eliminados = 0
         for clave, docs in por_grupo.items():
             previos = self._col.get(
-                where=_donde([{k: v} for k, v in zip(CLAVES_GRUPO, clave)]),
+                where=_donde([{k: v} for k, v in zip(self._claves, clave)]),
                 include=["metadatas"],
             )
             huellas = {i: m.get("huella") for i, m in zip(previos["ids"], previos["metadatas"])}
@@ -195,12 +199,15 @@ class IndiceVectorial:
         tipo_fuente: str | None = None,
         desde: str | None = None,
         hasta: str | None = None,
+        filtros: dict[str, str | int | float | bool] | None = None,
     ) -> list[ResultadoConsulta]:
         """Los k chunks mas cercanos a `texto`, filtrados por metadatos.
 
         `desarrollador` se compara sin distinguir mayusculas (el indice guarda el login en
         minusculas). `desde` y `hasta` (AAAA-MM-DD) seleccionan los chunks cuyo documento
         tiene actividad en ese rango; los documentos sin fechas se excluyen al filtrar por fecha.
+        `filtros` agrega igualdades exactas sobre otros metadatos (p. ej. la categoria de un
+        documento interno).
         """
         if k <= 0:
             raise ValueError("k debe ser positivo")
@@ -211,6 +218,10 @@ class IndiceVectorial:
             condiciones.append({"repositorio": repositorio})
         if tipo_fuente:
             condiciones.append({"tipo_fuente": tipo_fuente})
+        reservadas = set(filtros or {}) & {"desarrollador", "repositorio", "tipo_fuente"}
+        if reservadas:
+            raise ValueError(f"usa el parametro propio en lugar de filtros: {sorted(reservadas)}")
+        condiciones.extend({clave: val} for clave, val in (filtros or {}).items())
         for valor, clave, op in ((desde, "hasta_num", "$gte"), (hasta, "desde_num", "$lte")):
             if valor:
                 n = _fecha_num(valor)

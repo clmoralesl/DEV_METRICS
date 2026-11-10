@@ -104,3 +104,39 @@ Paquete `src/devmetrics/indexacion/` (`IndiceVectorial`, Chroma). Persiste en `d
   similitud, idempotencia (sin llamadas al embedder en la segunda pasada), actualizacion por
   texto y por metadatos, borrado de obsoletos, fallo del embedder, aislamiento de indices en
   memoria, purga y persistencia en disco.
+
+## Fuente interna (issue 10)
+
+Base de conocimiento ficticia en `conocimiento/*.md` (organizacion ficticia Andes Soluciones
+Digitales): 3 requerimientos (estabilizacion de microservicios, portal de documentacion,
+migracion a la nube), 3 definiciones de arquetipo (Druid, Cleric, Bard) y 1 documento de
+criterios de asignacion. Cada archivo lleva una cabecera `clave: valor` (categoria, documento,
+titulo, arquetipos). Paquete `src/devmetrics/conocimiento/`; indexacion con
+`python scripts/indexar_conocimiento.py` en la coleccion `conocimiento` de `data/chroma`.
+
+- Decision de esquema: se generalizo `IndiceVectorial` con `claves_grupo` (los documentos
+  internos se agrupan por `tipo_fuente` y `documento`, no por desarrollador) y el filtro
+  generico `filtros` en `consultar` (p. ej. `categoria`). Los perfiles no cambian.
+- Los chunks anteponen el titulo del documento, porque los posteriores al primero no lo repiten.
+- `recuperar_para_proyecto(consulta, conocimiento, perfiles)`: (1) requerimiento mas cercano,
+  (2) definiciones de los arquetipos que declara, (3) perfiles cercanos al texto de esas
+  definiciones y a la consulta. Las definiciones aportan el vocabulario de actividad (Dockerfile,
+  pruebas, README) que el requerimiento no usa.
+- Pruebas: `tests/test_conocimiento.py` (cargador, cabeceras invalidas, ids repetidos, chunking,
+  idempotencia, filtro por categoria, validez de la base real y recuperacion con embeddings de
+  bolsa de palabras) y `tests/test_conocimiento_integracion.py` con embeddings reales
+  (`DEVMETRICS_INTEGRACION=1`): las 3 consultas "perfil adecuado para ..." recuperan el
+  requerimiento esperado y, con k=1, el perfil esperado.
+- Resultado de la integracion: ejecutada con `DEVMETRICS_INTEGRACION=1` (2 pruebas del issue
+  pasadas junto a las unitarias). Los perfiles de las pruebas con bolsa de palabras solo se
+  comprueban por cantidad y tipo, no por orden.
+- `distancia_maxima` descarta requerimientos lejanos (consulta ajena -> contexto vacio); con embeddings reales una consulta ajena queda mas lejos que las 3 propias en la prueba de integracion, pero el
+  valor concreto del umbral no esta calibrado. `cargar_documentos` valida que cada
+  arquetipo declarado tenga su documento `arquetipo-<nombre>`.
+- Los perfiles recuperados son chunks: varios pueden ser del mismo desarrollador (agrupar es
+  tarea del agente). Un `.md` borrado de `conocimiento/` queda en el indice hasta usar
+  `eliminar(tipo_fuente="conocimiento_interno", ...)`; el script no purga grupos ausentes.
+- Limites: la integracion usa 3 perfiles sinteticos y 3 consultas (verifica el mecanismo, no
+  la calidad con la muestra piloto, que aun no esta indexada); el vinculo requerimiento ->
+  arquetipo es declarado a mano en la cabecera, no inferido; el paso 3 no usa la mezcla de
+  arquetipos calculada por `devmetrics.arquetipos` (queda para el agente, issues 11 y 12).
