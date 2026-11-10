@@ -140,3 +140,37 @@ titulo, arquetipos). Paquete `src/devmetrics/conocimiento/`; indexacion con
   la calidad con la muestra piloto, que aun no esta indexada); el vinculo requerimiento ->
   arquetipo es declarado a mano en la cabecera, no inferido; el paso 3 no usa la mezcla de
   arquetipos calculada por `devmetrics.arquetipos` (queda para el agente, issues 11 y 12).
+
+## Recuperador combinado y herramienta en vivo (issue 11, IE3)
+
+Paquete `src/devmetrics/recuperacion/`.
+
+- `RecuperadorCombinado(conocimiento, perfiles, en_vivo=None).recuperar(consulta, ...)` consulta
+  la fuente interna (filtro `categoria`) y la externa (filtros `desarrollador`, `repositorio`,
+  `tipo_fuente`, `desde`, `hasta`), mezcla por distancia y devuelve una `Recuperacion`. `k` limita
+  el total; `k_interna` y `k_externa`, cada fuente (por defecto 2 y 4). `distancia_maxima` descarta
+  fragmentos lejanos. Las distancias son comparables porque ambas colecciones usan el mismo modelo.
+- Citas: cada `Fragmento` lleva `cita` (documento y fragmento para la fuente interna; repositorio,
+  tipo, login, rango de fechas y fragmento para GitHub, con la marca "[consulta en vivo]" si
+  viene de la API). `Recuperacion.fuentes` lista las citas unicas y `formatear()` las imprime tras
+  cada fragmento, de modo que la respuesta del agente puede listar sus fuentes.
+- Fuente caida: cada fuente se consulta aislada; si una lanza una excepcion, la otra responde y el
+  fallo queda en `avisos`. Con todas caidas, `sin_resultados` y el texto "SIN RESULTADOS (motivo)".
+  Una fecha invalida es error del llamador (`ValueError`) y no se trata como fuente caida.
+- Herramienta en vivo: `consultar_en_vivo` descarga con la ingesta (cache local si existe), documenta
+  y segmenta como los perfiles indexados y consulta un indice efimero en memoria; un repositorio
+  que falla no bloquea a los demas. `crear_herramienta_github` la expone como `StructuredTool`
+  (`consultar_github`) y nunca propaga excepciones: devuelve "SIN RESULTADOS (...)". El recuperador
+  consulta GitHub solo si se pide un desarrollador sin ningun fragmento indexado (con o sin
+  filtros) y se entrego `en_vivo` (adaptador `crear_en_vivo(repositorios, cliente, embeddings)`);
+  los filtros (repositorio, tipo, fechas) se propagan a la consulta en vivo. Un fallo de esa fuente
+  queda como aviso. Los avisos acotan el mensaje de la excepcion a 120 caracteres.
+  Restriccion: indices y adaptador en vivo deben usar el mismo modelo de embeddings (no se valida).
+- Pruebas: `tests/test_recuperacion.py` (20): combinacion y citas, filtros, k, consulta sin
+  resultados (umbral, filtros, indices vacios), fuente externa caida, todas caidas, fallback en vivo
+  solo si no esta indexado, GitHub caido, repositorio caido entre varios, sin actividad, herramienta.
+  Usan embeddings de bolsa de palabras y el cliente falso de GitHub.
+- Limites: no probado con la API real ni con embeddings reales; un desarrollador indexado solo en
+  otro repositorio no activa la consulta en vivo (el criterio es "sin fragmentos para el login");
+  la ingesta en vivo descarga hasta 100 commits, 50 PR y 50 issues por repositorio y una solicitud
+  por commit, lo que sin token agota el limite de tasa; `distancia_maxima` sigue sin calibrar.
