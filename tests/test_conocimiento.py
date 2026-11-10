@@ -1,9 +1,6 @@
-import hashlib
-import re
-
 import pytest
+from embeddings_falsos import DIM, EmbeddingsBolsa  # noqa: F401
 from langchain_core.documents import Document
-from langchain_core.embeddings import Embeddings
 
 from devmetrics.conocimiento import (
     TIPO_FUENTE_INTERNA,
@@ -15,24 +12,6 @@ from devmetrics.conocimiento import (
 )
 from devmetrics.indexacion import IndiceVectorial
 from devmetrics.perfiles import segmentar
-
-DIM = 128
-
-
-class EmbeddingsBolsa(Embeddings):
-    """Bolsa de palabras con hashing: determinista y con similitud lexica real."""
-
-    def _vec(self, texto):
-        v = [0.0] * DIM
-        for p in re.findall(r"\w+", texto.casefold()):
-            v[int(hashlib.md5(p.encode()).hexdigest(), 16) % DIM] += 1.0
-        return v
-
-    def embed_documents(self, texts):
-        return [self._vec(t) for t in texts]
-
-    def embed_query(self, text):
-        return self._vec(text)
 
 
 def _escribir(ruta, nombre, cabecera, cuerpo="Texto del documento."):
