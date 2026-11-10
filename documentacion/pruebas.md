@@ -174,3 +174,26 @@ Paquete `src/devmetrics/recuperacion/`.
   otro repositorio no activa la consulta en vivo (el criterio es "sin fragmentos para el login");
   la ingesta en vivo descarga hasta 100 commits, 50 PR y 50 issues por repositorio y una solicitud
   por commit, lo que sin token agota el limite de tasa; `distancia_maxima` sigue sin calibrar.
+
+## Issue 12: cadena RAG y conversacion
+
+- `devmetrics.agente.Conversacion` recupera con `RecuperadorCombinado`, arma el prompt `sistema`
+  (v1.1.0, nueva variable `{contexto}` entre `<contexto>`) con contexto, historial y consulta, y
+  responde con las fuentes citadas. `MemoriaVentana(n)` guarda los ultimos `n` mensajes (usuario y
+  asistente cuentan aparte); no se usa `langchain-classic` ni langgraph.
+- Evidencia insuficiente: sin fragmentos no se llama al LLM y la respuesta es determinista
+  ("Evidencia insuficiente: ..." con los avisos de fuentes caidas). Si el LLM la declara, la
+  respuesta no lista fuentes. Consulta vacia: se pide precisar sin recuperar.
+- Ambiguedad: la resuelve el prompt (regla "pide que se precise"); la prueba solo comprueba que
+  la regla viaja en el prompt y que la respuesta del LLM se devuelve intacta.
+- Seguimiento: una consulta de hasta 8 palabras se busca junto a la ultima pregunta que tuvo
+  evidencia (no hereda las que quedaron sin ella);
+  las mas largas se buscan solas. Heuristica no calibrada.
+- Un fallo del LLM propaga y el turno no se guarda en la memoria.
+- Pruebas: `tests/test_agente.py` (19) con recuperador y LLM falsos: prompt aumentado, sin
+  contexto, evidencia insuficiente declarada, ambigua, vacia, seguimiento, ventana, filtros,
+  fallo del LLM, inyeccion por delimitador y reinicio.
+- Limites: no probado con LLM ni embeddings reales (el comportamiento ante ambiguedad y la
+  fidelidad de las citas se miden en el issue 16); la deteccion de "evidencia insuficiente" del LLM
+  busca la frase en las dos primeras lineas (tolera markdown); los avisos de fuentes caidas se
+  muestran al usuario en la respuesta determinista; sin herramienta en vivo integrada en la cadena (solo via el recuperador).
