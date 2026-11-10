@@ -78,3 +78,29 @@ pytest). Estado tras el issue 8: lint sin errores, 224 pruebas pasadas y 3 omiti
 `tests/test_perfiles.py` cubre documentos de perfil (atribucion, metadatos, revisiones de PR
 propios, issues) y segmentacion (metadatos, tamano maximo, configuracion invalida) con datos
 sinteticos.
+
+## Indexacion vectorial (issue 9)
+
+Paquete `src/devmetrics/indexacion/` (`IndiceVectorial`, Chroma). Persiste en `data/chroma`
+(no versionado); el indice se reconstruye volviendo a ejecutar `indexar` con los chunks de
+`devmetrics.perfiles`, sin duplicados. Los embeddings los calcula `ModeloEmbeddings`, no Chroma.
+
+- Metadatos por chunk: `desarrollador` (minusculas), `repositorio`, `tipo_fuente`, fechas
+  (`fecha_desde`/`fecha_hasta` y su copia numerica AAAAMMDD, porque Chroma solo compara
+  numeros), `chunk`, `n_chunks`, `id`, `huella` (hash de texto y metadatos).
+- `indexar` sincroniza los grupos (desarrollador, repositorio, tipo de fuente) que recibe: no
+  recalcula embeddings de chunks sin cambios, actualiza los modificados (texto o metadatos) y
+  borra los sobrantes al final, para no perder datos si falla el embedder. Un grupo que
+  desaparece por completo de la entrada no se purga solo: usar `eliminar`.
+- `consultar` aplica filtros por desarrollador, repositorio, tipo de fuente y rango de fechas
+  (solapamiento con la actividad del documento; sin fechas, el documento queda excluido al
+  filtrar por fecha). Metrica coseno.
+- Limites: las referencias llegan hasta el grupo y el rango de fechas; los metadatos no apuntan
+  a eventos concretos (SHA, numero de PR). Pruebas con embeddings de bolsa de palabras
+  deterministas; la consulta semantica real se comprobo solo con 3 documentos de ejemplo
+  (`DEVMETRICS_INTEGRACION=1 pytest tests/test_indexacion_integracion.py`, 1 prueba pasada).
+  No se ha indexado aun la muestra piloto.
+- `tests/test_indexacion.py` (27 pruebas): filtros simples y combinados, fechas, orden por
+  similitud, idempotencia (sin llamadas al embedder en la segunda pasada), actualizacion por
+  texto y por metadatos, borrado de obsoletos, fallo del embedder, aislamiento de indices en
+  memoria, purga y persistencia en disco.
