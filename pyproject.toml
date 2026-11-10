@@ -15,6 +15,7 @@ dependencies = [
     "langchain-google-genai>=4.4,<5",
     "langchain-ollama>=1.1,<2",
     "fastembed>=0.9,<1",
+    "langchain-text-splitters>=1.1,<2",
     "truststore",
 ]
 
