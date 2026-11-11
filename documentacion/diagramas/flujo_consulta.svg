@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1075" width="1600" height="1075" role="img" aria-label="Flujo de consulta del pipeline RAG: de la pregunta a la respuesta con fuentes">
+<title>Flujo de consulta del pipeline RAG: de la pregunta a la respuesta con fuentes</title>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#37474f"/></marker>
+<marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#78909c"/></marker>
+</defs>
+<style>
+text{font-family:Segoe UI,Arial,Helvetica,sans-serif;fill:#1b1f23}
+.t{font-size:20px;font-weight:700}
+.t2{font-size:17px;font-weight:700}
+.s{font-size:17px}
+.l{font-size:16px;fill:#37474f;paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round}
+.h{font-size:22px;font-weight:700;fill:#263238}
+.k{font-size:15px;fill:#455a64}
+</style>
+<rect width="1600" height="1075" fill="#ffffff"/>
+<text x="800.0" y="36" class="h" text-anchor="middle">Fase 2: consulta (por cada pregunta del usuario)</text>
+<rect x="25" y="60" width="210" height="46" rx="8" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2.2"/>
+<text x="130" y="90" class="t" text-anchor="middle">Consola</text>
+<line x1="130" y1="106" x2="130" y2="1050" stroke="#90a4ae" stroke-width="1.6" stroke-dasharray="6 6"/>
+<rect x="295" y="60" width="210" height="46" rx="8" fill="#fff3e0" stroke="#e65100" stroke-width="2.2"/>
+<text x="400" y="90" class="t" text-anchor="middle">Conversacion</text>
+<line x1="400" y1="106" x2="400" y2="1050" stroke="#90a4ae" stroke-width="1.6" stroke-dasharray="6 6"/>
+<rect x="565" y="60" width="210" height="46" rx="8" fill="#fff3e0" stroke="#e65100" stroke-width="2.2"/>
+<text x="670" y="90" class="t" text-anchor="middle">ClienteLLM</text>
+<line x1="670" y1="106" x2="670" y2="1050" stroke="#90a4ae" stroke-width="1.6" stroke-dasharray="6 6"/>
+<rect x="835" y="60" width="210" height="46" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2.2"/>
+<text x="940" y="90" class="t" text-anchor="middle">Recuperador</text>
+<line x1="940" y1="106" x2="940" y2="1050" stroke="#90a4ae" stroke-width="1.6" stroke-dasharray="6 6"/>
+<rect x="1105" y="60" width="210" height="46" rx="8" fill="#e8eaf6" stroke="#3949ab" stroke-width="2.2"/>
+<text x="1210" y="90" class="t" text-anchor="middle">Indices Chroma</text>
+<line x1="1210" y1="106" x2="1210" y2="1050" stroke="#90a4ae" stroke-width="1.6" stroke-dasharray="6 6"/>
+<rect x="1365" y="60" width="210" height="46" rx="8" fill="#eceff1" stroke="#455a64" stroke-width="2.2"/>
+<text x="1470" y="90" class="t" text-anchor="middle">GitHub en vivo</text>
+<line x1="1470" y1="106" x2="1470" y2="1050" stroke="#90a4ae" stroke-width="1.6" stroke-dasharray="6 6"/>
+<path d="M136,140 L394,140" fill="none" stroke="#37474f" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="265.0" y="131" class="l" text-anchor="middle">1 preguntar(consulta, desarrollador)</text>
+<rect x="245.0" y="160" width="310" height="77" rx="6" fill="#fffde7" stroke="#9e9d24" stroke-width="1.8"/>
+<text x="400" y="184" class="s" text-anchor="middle">consulta de 8 palabras o menos:</text>
+<text x="400" y="205" class="s" text-anchor="middle">se busca junto a la ultima con</text>
+<text x="400" y="226" class="s" text-anchor="middle">evidencia (seguimiento)</text>
+<path d="M406,262 L934,262" fill="none" stroke="#37474f" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="670.0" y="253" class="l" text-anchor="middle">2 recuperar(consulta, filtros)</text>
+<path d="M946,302 L1204,302" fill="none" stroke="#37474f" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="1075.0" y="293" class="l" text-anchor="middle">3 consultar interna (k 2) y externa (k 4)</text>
+<path d="M1204,342 L946,342" fill="none" stroke="#37474f" stroke-width="2.2" stroke-dasharray="7 5" marker-end="url(#a)"/>
+<text x="1075.0" y="333" class="l" text-anchor="middle">fragmentos con distancia</text>
+<rect x="880" y="372" width="680" height="106" rx="6" fill="none" stroke="#e65100" stroke-width="1.8" stroke-dasharray="3 4"/>
+<text x="888" y="392" class="k" text-anchor="start">con /desarrollador, --repos y login sin fragmentos indexados</text>
+<path d="M946,420 L1464,420" fill="none" stroke="#37474f" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="1205.0" y="411" class="l" text-anchor="middle">4 eventos del login (API)</text>
+<path d="M1464,462 L946,462" fill="none" stroke="#37474f" stroke-width="2.2" stroke-dasharray="7 5" marker-end="url(#a)"/>
+<text x="1205.0" y="453" class="l" text-anchor="middle">fragmentos con embeddings locales</text>
+<rect x="795.0" y="494" width="290" height="56" rx="6" fill="#fffde7" stroke="#9e9d24" stroke-width="1.8"/>
+<text x="940" y="518" class="s" text-anchor="middle">mezcla por distancia, top k,</text>
+<text x="940" y="539" class="s" text-anchor="middle">cita de origen y avisos</text>
+<path d="M934,580 L406,580" fill="none" stroke="#37474f" stroke-width="2.2" stroke-dasharray="7 5" marker-end="url(#a)"/>
+<text x="670.0" y="571" class="l" text-anchor="middle">Recuperacion (fragmentos, fuentes, avisos)</text>
+<rect x="70" y="604" width="1490" height="166" rx="6" fill="none" stroke="#e65100" stroke-width="1.8" stroke-dasharray="3 4"/>
+<text x="78" y="624" class="k" text-anchor="start"></text>
+<text x="90" y="626" class="k" text-anchor="start">sin fragmentos (sin_resultados)</text>
+<path d="M394,668 L136,668" fill="none" stroke="#37474f" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="265.0" y="659" class="l" text-anchor="middle">5a respuesta determinista: evidencia insuficiente</text>
+<rect x="250.0" y="690" width="300" height="56" rx="6" fill="#fffde7" stroke="#9e9d24" stroke-width="1.8"/>
+<text x="400" y="714" class="s" text-anchor="middle">no se llama al LLM: nada</text>
+<text x="400" y="735" class="s" text-anchor="middle">que pueda inventar datos</text>
+<line x1="70" y1="782" x2="1560" y2="782" stroke="#e65100" stroke-width="1.6" stroke-dasharray="6 6"/>
+<text x="90" y="806" class="k" text-anchor="start">con fragmentos</text>
+<path d="M406,846 L664,846" fill="none" stroke="#37474f" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="535.0" y="837" class="l" text-anchor="middle">5b prompt sistema + contexto + historial</text>
+<path d="M664,886 L406,886" fill="none" stroke="#37474f" stroke-width="2.2" stroke-dasharray="7 5" marker-end="url(#a)"/>
+<text x="535.0" y="877" class="l" text-anchor="middle">6 flujo de trozos (Gemini; Ollama si falla)</text>
+<path d="M394,926 L136,926" fill="none" stroke="#37474f" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="265.0" y="917" class="l" text-anchor="middle">7 en_fragmento(trozo): streaming en pantalla</text>
+<rect x="235.0" y="944" width="330" height="56" rx="6" fill="#fffde7" stroke="#9e9d24" stroke-width="1.8"/>
+<text x="400" y="968" class="s" text-anchor="middle">8 valida: fuentes citadas, frase de</text>
+<text x="400" y="989" class="s" text-anchor="middle">evidencia insuficiente; guarda el turno</text>
+<path d="M394,1030 L136,1030" fill="none" stroke="#37474f" stroke-width="2.2" stroke-dasharray="7 5" marker-end="url(#a)"/>
+<text x="265.0" y="1021" class="l" text-anchor="middle">9 Respuesta y linea Fuentes</text>
+</svg>
