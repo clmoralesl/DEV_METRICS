@@ -1,5 +1,5 @@
 nombre = "clasificacion_arquetipo"
-version = "1.0.0"
+version = "1.2.0"
 requisito = "RF14, RF5"
 salida = "json"
 objetivo = "Estimar la mezcla de arquetipos (Druid, Cleric, Bard) de un desarrollador a partir de la evidencia recuperada, con clase dominante solo si es clara, nivel de confianza y evidencias citadas."
@@ -11,11 +11,12 @@ actividad pública en repositorios y eres prudente cuando la evidencia es escasa
 
 tarea = """
 Estima la mezcla de arquetipos del desarrollador a partir de la evidencia entregada:
-- Druid: bases de datos, arquitectura e infraestructura.
-- Cleric: soporte, revisión constante de código y resolución de errores.
-- Bard: frontend, documentación y fomento del trabajo en equipo.
-Asigna un puntaje entre 0 y 1 a cada clase (los tres suman 1), elige la clase dominante o "mixto" \
-y declara la confianza de la estimación."""
+- Druid: bases de datos, arquitectura e infraestructura. Señal: gran parte de los archivos tocados son de infraestructura (integración continua, contenedores, migraciones, configuración).
+- Cleric: soporte, revisión constante de código y resolución de errores. Señales: muchas revisiones de PR ajenos, proporción alta de commits que corrigen errores, archivos de pruebas.
+- Bard: frontend, documentación y fomento del trabajo en equipo. Señal: gran parte de los archivos tocados son de documentación o frontend; también comentarios en PR e issues ajenos.
+Magnitudes de referencia: más de la mitad de los archivos en una categoría es una señal fuerte; unas 100 revisiones de PR ajenos o más son una señal fuerte de Cleric y menos de 20 son poca señal.
+Pesos relativos: los archivos tocados (infraestructura para Druid, documentación o frontend para Bard) pesan más que las revisiones; las revisiones, las correcciones y las pruebas se suman en Cleric con menos peso cada una. Un volumen alto de revisiones no anula un predominio claro de documentación, frontend o infraestructura en los archivos: ese perfil es de la clase de los archivos, con Cleric como segunda clase.
+Asigna un puntaje entre 0 y 1 a cada clase (los tres suman 1) en proporción a la fuerza de sus señales, y declara la confianza según el volumen de actividad (commits + revisiones + comentarios + issues): menos de 10, "datos_insuficientes"; de 10 a 29, "baja"; de 30 a 99, "media"; 100 o más, "alta" (sin dato del número de repositorios, "media" como máximo). Elige la clase dominante o "mixto"."""
 
 formato = """
 Responde únicamente con un objeto JSON, sin texto antes ni después, con estas claves:
@@ -48,12 +49,15 @@ Desarrollador: {alias}
 
 [tecnicas]
 razonamiento = """
-Antes de decidir, razona paso a paso (máximo cinco frases): qué señales apuntan a cada clase, cuánta \
-actividad hay y si la diferencia entre las dos primeras clases alcanza el margen. Escribe ese \
-razonamiento en una clave "razonamiento" que va primero en el objeto JSON."""
+Antes de decidir, razona paso a paso (máximo cinco frases): qué señales apuntan a cada clase, cuánta actividad hay y si la diferencia entre las dos primeras clases alcanza el margen. Escribe ese razonamiento en una clave "razonamiento" que va primero en el objeto JSON.
+Ejemplos de razonamiento (datos inventados):
+- 40 commits, 85 % de archivos en infraestructura, 5 revisiones, 10 % de commits de corrección. Volumen 45: confianza media. La infraestructura domina y las demás señales son débiles: Druid 0.80, Cleric 0.12, Bard 0.08; la diferencia es 0.68, dominante Druid.
+- 30 commits, 70 % de archivos en documentación, 2 revisiones, 5 % de correcciones. Volumen 32: confianza media. Documentación fuerte, sin otras señales: Bard 0.78, Cleric 0.12, Druid 0.10; dominante Bard.
+- 20 commits, 25 % de correcciones, 400 revisiones, sin categorías de archivos marcadas. Volumen 420: confianza media. Las revisiones y las correcciones apuntan a Cleric: Cleric 0.75, Druid 0.13, Bard 0.12; dominante Cleric.
+- 30 commits, 40 % de archivos en infraestructura y 40 % en documentación, 10 revisiones. Dos señales fuertes y equivalentes: Druid 0.42, Bard 0.40, Cleric 0.18; la diferencia es 0.02, dominante "mixto" con confianza media."""
 
 [validacion]
 estado = "estructura_validada"
-fecha = "2026-11-08"
+fecha = "2026-11-11"
 pruebas = "tests/test_prompts_biblioteca.py, tests/test_prompts_validadores.py"
-nota = "Esquema, razonamiento y delimitadores comprobados por pruebas con respuestas simuladas. Sin evaluacion con un LLM: se mide contra la muestra piloto en los issues 13 y 16."
+nota = "Esquema, razonamiento y delimitadores comprobados por pruebas con respuestas simuladas. Medido sobre 23 casos (alias neutros, evidencia solo con campos medidos): qwen3:4b con v1.0.0, clase dominante 1/15; Gemini con v1.1.0, 7/15; Gemini con v1.2.0, 12/15 (reglas: 13/15), con sobreajuste posible por iterar sobre los mismos 15 casos. Poca actividad: confianza baja o insuficiente en 4/4 casos sinteticos (no medidos). Ver documentacion/pruebas.md (issue 13)."

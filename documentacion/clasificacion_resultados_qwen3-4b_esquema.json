@@ -1,0 +1,1552 @@
+{
+ "modelo": "qwen3:4b",
+ "tecnica": "cot",
+ "salida_restringida_por_esquema": true,
+ "alias_neutros": true,
+ "evidencia_sin_campos_no_medidos": true,
+ "prompt_version": "1.0.0",
+ "temperatura": 0.3,
+ "fecha": "2026-11-11",
+ "resumen": {
+  "llamadas": 23,
+  "formato_invalido": 4,
+  "reintentos": 6,
+  "positivos_acuerdo_llm": "1/15",
+  "positivos_acuerdo_reglas": "13/15",
+  "positivos_acuerdo_llm_pct": 6.7,
+  "positivos_acuerdo_entre_validos": "1/11",
+  "positivos_con_salida_valida": "11/15",
+  "fallos_por_causa": {
+   "la mezcla no suma 1": 3,
+   "el dominante no es la clase con mayor pu": 1
+  },
+  "positivos_tendencia_llm_entre_validos": "6/11",
+  "mixtos_acuerdo_llm": "3/4",
+  "mixtos_acuerdo_reglas": "4/4",
+  "poca_actividad_confianza_baja_llm_crudo": "4/4",
+  "poca_actividad_confianza_baja_con_guardia": "4/4",
+  "discrepancias_dominante_vs_reglas": 13
+ },
+ "registros": [
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "D1",
+   "esperada": "Druid",
+   "segundos": 37.1,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 337,
+    "largo_contenido": 1062,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_10",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.75,
+    "Cleric": 0.17,
+    "Bard": 0.08
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "96% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)"
+    },
+    {
+     "fuente": "S6",
+     "descripcion": "17% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias: S3 muestra 96% de archivos en infraestructura, lo que apunta a Druid (arquitectura e infraestructura). S6 indica 17% de commits corrigiendo errores, vinculado a Cleric (resolución de errores). S4 y S5 son pequeños porcentajes (1% y 3%) que podrían ser Bard (documentación y frontend). La diferencia entre Druid y Cleric es clara (96% vs 17% de commits), pero la evidencia sobre Bard es escasa. Como el margen para dominante es 0.20 y la actividad de Bard es baja, la clase dominante es mixto con confianza baja por poca evidencia de Bard.",
+   "faltante": "Más actividad en frontend y documentación para refinar la clasificación de Bard",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.8963355090712855,
+     "cleric": 0.09432766270922206,
+     "bard": 0.009336828219492558
+    },
+    "estado": "dominante",
+    "dominante": "druid",
+    "confianza": "media",
+    "tendencia": "druid",
+    "margen": 0.8020078463620633,
+    "evidencia": 1.0710275229357797,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_10",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "Druid",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": "baja",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.146
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias: S3 muestra 96% de archivos en infraestructura, lo que apunta a Druid (arquitectura e infraestructura). S6 indica 17% de commits corrigiendo errores, vinculado a Cleric (resolución de errores). S4 y S5 son pequeños porcentajes (1% y 3%) que podrían ser Bard (documentación y frontend). La diferencia entre Druid y Cleric es clara (96% vs 17% de commits), pero la evidencia sobre Bard es escasa. Como el margen para dominante es 0.20 y la actividad de Bard es baja, la clase dominante es mixto con confianza baja por poca evidencia de Bard.\",\n  \"mezcla\": {\n    \"Druid\": 0.75,\n    \"Cleric\": 0.17,\n    \"Bard\": 0.08\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"96% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)\"\n    },\n    {\n      \"fuente\": \"S6\",\n      \"descripcion\": \"17% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Más actividad en frontend y documentación para refinar la clasificación de Bard\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "D2",
+   "esperada": "Druid",
+   "segundos": 85.1,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 310,
+    "largo_contenido": 957,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_15",
+   "valida": false,
+   "mezcla": null,
+   "dominante": null,
+   "confianza": null,
+   "evidencias": [],
+   "razonamiento": "",
+   "faltante": "",
+   "intentos": 2,
+   "errores": [
+    "la mezcla suma 1.150, debe sumar 1"
+   ],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.7754688291941206,
+     "cleric": 0.15493781433974033,
+     "bard": 0.06959335646613904
+    },
+    "estado": "dominante",
+    "dominante": "druid",
+    "confianza": "media",
+    "tendencia": "druid",
+    "margen": 0.6205310148543803,
+    "evidencia": 1.005843137254902,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_15",
+    "dominante_llm": null,
+    "dominante_reglas": "Druid",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": null,
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": null
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias para cada clase: Druid tiene alta actividad en infraestructura (S3: 78% de archivos tocados), lo que apunta a su arquitectura e infraestructura. Cleric se relaciona con soporte y corrección de errores (S6: 37% de commits corrigen errores), pero su actividad es menor que la de Druid. Bard tiene documentación (S4: 7%) y frontend, pero la actividad es baja. La diferencia entre Druid (78%) y Cleric (37% de correcciones) es 41%, lo que supera el margen de 0.20. Por lo tanto, Druid es dominante con alta confianza.\",\n  \"mezcla\": {\n    \"Druid\": 0.78,\n    \"Cleric\": 0.37,\n    \"Bard\": 0.00\n  },\n  \"dominante\": \"Druid\",\n  \"confianza\": \"alta\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"78% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)\"\n    },\n    {\n      \"fuente\": \"S6\",\n      \"descripcion\": \"37% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "D3",
+   "esperada": "Druid",
+   "segundos": 55.5,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 466,
+    "largo_contenido": 1556,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_08",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.79,
+    "Cleric": 0.03,
+    "Bard": 0.18
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "79% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "3% de los archivos tocados son de documentacion"
+    },
+    {
+     "fuente": "S6",
+     "descripcion": "3% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias para cada clase. Druid se relaciona con infraestructura (S3: 79% infraestructura), lo que sugiere alta actividad en este área. Cleric se vincula con soporte y corrección de errores (S6: 3% de commits corrigen errores), pero la actividad es baja. Bard se asocia con frontend y documentación (S4: .3% documentación), pero la actividad es mínima. Los datos muestran que Druid tiene la mayor actividad (79% infraestructura), Cleric y Bard tienen menos. La diferencia entre Druid y Cleric es 79% - 3% = 76%, pero esto no es directamente comparable porque no son porcentajes de la misma categoría. Revisando los datos, la actividad en infraestructura (Druid) es 79%, mientras que en soporte y corrección de errores (Cleric) es 3% de commits. La diferencia entre las dos primeras clases no alcanza 0.20, por lo que la clase dominante es mixto. La confianza es baja porque hay poca actividad en Bard y Cleric, y los datos son escasos para definir con precisión.",
+   "faltante": "Más datos sobre actividades en frontend y soporte para definir mejor la contribución de Bard y Cleric.",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.7833133918284144,
+     "cleric": 0.1869405300008863,
+     "bard": 0.02974607817069928
+    },
+    "estado": "dominante",
+    "dominante": "druid",
+    "confianza": "media",
+    "tendencia": "druid",
+    "margen": 0.5963728618275281,
+    "evidencia": 1.008536312849162,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_08",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "Druid",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": "baja",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.157
+   },
+   "texto_crudo": "{\"razonamiento\": \"Analizo las evidencias para cada clase. Druid se relaciona con infraestructura (S3: 79% infraestructura), lo que sugiere alta actividad en este área. Cleric se vincula con soporte y corrección de errores (S6: 3% de commits corrigen errores), pero la actividad es baja. Bard se asocia con frontend y documentación (S4: .3% documentación), pero la actividad es mínima. Los datos muestran que Druid tiene la mayor actividad (79% infraestructura), Cleric y Bard tienen menos. La diferencia entre Druid y Cleric es 79% - 3% = 76%, pero esto no es directamente comparable porque no son porcentajes de la misma categoría. Revisando los datos, la actividad en infraestructura (Druid) es 79%, mientras que en soporte y corrección de errores (Cleric) es 3% de commits. La diferencia entre las dos primeras clases no alcanza 0.20, por lo que la clase dominante es mixto. La confianza es baja porque hay poca actividad en Bard y Cleric, y los datos son escasos para definir con precisión.\",\n\"mezcla\": {\n  \"Druid\": 0.79,\n  \"Cleric\": 0.03,\n  \"Bard\": 0.18\n},\n\"dominante\": \"mixto\",\n\"confianza\": \"baja\",\n\"evidencias\": [\n  {\n    \"fuente\": \"S3\",\n    \"descripcion\": \"79% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)\"\n  },\n  {\n    \"fuente\": \"S4\",\n    \"descripcion\": \"3% de los archivos tocados son de documentacion\"\n  },\n  {\n    \"fuente\": \"S6\",\n    \"descripcion\": \"3% de los commits corrigen errores\"\n  }\n],\n\"faltante\": \"Más datos sobre actividades en frontend y soporte para definir mejor la contribución de Bard y Cleric.\"}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "D4",
+   "esperada": "Druid",
+   "segundos": 47.1,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 399,
+    "largo_contenido": 1307,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_13",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.95,
+    "Cleric": 0.03,
+    "Bard": 0.02
+   },
+   "dominante": "Druid",
+   "confianza": "alta",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "98% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "2% de los archivos tocados son de código general"
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "0% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizando las evidencias: S3 muestra que el 98% de los archivos tocados son de infraestructura (CI, contenedores, migraciones), lo que apunta fuertemente a Druid. S4 indica 2% de código general, lo que es mínimo y no afecta significativamente. S5 confirma 0% de correcciones de errores, lo que descarta Cleric. S2 muestra 7 revisiones de PR ajenos, lo que sugiere actividad en soporte (Cleric), pero la cantidad es baja. No hay evidencia de frontend o documentación (Bard). Las actividades de Druid (98%) y Cleric (bajo) son claras, pero Cleric no tiene actividad en corrección de errores (S5) ni suficientes revisiones para ser dominante. La diferencia entre Druid y Cleric es >0.20, pero Cleric no tiene actividad relevante. Por lo tanto, Druid es dominante con alta confianza.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.9739921976592977,
+     "cleric": 0.026007802340702206,
+     "bard": 0.0
+    },
+    "estado": "dominante",
+    "dominante": "druid",
+    "confianza": "baja",
+    "tendencia": "druid",
+    "margen": 0.9479843953185955,
+    "evidencia": 1.0061682242990655,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_13",
+    "dominante_llm": "Druid",
+    "dominante_reglas": "Druid",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "alta",
+    "confianza_reglas": "baja",
+    "max_diferencia_mezcla": 0.024
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizando las evidencias: S3 muestra que el 98% de los archivos tocados son de infraestructura (CI, contenedores, migraciones), lo que apunta fuertemente a Druid. S4 indica 2% de código general, lo que es mínimo y no afecta significativamente. S5 confirma 0% de correcciones de errores, lo que descarta Cleric. S2 muestra 7 revisiones de PR ajenos, lo que sugiere actividad en soporte (Cleric), pero la cantidad es baja. No hay evidencia de frontend o documentación (Bard). Las actividades de Druid (98%) y Cleric (bajo) son claras, pero Cleric no tiene actividad en corrección de errores (S5) ni suficientes revisiones para ser dominante. La diferencia entre Druid y Cleric es >0.20, pero Cleric no tiene actividad relevante. Por lo tanto, Druid es dominante con alta confianza.\",\n  \"mezcla\": {\n    \"Druid\": 0.95,\n    \"Cleric\": 0.03,\n    \"Bard\": 0.02\n  },\n  \"dominante\": \"Druid\",\n  \"confianza\": \"alta\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"98% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"2% de los archivos tocados son de código general\"\n    },\n    {\n      \"fuente\": \"S5\",\n      \"descripcion\": \"0% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"\"\n}",
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "D5",
+   "esperada": "Druid",
+   "segundos": 94.4,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 310,
+    "largo_contenido": 949,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_19",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.65,
+    "Cleric": 0.25,
+    "Bard": 0.1
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "90% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "10% de los archivos tocados son de código general"
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "65% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias: S3 muestra 90% de archivos en infraestructura (Druid), S4 indica 10% de código general (Cleric), S5 muestra 65% de commits corrigiendo errores (Cleric). La diferencia entre Druid y Cleric es 0.20 (90% vs 65% de actividad), pero hay poca actividad en Bard. Con confianza baja, el dominante debe ser mixto según las reglas.",
+   "faltante": "Actividad en frontend y documentación para mejorar la clasificación de Bard",
+   "intentos": 2,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.664788303381054,
+     "cleric": 0.3352116966189461,
+     "bard": 0.0
+    },
+    "estado": "dominante",
+    "dominante": "druid",
+    "confianza": "media",
+    "tendencia": "druid",
+    "margen": 0.32957660676210787,
+    "evidencia": 1.3538144329896906,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_19",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "Druid",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": "baja",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.1
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias: S3 muestra 90% de archivos en infraestructura (Druid), S4 indica 10% de código general (Cleric), S5 muestra 65% de commits corrigiendo errores (Cleric). La diferencia entre Druid y Cleric es 0.20 (90% vs 65% de actividad), pero hay poca actividad en Bard. Con confianza baja, el dominante debe ser mixto según las reglas.\",\n  \"mezcla\": {\n    \"Druid\": 0.65,\n    \"Cleric\": 0.25,\n    \"Bard\": 0.10\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"90% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"10% de los archivos tocados son de código general\"\n    },\n    {\n      \"fuente\": \"S5\",\n      \"descripcion\": \"65% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Actividad en frontend y documentación para mejorar la clasificación de Bard\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "B1",
+   "esperada": "Bard",
+   "segundos": 45.0,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 381,
+    "largo_contenido": 1223,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_21",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.25,
+    "Cleric": 0.37,
+    "Bard": 0.38
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "76% de los archivos tocados son de documentacion"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "24% de los archivos tocados son de codigo general"
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "37% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las señales: S3 muestra 76% de archivos de documentacion, lo que apunta a Bard (frontend y documentación). S4 indica 24% de código general, lo que podría ser Druid (infraestructura) o Cleric (soporte). S5 muestra 37% de commits corrigiendo errores, lo que apunta a Cleric (resolución de errores). S2 muestra 1 revisión de PR ajenos, lo que podría ser Cleric (revisión constante). S1 muestra .30 commits, pero no es suficiente para una clasificación clara. La diferencia entre Druid y Cleric es baja (24% vs 37% de commits corrigiendo errores), por lo que no hay dominancia clara. La confianza es baja por poca actividad y evidencia escasa.",
+   "faltante": "Más commits de código y revisión de PR para distinguir mejor entre Druid y Cleric",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.16663047726581837,
+     "bard": 0.8333695227341816
+    },
+    "estado": "dominante",
+    "dominante": "bard",
+    "confianza": "media",
+    "tendencia": "bard",
+    "margen": 0.6667390454683633,
+    "evidencia": 0.911960396039604,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_21",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "Bard",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": "baja",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.453
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las señales: S3 muestra 76% de archivos de documentacion, lo que apunta a Bard (frontend y documentación). S4 indica 24% de código general, lo que podría ser Druid (infraestructura) o Cleric (soporte). S5 muestra 37% de commits corrigiendo errores, lo que apunta a Cleric (resolución de errores). S2 muestra 1 revisión de PR ajenos, lo que podría ser Cleric (revisión constante). S1 muestra .30 commits, pero no es suficiente para una clasificación clara. La diferencia entre Druid y Cleric es baja (24% vs 37% de commits corrigiendo errores), por lo que no hay dominancia clara. La confianza es baja por poca actividad y evidencia escasa.\",\n  \"mezcla\": {\n    \"Druid\": 0.25,\n    \"Cleric\": 0.37,\n    \"Bard\": 0.38\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"76% de los archivos tocados son de documentacion\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"24% de los archivos tocados son de codigo general\"\n    },\n    {\n      \"fuente\": \"S5\",\n      \"descripcion\": \"37% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Más commits de código y revisión de PR para distinguir mejor entre Druid y Cleric\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "B2",
+   "esperada": "Bard",
+   "segundos": 89.1,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 330,
+    "largo_contenido": 932,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_09",
+   "valida": false,
+   "mezcla": null,
+   "dominante": null,
+   "confianza": null,
+   "evidencias": [],
+   "razonamiento": "",
+   "faltante": "",
+   "intentos": 2,
+   "errores": [
+    "el dominante no es la clase con mayor puntaje"
+   ],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.34463637638043026,
+     "bard": 0.6553636236195698
+    },
+    "estado": "dominante",
+    "dominante": "bard",
+    "confianza": "media",
+    "tendencia": "bard",
+    "margen": 0.3107272472391395,
+    "evidencia": 1.296989898989899,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_09",
+    "dominante_llm": null,
+    "dominante_reglas": "Bard",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": null,
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": null
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias: S1 muestra actividad de commits (30), S2 indica revisión de PRs (296), S3 revela 85% de archivos tocados son documentación (Bard), S4 muestra 15% código general (Druid), S5 muestra 37% de commits corrigen errores (Cleric). La diferencia entre Cleric (37%) y Druid (15%) es 22%, que supera 0.20. Por lo tanto, Cleric es dominante con 0.37, Druid 0.15, Bard 0.48. Confianza alta por evidencia clara y cuantificada.\",\n  \"mezcla\": {\n    \"Druid\": 0.15,\n    \"Cleric\": 0.37,\n    \"Bard\": 0.48\n  },\n  \"dominante\": \"Cleric\",\n  \"confianza\": \"alta\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"85% de los archivos tocados son de documentacion\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"15% de los archivos tocados son de codigo general\"\n    },\n    {\n      \"fuente\": \"S5\",\n      \"descripcion\": \"37% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "B3",
+   "esperada": "Bard",
+   "segundos": 51.8,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 432,
+    "largo_contenido": 1303,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_20",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.14,
+    "Cleric": 0.66,
+    "Bard": 0.2
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "14% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "67% de los archivos tocados son de documentacion"
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "19% de los archivos tocados son de codigo general"
+    },
+    {
+     "fuente": "S6",
+     "descripcion": "47% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias: S3 muestra 14% de infraestructura, que apunta a Druid; S4 indica 67% de documentación, vinculado a Bard; S5 muestra 19% de código general, que podría ser Cleric; S6 muestra 47% de commits corrigiendo errores, lo que apunta a Cleric. La actividad de Druid es baja (14%), Bard es alta (67%), Cleric es moderada (19% de código general y 47% de correcciones). La diferencia entre Bard (67%) y Cleric (47% + 19% = 66%) es 1%, que no supera 0.20, por lo que la clase dominante es 'mixto'. La confianza es 'baja' porque hay poca actividad en Druid y la mezcla es cercana.",
+   "faltante": "Más datos sobre arquitectura y infraestructura para refinar el puntaje de Druid",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.11666859189095531,
+     "cleric": 0.3249888612023301,
+     "bard": 0.5583425469067147
+    },
+    "estado": "dominante",
+    "dominante": "bard",
+    "confianza": "media",
+    "tendencia": "bard",
+    "margen": 0.23335368570438458,
+    "evidencia": 1.199980198019802,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_20",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "Bard",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": "baja",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.358
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias: S3 muestra 14% de infraestructura, que apunta a Druid; S4 indica 67% de documentación, vinculado a Bard; S5 muestra 19% de código general, que podría ser Cleric; S6 muestra 47% de commits corrigiendo errores, lo que apunta a Cleric. La actividad de Druid es baja (14%), Bard es alta (67%), Cleric es moderada (19% de código general y 47% de correcciones). La diferencia entre Bard (67%) y Cleric (47% + 19% = 66%) es 1%, que no supera 0.20, por lo que la clase dominante es 'mixto'. La confianza es 'baja' porque hay poca actividad en Druid y la mezcla es cercana.\",\n  \"mezcla\": {\n    \"Druid\": 0.14,\n    \"Cleric\": 0.66,\n    \"Bard\": 0.20\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"14% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"67% de los archivos tocados son de documentacion\"\n    },\n    {\n      \"fuente\": \"S5\",\n      \"descripcion\": \"19% de los archivos tocados son de codigo general\"\n    },\n    {\n      \"fuente\": \"S6\",\n      \"descripcion\": \"47% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Más datos sobre arquitectura y infraestructura para refinar el puntaje de Druid\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "B4",
+   "esperada": "Bard",
+   "segundos": 40.5,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 342,
+    "largo_contenido": 1014,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_23",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.02,
+    "Cleric": 0.98,
+    "Bard": 0.0
+   },
+   "dominante": "Cleric",
+   "confianza": "alta",
+   "evidencias": [
+    {
+     "fuente": "S2",
+     "descripcion": "4503 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "0% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias: S1 muestra actividad en commits, pero S4 indica que 0% de los commits corrigen errores, lo que apunta a que no hay corrección de errores (Cleric). S2 muestra 4503 revisiones de PR ajenos, lo que sugiere soporte y revisión constante (Cler: 4503). S3 indica que 100% de los archivos tocados son de documentación, lo que apunta a Bard (frontend y documentación). S4 confirma ausencia de corrección de errores, reforzando que no hay Cleric. La diferencia entre Cleric (4503) y Druid (20) es 4483, que supera 0.20, por lo que Cleric es dominante. Confianza es alta porque hay evidencia clara en revisiones de PR y documentación.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.28125292776615346,
+     "bard": 0.7187470722338466
+    },
+    "estado": "dominante",
+    "dominante": "bard",
+    "confianza": "media",
+    "tendencia": "bard",
+    "margen": 0.43749414446769314,
+    "evidencia": 1.3913100152074733,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_23",
+    "dominante_llm": "Cleric",
+    "dominante_reglas": "Bard",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": "alta",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.719
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias: S1 muestra actividad en commits, pero S4 indica que 0% de los commits corrigen errores, lo que apunta a que no hay corrección de errores (Cleric). S2 muestra 4503 revisiones de PR ajenos, lo que sugiere soporte y revisión constante (Cler: 4503). S3 indica que 100% de los archivos tocados son de documentación, lo que apunta a Bard (frontend y documentación). S4 confirma ausencia de corrección de errores, reforzando que no hay Cleric. La diferencia entre Cleric (4503) y Druid (20) es 4483, que supera 0.20, por lo que Cleric es dominante. Confianza es alta porque hay evidencia clara en revisiones de PR y documentación.\",\n  \"mezcla\": {\n    \"Druid\": 0.02,\n    \"Cleric\": 0.98,\n    \"Bard\": 0.00\n  },\n  \"dominante\": \"Cleric\",\n  \"confianza\": \"alta\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S2\",\n      \"descripcion\": \"4503 revisiones de PR ajenos\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"0% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "B5",
+   "esperada": "Bard",
+   "segundos": 131.3,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 468,
+    "largo_contenido": 1478,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_22",
+   "valida": false,
+   "mezcla": null,
+   "dominante": null,
+   "confianza": null,
+   "evidencias": [],
+   "razonamiento": "",
+   "faltante": "",
+   "intentos": 2,
+   "errores": [
+    "la mezcla suma 2.000, debe sumar 1"
+   ],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.2854632348213712,
+     "bard": 0.7145367651786287
+    },
+    "estado": "dominante",
+    "dominante": "bard",
+    "confianza": "media",
+    "tendencia": "bard",
+    "margen": 0.42907353035725754,
+    "evidencia": 1.077621247113164,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_22",
+    "dominante_llm": null,
+    "dominante_reglas": "Bard",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": null,
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": null
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias: S1 muestra actividad en commits, S2 indica revisión de PRs (Cleric), S3 y S4 muestran predominio en documentación y código general (Bard y Druid), S5 confirma que no hay corrección de errores (no Cleric). Las clases: Druid (documentación y infraestructura), Cleric (revisión y soporte), Bard (frontend y equipo). S3 (77% documentación) y S4 (23% código general) sugieren alta actividad en Bard. S2 (333 PRs) apunta a Cleric. S5 confirma ausencia de corrección de errores, descartando Cleric. La diferencia entre Druid (S3, S4) y Cleric (S2) es pequeña: 77% vs 333 PRs, pero no hay suficiente evidencia para diferenciar claramente. Por lo tanto, la mezcla es mixto con confianza baja.\",\n  \"mezcla\": {\n    \"Druid\": 0.4,\n    \"Cleric\": 1.0,\n    \"Bard\": 0.6\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S1\",\n      \"descripcion\": \"20 commits analizados\"\n    },\n    {\n      \"fuente\": \"S2\",\n      \"descripcion\": \"333 revisiones de PR ajenos\"\n    },\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"77% de los archivos tocados son de documentacion\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"23% de los archivos tocados son de codigo general\"\n    },\n    {\n      \"fuente\": \"S5\",\n      \"descripcion\": \"0% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Más datos sobre la cantidad de PRs revisados y correcciones de errores para diferenciar mejor entre Druid y Cleric\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "C1",
+   "esperada": "Cleric",
+   "segundos": 134.8,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 470,
+    "largo_contenido": 1535,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_05",
+   "valida": false,
+   "mezcla": null,
+   "dominante": null,
+   "confianza": null,
+   "evidencias": [],
+   "razonamiento": "",
+   "faltante": "",
+   "intentos": 2,
+   "errores": [
+    "la mezcla suma 2.000, debe sumar 1"
+   ],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.13822377013495865,
+     "cleric": 0.7341850574327718,
+     "bard": 0.1275911724322695
+    },
+    "estado": "dominante",
+    "dominante": "cleric",
+    "confianza": "media",
+    "tendencia": "cleric",
+    "margen": 0.5959612872978132,
+    "evidencia": 0.940503937007874,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_05",
+    "dominante_llm": null,
+    "dominante_reglas": "Cleric",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": null,
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": null
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias para estimar las contribuciones a cada arquetipo. El Druid se asocia con bases de datos, arquitectura e infraestructura; aquí hay 13% de archivos de infraestructura (S3) y 42% de pruebas (S5), pero no hay datos directos de bases de datos o arquitectura. El Cleric incluye soporte, revisión constante y resolución de errores; S7 muestra 70% de commits corrigiendo errores, lo que apunta fuertemente a Cleric. El Bard está en frontend, documentación y trabajo en equipo; S4 indica 12% de archivos de documentación, pero no hay datos de frontend o trabajo en equipo. Las revisiones de PR ajenos (S2) sugieren actividad de revisión constante, reforzando Cleric. La diferencia entre Druid y Cleric es baja (13% vs 70% de actividad), por lo que no supera el umbral de 0.20. Con poca actividad en Bard y evidencia escasa para Druid, la mezcla es mixta con confianza baja.\",\n  \"mezcla\": {\n    \"Druid\": 0.25,\n    \"Cleric\": 1.0,\n    \"Bard\": 0.75\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S7\",\n      \"descripcion\": \"70% de los commits corrigen errores, asociado a Cleric\"\n    },\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"13% de los archivos tocados son de infraestructura, asociado a Druid\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"12% de los archivos tocados son de documentación, asociado a Bard\"\n    }\n  ],\n  \"faltante\": \"Más datos sobre bases de datos, arquitectura y frontend para mejorar la estimación del Druid y Bard\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "C2",
+   "esperada": "Cleric",
+   "segundos": 103.2,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 365,
+    "largo_contenido": 1160,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_12",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.25,
+    "Cleric": 0.3,
+    "Bard": 0.45
+   },
+   "dominante": "mixto",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "25% de los archivos tocados son de infraestructura"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "31% de los archivos tocados son de documentacion"
+    },
+    {
+     "fuente": "S7",
+     "descripcion": "30% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias para cada clase: Druid se relaciona con infraestructura (S3: 25%), Cleric con soporte y correcciones (S7: 30% de commits corrigiendo errores), Bard con documentación (S4: 31%). Los datos muestran que Bard tiene el mayor porcentaje de archivos tocados (31% documentación), Cleric tiene 30% de commits corrigiendo errores, y Druid tiene 25% infraestructura. La diferencia entre Bard (31%) y Cleric (30%) es 1%, menor que 0.20, por lo que no hay dominancia clara. La actividad es suficiente para asignar puntajes pero la diferencia es pequeña, por lo que la confianza es media.",
+   "faltante": "Más datos sobre frontend y arquitectura para mejorar la estimación",
+   "intentos": 2,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.24051531550820215,
+     "cleric": 0.4612456932616271,
+     "bard": 0.29823899123017067
+    },
+    "estado": "mixto",
+    "dominante": null,
+    "confianza": "media",
+    "tendencia": "cleric",
+    "margen": 0.16300670203145645,
+    "evidencia": 1.0394348462664715,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_12",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "mixto",
+    "difiere_dominante": false,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.161
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias para cada clase: Druid se relaciona con infraestructura (S3: 25%), Cleric con soporte y correcciones (S7: 30% de commits corrigiendo errores), Bard con documentación (S4: 31%). Los datos muestran que Bard tiene el mayor porcentaje de archivos tocados (31% documentación), Cleric tiene 30% de commits corrigiendo errores, y Druid tiene 25% infraestructura. La diferencia entre Bard (31%) y Cleric (30%) es 1%, menor que 0.20, por lo que no hay dominancia clara. La actividad es suficiente para asignar puntajes pero la diferencia es pequeña, por lo que la confianza es media.\",\n  \"mezcla\": {\n    \"Druid\": 0.25,\n    \"Cleric\": 0.30,\n    \"Bard\": 0.45\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"media\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"25% de los archivos tocados son de infraestructura\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"31% de los archivos tocados son de documentacion\"\n    },\n    {\n      \"fuente\": \"S7\",\n      \"descripcion\": \"30% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Más datos sobre frontend y arquitectura para mejorar la estimación\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": false
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "C3",
+   "esperada": "Cleric",
+   "segundos": 55.5,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 455,
+    "largo_contenido": 1461,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_02",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.15,
+    "Cleric": 0.55,
+    "Bard": 0.3
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "4% de los archivos tocados son de infraestructura"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "42% de los archivos tocados son de documentacion"
+    },
+    {
+     "fuente": "S7",
+     "descripcion": "40% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias para identificar las señales de cada arquetipo. El Druid se asocia con bases de datos, arquitectura e infraestructura; aquí hay 4% de archivos de infraestructura (S3) y 42% de documentación (S4) que podría ser relevante para Cleric. El Cleric incluye soporte, revisión constante y resolución de errores; S7 muestra 40% de commits corrigiendo errores, lo que apunta fuertemente a Cleric. El Bard se relaciona con frontend, documentación y trabajo en equipo; S4 (42% documentación) y S5 (8% pruebas) podrían ser relevantes, pero no hay señales claras de frontend. La actividad total es 30 commits (S1), con 40% de ellos corrigiendo errores (S7). La diferencia entre Druid (4%) y Cleric (40% de correcciones) es 36%, pero el margen mínimo es 0.20, así que no hay dominancia clara. Con poca actividad en otros aspectos, la confianza es baja y la mezcla es mixto.",
+   "faltante": "Más datos sobre archivos de frontend y colaboración en equipo para confirmar el Bard.",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.04017526295944769,
+     "cleric": 0.5379844759663516,
+     "bard": 0.4218402610742007
+    },
+    "estado": "mixto",
+    "dominante": null,
+    "confianza": "media",
+    "tendencia": "cleric",
+    "margen": 0.11614421489215088,
+    "evidencia": 0.9956375404530744,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_02",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "mixto",
+    "difiere_dominante": false,
+    "confianza_llm": "baja",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.122
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias para identificar las señales de cada arquetipo. El Druid se asocia con bases de datos, arquitectura e infraestructura; aquí hay 4% de archivos de infraestructura (S3) y 42% de documentación (S4) que podría ser relevante para Cleric. El Cleric incluye soporte, revisión constante y resolución de errores; S7 muestra 40% de commits corrigiendo errores, lo que apunta fuertemente a Cleric. El Bard se relaciona con frontend, documentación y trabajo en equipo; S4 (42% documentación) y S5 (8% pruebas) podrían ser relevantes, pero no hay señales claras de frontend. La actividad total es 30 commits (S1), con 40% de ellos corrigiendo errores (S7). La diferencia entre Druid (4%) y Cleric (40% de correcciones) es 36%, pero el margen mínimo es 0.20, así que no hay dominancia clara. Con poca actividad en otros aspectos, la confianza es baja y la mezcla es mixto.\",\n  \"mezcla\": {\n    \"Druid\": 0.15,\n    \"Cleric\": 0.55,\n    \"Bard\": 0.30\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"4% de los archivos tocados son de infraestructura\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"42% de los archivos tocados son de documentacion\"\n    },\n    {\n      \"fuente\": \"S7\",\n      \"descripcion\": \"40% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Más datos sobre archivos de frontend y colaboración en equipo para confirmar el Bard.\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": false
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "C4",
+   "esperada": "Cleric",
+   "segundos": 43.6,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 377,
+    "largo_contenido": 1228,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_07",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.45,
+    "Cleric": 0.4,
+    "Bard": 0.15
+   },
+   "dominante": "mixto",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "20 commits analizados"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "943 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "100% de los archivos tocados son de codigo general"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "30% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias: S1 muestra 20 commits, S2 indica 943 PRs revisados, S3 afirma que 100% de archivos tocados son código general, y S4 dice que 30% de los commits corrigen errores. Para Druid, los commits de código general y la actividad en infraestructura sugieren un puntaje alto. Cleric se relaciona con revisión de código y corrección de errores, con S2 y S4 indicando actividad significativa. Bard no tiene evidencia directa en los archivos tocados ni en frontend, por lo que su contribución es baja. La diferencia entre Druid y Cleric es menor que 0.20, por lo que la clase dominante es mixto.",
+   "faltante": "Actividad en frontend o documentación para refinar el perfil de Bard",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 1.0,
+     "bard": 0.0
+    },
+    "estado": "dominante",
+    "dominante": "cleric",
+    "confianza": "media",
+    "tendencia": "cleric",
+    "margen": 1.0,
+    "evidencia": 0.4816490891658677,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_07",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "Cleric",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.6
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias: S1 muestra 20 commits, S2 indica 943 PRs revisados, S3 afirma que 100% de archivos tocados son código general, y S4 dice que 30% de los commits corrigen errores. Para Druid, los commits de código general y la actividad en infraestructura sugieren un puntaje alto. Cleric se relaciona con revisión de código y corrección de errores, con S2 y S4 indicando actividad significativa. Bard no tiene evidencia directa en los archivos tocados ni en frontend, por lo que su contribución es baja. La diferencia entre Druid y Cleric es menor que 0.20, por lo que la clase dominante es mixto.\",\n  \"mezcla\": {\n    \"Druid\": 0.45,\n    \"Cleric\": 0.40,\n    \"Bard\": 0.15\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"media\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S1\",\n      \"descripcion\": \"20 commits analizados\"\n    },\n    {\n      \"fuente\": \"S2\",\n      \"descripcion\": \"943 revisiones de PR ajenos\"\n    },\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"100% de los archivos tocados son de codigo general\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"30% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Actividad en frontend o documentación para refinar el perfil de Bard\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "C5",
+   "esperada": "Cleric",
+   "segundos": 43.9,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 375,
+    "largo_contenido": 1205,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_03",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.45,
+    "Cleric": 0.35,
+    "Bard": 0.2
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "20 commits analizados"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "883 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "100% de los archivos tocados son de codigo general"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "35% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias: S1 muestra 20 commits, S2 indica 883 PRs revisados, S3 afirma que 100% de archivos tocados son de código general, y S4 señala que 35% de los commits corrigen errores. Para Druid, los commits de código general y la actividad en infraestructura sugieren una alta presencia. Cleric se relaciona con revisión constante de código (S2) y resolución de errores (S4). Bard no tiene evidencia clara en frontend o documentación. La diferencia entre Druid y Cleric es pequeña (S4 muestra solo 35% de correcciones), por lo que la clase dominante es mixto.",
+   "faltante": "Actividad en frontend y documentación para definir más claramente el perfil de Bard",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 1.0,
+     "bard": 0.0
+    },
+    "estado": "dominante",
+    "dominante": "cleric",
+    "confianza": "media",
+    "tendencia": "cleric",
+    "margen": 1.0,
+    "evidencia": 0.4993082400813835,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_03",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "Cleric",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": "baja",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.65
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias: S1 muestra 20 commits, S2 indica 883 PRs revisados, S3 afirma que 100% de archivos tocados son de código general, y S4 señala que 35% de los commits corrigen errores. Para Druid, los commits de código general y la actividad en infraestructura sugieren una alta presencia. Cleric se relaciona con revisión constante de código (S2) y resolución de errores (S4). Bard no tiene evidencia clara en frontend o documentación. La diferencia entre Druid y Cleric es pequeña (S4 muestra solo 35% de correcciones), por lo que la clase dominante es mixto.\",\n  \"mezcla\": {\n    \"Druid\": 0.45,\n    \"Cleric\": 0.35,\n    \"Bard\": 0.20\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S1\",\n      \"descripcion\": \"20 commits analizados\"\n    },\n    {\n      \"fuente\": \"S2\",\n      \"descripcion\": \"883 revisiones de PR ajenos\"\n    },\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"100% de los archivos tocados son de codigo general\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"35% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Actividad en frontend y documentación para definir más claramente el perfil de Bard\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "mixto",
+   "alias_etiqueta": "M1",
+   "esperada": "mixto",
+   "segundos": 58.2,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 498,
+    "largo_contenido": 1667,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_11",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.35,
+    "Cleric": 0.45,
+    "Bard": 0.2
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S2",
+     "descripcion": "462 revisiones de PR ajenos indican revisión constante de código"
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "10% de los commits corrigen errores, lo que apoya resolución de errores"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "28% de los archivos tocados son de documentación, lo que apoya documentación"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias para cada clase. Druid se relaciona con bases de datos, arquitectura e infraestructura. En los datos, 72% de los archivos tocados son de código general, lo que podría incluir infraestructura, pero no hay evidencia directa de bases de datos o arquitectura. Cleric se relaciona con soporte, revisión constante de código y resolución de errores. S2 muestra 462 revisiones de PR ajenos, lo que indica revisión constante de código, y S5 muestra 10% de los commits corrigen errores, lo que apoya resolución de errores. Bard se relaciona con frontend, documentación y fomento del trabajo en equipo. S3 muestra 28% de los archivos tocados son de documentación, lo que apoya documentación, pero no hay evidencia de frontend o fomento del equipo. Las actividades son significativas: 30 commits, 462 PRs, 28% documentación, 72% código general, 10% correcciones. La diferencia entre Druid y Cleric no alcanza 0.20, por lo que la clase dominante es mixto. La confianza es baja por la escasa evidencia directa de las clases específicas.",
+   "faltante": "Evidencia de arquitectura, bases de datos o frontend para mejorar la asignación de Druid y Bard.",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.5684510750329091,
+     "bard": 0.4315489249670908
+    },
+    "estado": "mixto",
+    "dominante": null,
+    "confianza": "media",
+    "tendencia": "cleric",
+    "margen": 0.13690215006581835,
+    "evidencia": 0.6488256227758008,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_11",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "mixto",
+    "difiere_dominante": false,
+    "confianza_llm": "baja",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.35
+   },
+   "texto_crudo": "{\"razonamiento\": \"Analizo las evidencias para cada clase. Druid se relaciona con bases de datos, arquitectura e infraestructura. En los datos, 72% de los archivos tocados son de código general, lo que podría incluir infraestructura, pero no hay evidencia directa de bases de datos o arquitectura. Cleric se relaciona con soporte, revisión constante de código y resolución de errores. S2 muestra 462 revisiones de PR ajenos, lo que indica revisión constante de código, y S5 muestra 10% de los commits corrigen errores, lo que apoya resolución de errores. Bard se relaciona con frontend, documentación y fomento del trabajo en equipo. S3 muestra 28% de los archivos tocados son de documentación, lo que apoya documentación, pero no hay evidencia de frontend o fomento del equipo. Las actividades son significativas: 30 commits, 462 PRs, 28% documentación, 72% código general, 10% correcciones. La diferencia entre Druid y Cleric no alcanza 0.20, por lo que la clase dominante es mixto. La confianza es baja por la escasa evidencia directa de las clases específicas.\",\n\"mezcla\": {\n  \"Druid\": 0.35,\n  \"Cleric\": 0.45,\n  \"Bard\": 0.20\n},\n\"dominante\": \"mixto\",\n\"confianza\": \"baja\",\n\"evidencias\": [\n  {\n    \"fuente\": \"S2\",\n    \"descripcion\": \"462 revisiones de PR ajenos indican revisión constante de código\"\n  },\n  {\n    \"fuente\": \"S5\",\n    \"descripcion\": \"10% de los commits corrigen errores, lo que apoya resolución de errores\"\n  },\n  {\n    \"fuente\": \"S3\",\n    \"descripcion\": \"28% de los archivos tocados son de documentación, lo que apoya documentación\"\n  }\n],\n\"faltante\": \"Evidencia de arquitectura, bases de datos o frontend para mejorar la asignación de Druid y Bard.\"}",
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "mixto",
+   "alias_etiqueta": "M2",
+   "esperada": "mixto",
+   "segundos": 43.3,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 361,
+    "largo_contenido": 1104,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_06",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.38,
+    "Cleric": 0.15,
+    "Bard": 0.47
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "38% de los archivos tocados son de infraestructura"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "47% de los archivos tocados son de documentacion"
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "15% de los archivos tocados son de codigo general"
+    }
+   ],
+   "razonamiento": "Analizo las señales: S3 muestra 38% de infraestructura (Druid), S4 indica 47% de documentación (Bard), y S5 muestra 15% de código general (Cleric). S6 confirma 0% de correcciones de errores, lo que reduce la actividad Cleric. Los commits (S1) y PRs (S2) no son específicos, pero S3 y S4 son claras. La diferencia entre Druid (38%) y Bard (47%) es 9%, menor que 0.20, por lo que es mixto. La confianza es baja por poca actividad en Cleric y falta de datos en commits específicos.",
+   "faltante": "Más datos sobre correcciones de errores y actividades específicas de soporte para mejorar la clasificación de Cleric",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.35602139037433156,
+     "cleric": 0.20363636363636367,
+     "bard": 0.44034224598930477
+    },
+    "estado": "mixto",
+    "dominante": null,
+    "confianza": "media",
+    "tendencia": "bard",
+    "margen": 0.08432085561497321,
+    "evidencia": 1.067351598173516,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_06",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "mixto",
+    "difiere_dominante": false,
+    "confianza_llm": "baja",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.054
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las señales: S3 muestra 38% de infraestructura (Druid), S4 indica 47% de documentación (Bard), y S5 muestra 15% de código general (Cleric). S6 confirma 0% de correcciones de errores, lo que reduce la actividad Cleric. Los commits (S1) y PRs (S2) no son específicos, pero S3 y S4 son claras. La diferencia entre Druid (38%) y Bard (47%) es 9%, menor que 0.20, por lo que es mixto. La confianza es baja por poca actividad en Cleric y falta de datos en commits específicos.\",\n  \"mezcla\": {\n    \"Druid\": 0.38,\n    \"Cleric\": 0.15,\n    \"Bard\": 0.47\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"38% de los archivos tocados son de infraestructura\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"47% de los archivos tocados son de documentacion\"\n    },\n    {\n      \"fuente\": \"S5\",\n      \"descripcion\": \"15% de los archivos tocados son de codigo general\"\n    }\n  ],\n  \"faltante\": \"Más datos sobre correcciones de errores y actividades específicas de soporte para mejorar la clasificación de Cleric\"\n}",
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "mixto",
+   "alias_etiqueta": "M3",
+   "esperada": "mixto",
+   "segundos": 55.2,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 472,
+    "largo_contenido": 1361,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_01",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.67,
+    "Cleric": 0.0,
+    "Bard": 0.33
+   },
+   "dominante": "Druid",
+   "confianza": "alta",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "20 commits analizados"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "0 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "33% de los archivos tocados son de documentacion"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "67% de los archivos tocados son de codigo general"
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "0% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizando las evidencias: S1 muestra actividad en commits, S2 indica ausencia de PRs ajenos, S3 muestra 33% de archivos de documentación (Bard), S4 muestra 67% de código general (Druid), y S5 confirma 0% de correcciones de errores (Cleric). La actividad en código general (Dr: 0.67) y documentación (B: 0.33) son claras, mientras que Cleric tiene 0% de actividad. La diferencia entre Druid (0.67) y Cleric (0) es 0.67, que supera el umbral de 0.20, pero Cleric es 0, no 0.20. La clase dominante debe ser Druid con 0.67, Cleric 0, Bard 0.33. Los tres suman 1 (0.67+0.33+0=1). La confianza es alta porque hay evidencia clara en archivos tocados y commits. El faltante es vacío ya que la confianza es alta.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.0,
+     "bard": 1.0
+    },
+    "estado": "mixto",
+    "dominante": null,
+    "confianza": "baja",
+    "tendencia": "bard",
+    "margen": 1.0,
+    "evidencia": 0.33,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_01",
+    "dominante_llm": "Druid",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "mixto",
+    "difiere_dominante": true,
+    "confianza_llm": "alta",
+    "confianza_reglas": "baja",
+    "max_diferencia_mezcla": 0.67
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizando las evidencias: S1 muestra actividad en commits, S2 indica ausencia de PRs ajenos, S3 muestra 33% de archivos de documentación (Bard), S4 muestra 67% de código general (Druid), y S5 confirma 0% de correcciones de errores (Cleric). La actividad en código general (Dr: 0.67) y documentación (B: 0.33) son claras, mientras que Cleric tiene 0% de actividad. La diferencia entre Druid (0.67) y Cleric (0) es 0.67, que supera el umbral de 0.20, pero Cleric es 0, no 0.20. La clase dominante debe ser Druid con 0.67, Cleric 0, Bard 0.33. Los tres suman 1 (0.67+0.33+0=1). La confianza es alta porque hay evidencia clara en archivos tocados y commits. El faltante es vacío ya que la confianza es alta.\",\n  \"mezcla\": {\n    \"Druid\": 0.67,\n    \"Cleric\": 0.0,\n    \"Bard\": 0.33\n  },\n  \"dominante\": \"Druid\",\n  \"confianza\": \"alta\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S1\",\n      \"descripcion\": \"20 commits analizados\"\n    },\n    {\n      \"fuente\": \"S2\",\n      \"descripcion\": \"0 revisiones de PR ajenos\"\n    },\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"33% de los archivos tocados son de documentacion\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"67% de los archivos tocados son de codigo general\"\n    },\n    {\n      \"fuente\": \"S5\",\n      \"descripcion\": \"0% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"\"\n}",
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "mixto",
+   "alias_etiqueta": "M4",
+   "esperada": "mixto",
+   "segundos": 50.8,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 430,
+    "largo_contenido": 1307,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_16",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.45,
+    "Cleric": 0.45,
+    "Bard": 0.1
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "80% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "825 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "45% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las señales: S3 muestra alta actividad en infraestructura (CI, contenedores, migraciones), lo que apunta a Druid. S4 indica código general, menos relevante. S5 muestra corrección de errores, vinculado a Cleric. S2 (825 PRs ajenos) sugiere soporte y revisión constante, reforzando Cleric. S1 (30 commits) es baja actividad, pero S5 (45% correcciones) indica que los commits están centrados en errores. La diferencia entre Druid (S3) y Cleric (S2+S5) es significativa: S3 es 80% infraestructura, S2 es 825 PRs ajenos y S5 es : 45% correcciones. La clase dominante no se declara porque la diferencia entre Druid y Cleric no supera 0.20; por lo tanto, es mixto. La confianza es baja por poca actividad (S1: 30 commits).",
+   "faltante": "Más commits analizados para evaluar la proporción de frontend y documentación",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.5984634047715325,
+     "cleric": 0.40153659522846746,
+     "bard": 0.0
+    },
+    "estado": "mixto",
+    "dominante": null,
+    "confianza": "media",
+    "tendencia": "druid",
+    "margen": 0.19692680954306502,
+    "evidencia": 1.3367567567567569,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_16",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "mixto",
+    "difiere_dominante": false,
+    "confianza_llm": "baja",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.148
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las señales: S3 muestra alta actividad en infraestructura (CI, contenedores, migraciones), lo que apunta a Druid. S4 indica código general, menos relevante. S5 muestra corrección de errores, vinculado a Cleric. S2 (825 PRs ajenos) sugiere soporte y revisión constante, reforzando Cleric. S1 (30 commits) es baja actividad, pero S5 (45% correcciones) indica que los commits están centrados en errores. La diferencia entre Druid (S3) y Cleric (S2+S5) es significativa: S3 es 80% infraestructura, S2 es 825 PRs ajenos y S5 es : 45% correcciones. La clase dominante no se declara porque la diferencia entre Druid y Cleric no supera 0.20; por lo tanto, es mixto. La confianza es baja por poca actividad (S1: 30 commits).\",\n  \"mezcla\": {\n    \"Druid\": 0.45,\n    \"Cleric\": 0.45,\n    \"Bard\": 0.10\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"80% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)\"\n    },\n    {\n      \"fuente\": \"S2\",\n      \"descripcion\": \"825 revisiones de PR ajenos\"\n    },\n    {\n      \"fuente\": \"S5\",\n      \"descripcion\": \"45% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Más commits analizados para evaluar la proporción de frontend y documentación\"\n}",
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "poca_actividad",
+   "alias_etiqueta": "L1",
+   "esperada": "mixto",
+   "segundos": 54.7,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 467,
+    "largo_contenido": 1506,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_18",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.45,
+    "Cleric": 0.4,
+    "Bard": 0.15
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "50% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "50% de los archivos tocados son de codigo general"
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "25% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las señales: S3 muestra 50% de archivos de infraestructura, lo que apunta a Druid (arquitectura e infraestructura). S4 indica 50% de código general, vinculado a Cleric (soporte y corrección de errores). S5 muestra 25% de commits corrigiendo errores, que refuerza Cleric. S2 muestra 0 PRs ajenos, lo que sugiere poca interacción en colaboración, reduciendo Bard. Los datos indican que Druid y Cleric tienen actividad similar (50% cada uno), pero Cleric tiene un 25% de correcciones, lo que le da una ligera ventaja. La diferencia entre Druid y Cler: 50% vs 50% + 25% correcciones, pero la evidencia no especifica si el 25% es parte de la actividad de Cleric o Druid. Como la diferencia no supera 0.20, la clase dominante es mixto. La confianza es baja por la escasa actividad (4 commits) y la falta de datos específicos sobre el 25% de correcciones.",
+   "faltante": "Más datos sobre la distribución de correcciones de errores y la participación en PRs para mejorar la estimación de Cleric",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": true,
+   "cumplia_guardia": true,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.8333333333333334,
+     "cleric": 0.16666666666666669,
+     "bard": 0.0
+    },
+    "estado": "datos_insuficientes",
+    "dominante": null,
+    "confianza": "baja",
+    "tendencia": "druid",
+    "margen": 0.6666666666666667,
+    "evidencia": 0.6,
+    "eventos_faltantes": 6
+   },
+   "discrepancia": {
+    "alias": "dev_18",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "datos_insuficientes",
+    "difiere_dominante": false,
+    "confianza_llm": "baja",
+    "confianza_reglas": "baja",
+    "max_diferencia_mezcla": 0.383
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las señales: S3 muestra 50% de archivos de infraestructura, lo que apunta a Druid (arquitectura e infraestructura). S4 indica 50% de código general, vinculado a Cleric (soporte y corrección de errores). S5 muestra 25% de commits corrigiendo errores, que refuerza Cleric. S2 muestra 0 PRs ajenos, lo que sugiere poca interacción en colaboración, reduciendo Bard. Los datos indican que Druid y Cleric tienen actividad similar (50% cada uno), pero Cleric tiene un 25% de correcciones, lo que le da una ligera ventaja. La diferencia entre Druid y Cler: 50% vs 50% + 25% correcciones, pero la evidencia no especifica si el 25% es parte de la actividad de Cleric o Druid. Como la diferencia no supera 0.20, la clase dominante es mixto. La confianza es baja por la escasa actividad (4 commits) y la falta de datos específicos sobre el 25% de correcciones.\",\n  \"mezcla\": {\n    \"Druid\": 0.45,\n    \"Cleric\": 0.40,\n    \"Bard\": 0.15\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"50% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"50% de los archivos tocados son de codigo general\"\n    },\n    {\n      \"fuente\": \"S5\",\n      \"descripcion\": \"25% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Más datos sobre la distribución de correcciones de errores y la participación en PRs para mejorar la estimación de Cleric\"\n}",
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "poca_actividad",
+   "alias_etiqueta": "L2",
+   "esperada": "mixto",
+   "segundos": 47.7,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 410,
+    "largo_contenido": 1366,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_17",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.15,
+    "Cleric": 0.15,
+    "Bard": 0.7
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "100% de los archivos tocados son de documentación"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "1 revisión de PR ajenos"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias: S1 muestra 3 commits, S2 indica 1 revisión de PR ajenos, S3 muestra que 100% de los archivos tocados son de documentación, y S4 indica 0% de commits que corrigen errores. Para Druid (bases de datos, arquitectura, infraestructura), no hay evidencia directa en los commits ni en los archivos tocados. Cleric (soporte, revisión constante, resolución de: S2 muestra revisión de PR ajenos, pero no hay actividad en resolución de errores (S4). Bard (frontend, documentación, fomento equipo): S3 muestra 100% de archivos tocados son de documentación, lo que sugiere actividad en documentación, pero no hay evidencia de frontend o fomento equipo. Las clases Druid y Cleric tienen menos actividad que Bard, pero no hay suficiente evidencia para asignar puntajes claros. La diferencia entre las dos primeras clases es menor que 0.20, por lo que la clase dominante es 'mixto'.",
+   "faltante": "Actividad en commits que modifiquen bases de datos o arquitectura para mejorar la estimación de Druid",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": true,
+   "cumplia_guardia": true,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.0039447731755424065,
+     "bard": 0.9960552268244576
+    },
+    "estado": "datos_insuficientes",
+    "dominante": null,
+    "confianza": "baja",
+    "tendencia": "bard",
+    "margen": 0.9921104536489151,
+    "evidencia": 1.003960396039604,
+    "eventos_faltantes": 6
+   },
+   "discrepancia": {
+    "alias": "dev_17",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "datos_insuficientes",
+    "difiere_dominante": false,
+    "confianza_llm": "baja",
+    "confianza_reglas": "baja",
+    "max_diferencia_mezcla": 0.296
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias: S1 muestra 3 commits, S2 indica 1 revisión de PR ajenos, S3 muestra que 100% de los archivos tocados son de documentación, y S4 indica 0% de commits que corrigen errores. Para Druid (bases de datos, arquitectura, infraestructura), no hay evidencia directa en los commits ni en los archivos tocados. Cleric (soporte, revisión constante, resolución de: S2 muestra revisión de PR ajenos, pero no hay actividad en resolución de errores (S4). Bard (frontend, documentación, fomento equipo): S3 muestra 100% de archivos tocados son de documentación, lo que sugiere actividad en documentación, pero no hay evidencia de frontend o fomento equipo. Las clases Druid y Cleric tienen menos actividad que Bard, pero no hay suficiente evidencia para asignar puntajes claros. La diferencia entre las dos primeras clases es menor que 0.20, por lo que la clase dominante es 'mixto'.\",\n  \"mezcla\": {\n    \"Druid\": 0.15,\n    \"Cleric\": 0.15,\n    \"Bard\": 0.70\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"100% de los archivos tocados son de documentación\"\n    },\n    {\n      \"fuente\": \"S2\",\n      \"descripcion\": \"1 revisión de PR ajenos\"\n    }\n  ],\n  \"faltante\": \"Actividad en commits que modifiquen bases de datos o arquitectura para mejorar la estimación de Druid\"\n}",
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "poca_actividad",
+   "alias_etiqueta": "L3",
+   "esperada": "mixto",
+   "segundos": 51.1,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 442,
+    "largo_contenido": 1384,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_04",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.35,
+    "Cleric": 0.45,
+    "Bard": 0.2
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "6 commits analizados"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "2 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "100% de los archivos tocados son de codigo general"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "50% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias: S1 muestra 6 commits, S2 indica 2 PRs ajenos, S3 afirma que 100% de archivos son de codigo general (no específico de frontend/backend), y S4 dice que 50% de commits corrigen errores. Para Druid: S3 sugiere actividad en infraestructura y arquitectura (codigo general), pero S4 indica corrección de errores (más Cleric). Para Cleric: S2 (PRs ajenos) y S4 (50% corrección de errores) apuntan a soporte y resolución de errores. Para Bard: no hay evidencia directa de frontend o documentación. Las actividades de Druid y Cleric son similares (S3 y S4), pero Cleric tiene más evidencia concreta (S2 y S:4). La diferencia entre Druid y Cleric es pequeña (S3 vs S4), por lo que no supera el margen de 0.20. Por lo tanto, la mezcla es mixto con confianza baja.",
+   "faltante": "Actividad en frontend o documentación para confirmar Bard",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": true,
+   "cumplia_guardia": true,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 1.0,
+     "bard": 0.0
+    },
+    "estado": "datos_insuficientes",
+    "dominante": null,
+    "confianza": "baja",
+    "tendencia": "cleric",
+    "margen": 1.0,
+    "evidencia": 0.20784313725490197,
+    "eventos_faltantes": 2
+   },
+   "discrepancia": {
+    "alias": "dev_04",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "datos_insuficientes",
+    "difiere_dominante": false,
+    "confianza_llm": "baja",
+    "confianza_reglas": "baja",
+    "max_diferencia_mezcla": 0.55
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias: S1 muestra 6 commits, S2 indica 2 PRs ajenos, S3 afirma que 100% de archivos son de codigo general (no específico de frontend/backend), y S4 dice que 50% de commits corrigen errores. Para Druid: S3 sugiere actividad en infraestructura y arquitectura (codigo general), pero S4 indica corrección de errores (más Cleric). Para Cleric: S2 (PRs ajenos) y S4 (50% corrección de errores) apuntan a soporte y resolución de errores. Para Bard: no hay evidencia directa de frontend o documentación. Las actividades de Druid y Cleric son similares (S3 y S4), pero Cleric tiene más evidencia concreta (S2 y S:4). La diferencia entre Druid y Cleric es pequeña (S3 vs S4), por lo que no supera el margen de 0.20. Por lo tanto, la mezcla es mixto con confianza baja.\",\n  \"mezcla\": {\n    \"Druid\": 0.35,\n    \"Cleric\": 0.45,\n    \"Bard\": 0.20\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S1\",\n      \"descripcion\": \"6 commits analizados\"\n    },\n    {\n      \"fuente\": \"S2\",\n      \"descripcion\": \"2 revisiones de PR ajenos\"\n    },\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"100% de los archivos tocados son de codigo general\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"50% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Actividad en frontend o documentación para confirmar Bard\"\n}",
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "poca_actividad",
+   "alias_etiqueta": "L4",
+   "esperada": "mixto",
+   "segundos": 43.9,
+   "ultima_llamada": {
+    "done_reason": "stop",
+    "eval_count": 376,
+    "largo_contenido": 1197,
+    "largo_pensamiento": 0
+   },
+   "alias": "dev_14",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.15,
+    "Cleric": 0.15,
+    "Bard": 0.7
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "2 commits analizados"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "0 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "100% de los archivos tocados son de codigo general"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "0% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Analizo las evidencias: S1 muestra 2 commits, S2 indica 0 PRs ajenos, S3 dice que 100% de archivos son de codigo general, y S4 muestra 0% de commits corrigiendo errores. Esto sugiere que el desarrollador no ha hecho cambios en infraestructura (Druid) ni ha corregido errores (Cleric), pero hay actividad en código general (Bard). La actividad en Bard es alta (100% de archivos tocados), mientras que Druid y Cleric tienen poca evidencia. La diferencia entre Druid y Cler: 0.20 (margen mínimo para dominante) no se alcanza, por lo que es mixto.",
+   "faltante": "Más commits con correcciones de errores para fortalecer Cleric, o commits en infraestructura para Druid",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": true,
+   "cumplia_guardia": true,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.3333333333333333,
+     "cleric": 0.3333333333333333,
+     "bard": 0.3333333333333333
+    },
+    "estado": "datos_insuficientes",
+    "dominante": null,
+    "confianza": "baja",
+    "tendencia": null,
+    "margen": 0.0,
+    "evidencia": 0.0,
+    "eventos_faltantes": 8
+   },
+   "discrepancia": {
+    "alias": "dev_14",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "datos_insuficientes",
+    "difiere_dominante": false,
+    "confianza_llm": "baja",
+    "confianza_reglas": "baja",
+    "max_diferencia_mezcla": 0.367
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Analizo las evidencias: S1 muestra 2 commits, S2 indica 0 PRs ajenos, S3 dice que 100% de archivos son de codigo general, y S4 muestra 0% de commits corrigiendo errores. Esto sugiere que el desarrollador no ha hecho cambios en infraestructura (Druid) ni ha corregido errores (Cleric), pero hay actividad en código general (Bard). La actividad en Bard es alta (100% de archivos tocados), mientras que Druid y Cleric tienen poca evidencia. La diferencia entre Druid y Cler: 0.20 (margen mínimo para dominante) no se alcanza, por lo que es mixto.\",\n  \"mezcla\": {\n    \"Druid\": 0.15,\n    \"Cleric\": 0.15,\n    \"Bard\": 0.70\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"baja\",\n  \"evidencias\": [\n    {\n      \"fuente\": \"S1\",\n      \"descripcion\": \"2 commits analizados\"\n    },\n    {\n      \"fuente\": \"S2\",\n      \"descripcion\": \"0 revisiones de PR ajenos\"\n    },\n    {\n      \"fuente\": \"S3\",\n      \"descripcion\": \"100% de los archivos tocados son de codigo general\"\n    },\n    {\n      \"fuente\": \"S4\",\n      \"descripcion\": \"0% de los commits corrigen errores\"\n    }\n  ],\n  \"faltante\": \"Más commits con correcciones de errores para fortalecer Cleric, o commits en infraestructura para Druid\"\n}",
+   "acierta_llm": true,
+   "acierta_reglas": true
+  }
+ ]
+}

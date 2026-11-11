@@ -36,6 +36,16 @@ MIXTOS = {
 }
 
 
+# Poca actividad (volumen < minimo_eventos = 10). SINTETICOS: ilustran el caso, no son medidos.
+# La clase esperada es "mixto" con confianza baja o datos insuficientes.
+POCA_ACTIVIDAD = {
+    "L1": ("mixto", 0.50, 0.0, 0.0, 0.25, 0, 4),
+    "L2": ("mixto", 0.0, 1.0, 0.0, 0.0, 1, 3),
+    "L3": ("mixto", 0.0, 0.0, 0.0, 0.50, 2, 6),
+    "L4": ("mixto", 0.0, 0.0, 0.0, 0.0, 0, 2),
+}
+
+
 def senales(fila: tuple) -> Senales:
     _, infra, docs_front, pruebas, fix, revisiones, commits = fila
     return Senales(
