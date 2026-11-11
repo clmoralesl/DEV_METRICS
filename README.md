@@ -68,6 +68,26 @@ set DEVMETRICS_OLLAMA_MODEL=qwen3:0.6b
 python -m pytest tests/test_llm_integracion.py -rs
 ```
 
+## Consola conversacional (demo)
+
+`scripts/consola.py` abre un chat con el agente (recuperacion sobre la base interna y los perfiles indexados, respuesta por streaming y fuentes citadas). Desde la raiz, con el entorno virtual activo:
+
+```
+python scripts/consola.py ingestar pallets/click --max-commits 50   # descarga a data/github (usa GITHUB_TOKEN si existe)
+python scripts/consola.py indexar conocimiento                      # base interna (conocimiento/*.md)
+python scripts/consola.py indexar perfiles                          # perfiles de lo descargado (opcional: --login <usuario>)
+python scripts/consola.py chat --simulado                           # chat sin LLM ni red
+python scripts/consola.py chat                                      # chat con el LLM real (Gemini, respaldo Ollama)
+python scripts/consola.py chat --pregunta "que actividad tiene clmoralesl"   # una sola pregunta
+```
+
+- Sin clave y, tras la primera descarga del modelo de embeddings, sin red: `ingestar` solo se necesita si `data/github/` esta vacio (esta ignorado por Git: en un clon limpio, sin `indexar` el indice esta vacio y el agente responde "evidencia insuficiente"). `chat --simulado` usa los embeddings locales y un LLM simulado que lista los fragmentos recuperados con sus citas; no razona. Sirve para ver recuperacion, citas y streaming.
+- Dentro del chat: `/ayuda`, `/desarrollador <login>` (filtra), `/reiniciar`, `/ingestar ...`, `/indexar [perfiles|conocimiento]`, `/salir`.
+- `--repos propietario/repo ...` habilita la consulta en vivo a GitHub para desarrolladores no indexados.
+- El streaming usa `.stream()` de LangChain (`ClienteLLM.flujo`): cambia al respaldo solo si el proveedor falla antes del primer trozo, y no reintenta.
+- Por el streaming, el texto se muestra antes de validarlo: una cita que el modelo invente aparece en pantalla aunque no figure en la linea `Fuentes:` (solo lista las recuperadas). Si el proveedor se corta a mitad de la respuesta queda el texto parcial, un aviso de error y el turno no entra en la memoria.
+- Con Ollama y un modelo de razonamiento (qwen3) el streaming puede llegar vacio (el razonamiento no es contenido): usar Gemini (`DEVMETRICS_LLM_PROVIDER=gemini`) para la demo.
+
 ## Verificacion
 
 ```

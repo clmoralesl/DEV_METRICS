@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Protocol
 
@@ -62,12 +63,17 @@ class Conversacion:
         self.memoria = MemoriaVentana(ventana)
         self._ultima_busqueda: str | None = None
 
-    def preguntar(self, consulta: str, **filtros) -> Respuesta:
+    def preguntar(
+        self, consulta: str, *, en_fragmento: Callable[[str], None] | None = None, **filtros
+    ) -> Respuesta:
+        """`en_fragmento` recibe el texto a medida que llega si el LLM tiene `flujo(mensajes)`;
+        si no, o en las respuestas deterministas, lo recibe completo de una vez."""
         consulta = (consulta or "").strip()
         if not consulta:
-            return self._cerrar(
-                consulta, Respuesta("Indica qué quieres saber para poder ayudarte.", False)
-            )
+            texto = "Indica qué quieres saber para poder ayudarte."
+            if en_fragmento:
+                en_fragmento(texto)
+            return self._cerrar(consulta, Respuesta(texto, False))
         if self._k is not None:
             filtros.setdefault("k", self._k)
         recuperacion = self._recuperador.recuperar(self._consulta_de_busqueda(consulta), **filtros)
@@ -77,6 +83,8 @@ class Conversacion:
                 f"{motivo}. Falta información sobre el desarrollador, repositorio o criterio "
                 "consultado; indica un login o un requerimiento concreto."
             )
+            if en_fragmento:
+                en_fragmento(texto)
             return self._cerrar(consulta, Respuesta(texto, False, [], recuperacion))
         mensajes = self._prompt.mensajes(
             {
@@ -86,7 +94,17 @@ class Conversacion:
             },
             self._tecnica,
         )
-        texto = self._llm.invocar(mensajes).strip()
+        flujo = getattr(self._llm, "flujo", None)
+        if en_fragmento and flujo:
+            partes: list[str] = []
+            for parte in flujo(mensajes):
+                partes.append(parte)
+                en_fragmento(parte)
+            texto = "".join(partes).strip()
+        else:
+            texto = self._llm.invocar(mensajes).strip()
+            if en_fragmento:
+                en_fragmento(texto)
         evidencia = not _declara_insuficiente(texto)
         fuentes = [c for c in recuperacion.fuentes if c in texto] if evidencia else []
         if evidencia:
