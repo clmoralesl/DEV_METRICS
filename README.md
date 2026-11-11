@@ -102,7 +102,7 @@ Alternativa manual: `ruff check .` y `pytest`.
 - `tests/`: pruebas automatizadas
 - `prompts/`: plantillas de prompts
 - `data/`: datos locales (no versionados, salvo `.gitkeep`)
-- `documentacion/`: documentacion del proyecto
+- `documentacion/`: documentacion del proyecto (arquitectura y diagramas en `documentacion/arquitectura.md`)
 - `scripts/`: scripts de apoyo
 - `.github/workflows/`: integracion continua
 
