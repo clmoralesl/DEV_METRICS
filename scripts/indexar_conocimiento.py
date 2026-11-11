@@ -17,11 +17,11 @@ from devmetrics.indexacion import RUTA_POR_DEFECTO
 from devmetrics.llm import ModeloEmbeddings
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--ruta", default=RUTA_CONOCIMIENTO)
     ap.add_argument("--indice", default=RUTA_POR_DEFECTO)
-    args = ap.parse_args()
+    args = ap.parse_args(argv)
     indice = crear_indice_interno(ModeloEmbeddings(), ruta=args.indice)
     r = indexar_conocimiento(indice, args.ruta)
     print(

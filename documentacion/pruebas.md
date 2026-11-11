@@ -298,3 +298,25 @@ la guardia sobre salidas invalidas y a `texto_crudo`):
   fragmentos recuperados (`contexto_extra` existe pero no se probo con LLM real).
 - Capa gratuita de Gemini: limites bajos y uso de los datos para mejorar productos; aqui solo viajan
   senales agregadas con alias neutros. Los datos de uso exacto no se midieron.
+
+## Issue 14: consola con streaming
+
+`src/devmetrics/consola.py` (entrada `scripts/consola.py`), `ClienteLLM.flujo` y
+`Conversacion.preguntar(en_fragmento=...)`. Pruebas: `tests/test_consola.py` (13) y
+`tests/test_flujo.py` (8), todas con recuperador, LLM y modelos inyectados (sin red).
+
+Verificado con ejecucion real: ingesta desde la cache de `data/github/`, `indexar conocimiento`
+y `indexar perfiles` con embeddings locales, `chat --simulado --pregunta` y un `chat --pregunta`
+contra Gemini (respuesta correcta con evidencia insuficiente por menos de 10 eventos), y `/ingestar`
+sin argumentos e `/indexar conocimiento` dentro del REPL.
+
+Limites:
+- El streaming con Gemini se ejecuto pero no se observo trozo a trozo; las pruebas cubren los trozos
+  con modelos falsos. No se probo el streaming con Ollama: con qwen3 el contenido llega vacio (el
+  razonamiento no es contenido) y falla con "respuesta vacia"; se documenta en el README.
+- `flujo` no reintenta errores transitorios y solo conmuta al respaldo antes del primer trozo.
+- `/ingestar` e `indexar conocimiento` reutilizan `scripts/` cargandolos por ruta (dependen de que
+  el repositorio este completo, no de un paquete instalado); `indexar perfiles` es nuevo (todos los
+  logins de la cache, o `--login`). No elimina perfiles que ya no estan en la cache.
+- Sin prueba automatica del modo `main` con argumentos reales (solo manual); GITHUB_TOKEN sin
+  verificar (regla de denegacion sobre .env).

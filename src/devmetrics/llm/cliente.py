@@ -6,7 +6,7 @@ import logging
 import os
 import re
 import time
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
 from dataclasses import dataclass
 
 import httpx
@@ -230,6 +230,41 @@ class ClienteLLM:
                 continue
             self.ultimo_proveedor = proveedor
             return texto
+        if len(errores) == 1:
+            raise errores[0]
+        raise ErrorTodosFallaron(errores)
+
+    def flujo(self, mensajes) -> Iterator[str]:
+        """Emite la respuesta por fragmentos de texto (`.stream()` del modelo de LangChain).
+
+        Conmuta al respaldo solo si el proveedor falla antes de emitir el primer fragmento; un
+        corte a mitad de la respuesta se propaga porque ya se mostro texto parcial. No reintenta
+        errores transitorios (a diferencia de `invocar`).
+        """
+        errores: list[ErrorLLM] = []
+        self.ultimo_proveedor = None
+        orden = [self.config.proveedor] + ([self.config.respaldo] if self.config.respaldo else [])
+        for proveedor in orden:
+            emitido = False
+            try:
+                for trozo in self._modelo(proveedor).stream(mensajes):
+                    texto = str(trozo.text)
+                    if texto:
+                        emitido = True
+                        yield texto
+                if not emitido:
+                    raise ErrorProveedor(
+                        f"{proveedor}: respuesta vacia (max_tokens demasiado bajo?)."
+                    )
+            except Exception as exc:  # noqa: BLE001 - se clasifica y se relanza tipado
+                error = exc if isinstance(exc, ErrorLLM) else clasificar_error(exc, proveedor)
+                if emitido:
+                    raise error from exc
+                errores.append(error)
+                registro.warning("Proveedor %s fallo: %s", proveedor, error)
+                continue
+            self.ultimo_proveedor = proveedor
+            return
         if len(errores) == 1:
             raise errores[0]
         raise ErrorTodosFallaron(errores)
