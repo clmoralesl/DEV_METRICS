@@ -1,0 +1,1556 @@
+{
+ "modelo": "gemini-3.5-flash-lite",
+ "tecnica": "cot",
+ "salida_restringida_por_esquema": false,
+ "alias_neutros": true,
+ "evidencia_sin_campos_no_medidos": true,
+ "prompt_version": "1.2.0",
+ "temperatura": 0.3,
+ "fecha": "2026-11-11",
+ "resumen": {
+  "llamadas": 23,
+  "formato_invalido": 0,
+  "reintentos": 0,
+  "positivos_acuerdo_llm": "12/15",
+  "positivos_acuerdo_reglas": "13/15",
+  "positivos_acuerdo_llm_pct": 80.0,
+  "positivos_acuerdo_entre_validos": "12/15",
+  "positivos_con_salida_valida": "15/15",
+  "fallos_por_causa": {},
+  "positivos_acuerdo_llm_prueba": "5/6",
+  "positivos_acuerdo_llm_ajuste": "7/9",
+  "con_correccion_de_dominante": 3,
+  "con_mezcla_renormalizada": 0,
+  "positivos_tendencia_llm_entre_validos": "14/15",
+  "mixtos_acuerdo_llm": "2/4",
+  "mixtos_acuerdo_reglas": "4/4",
+  "poca_actividad_confianza_baja_llm_crudo": "4/4",
+  "poca_actividad_confianza_baja_con_guardia": "4/4",
+  "discrepancias_dominante_vs_reglas": 3
+ },
+ "registros": [
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "D1",
+   "esperada": "Druid",
+   "segundos": 8.4,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 646
+   },
+   "alias": "dev_10",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.85,
+    "Cleric": 0.1,
+    "Bard": 0.05
+   },
+   "dominante": "Druid",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "30 commits analizados"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "96% de los archivos tocados son de infraestructura"
+    }
+   ],
+   "razonamiento": "30 commits y 9 revisiones suman un volumen de 39, lo que otorga confianza media. El 96% de archivos de infraestructura es una señal abrumadora para Druid. Las otras clases son muy débiles, dando Druid 0.85, Cleric 0.10, Bard 0.05, con una diferencia de 0.75 que supera el umbral y hace dominante a Druid.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.8963355090712855,
+     "cleric": 0.09432766270922206,
+     "bard": 0.009336828219492558
+    },
+    "estado": "dominante",
+    "dominante": "druid",
+    "confianza": "media",
+    "tendencia": "druid",
+    "margen": 0.8020078463620633,
+    "evidencia": 1.0710275229357797,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_10",
+    "dominante_llm": "Druid",
+    "dominante_reglas": "Druid",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.046
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"30 commits y 9 revisiones suman un volumen de 39, lo que otorga confianza media. El 96% de archivos de infraestructura es una señal abrumadora para Druid. Las otras clases son muy débiles, dando Druid 0.85, Cleric 0.10, Bard 0.05, con una diferencia de 0.75 que supera el umbral y hace dominante a Druid.\",\n \"mezcla\": {\n  \"Druid\": 0.85,\n  \"Cleric\": 0.10,\n  \"Bard\": 0.05\n },\n \"dominante\": \"Druid\",\n \"confianza\": \"media\",\n \"evidencias\": [\n  {\n   \"fuente\": \"S1\",\n   \"descripcion\": \"30 commits analizados\"\n  },\n  {\n   \"fuente\": \"S3\",\n   \"descripcion\": \"96% de los archivos tocados son de infraestructura\"\n  }\n ],\n \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "D2",
+   "esperada": "Druid",
+   "segundos": 7.3,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 611
+   },
+   "alias": "dev_15",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.78,
+    "Cleric": 0.14,
+    "Bard": 0.08
+   },
+   "dominante": "Druid",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "Se analizaron 30 commits."
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "El 78% de los archivos tocados corresponden a infraestructura, integracion continua, contenedores y migraciones."
+    }
+   ],
+   "razonamiento": "30 commits y 2 revisiones suman 32 eventos, lo que da confianza media. La infraestructura domina con 78% de los archivos y las demás señales son auxiliares: Druid 0.78, Cleric 0.14, Bard 0.08; la diferencia es 0.64, dominante Druid.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.7754688291941206,
+     "cleric": 0.15493781433974033,
+     "bard": 0.06959335646613904
+    },
+    "estado": "dominante",
+    "dominante": "druid",
+    "confianza": "media",
+    "tendencia": "druid",
+    "margen": 0.6205310148543803,
+    "evidencia": 1.005843137254902,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_15",
+    "dominante_llm": "Druid",
+    "dominante_reglas": "Druid",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.015
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"30 commits y 2 revisiones suman 32 eventos, lo que da confianza media. La infraestructura domina con 78% de los archivos y las demás señales son auxiliares: Druid 0.78, Cleric 0.14, Bard 0.08; la diferencia es 0.64, dominante Druid.\",\n \"mezcla\": {\"Druid\": 0.78, \"Cleric\": 0.14, \"Bard\": 0.08},\n \"dominante\": \"Druid\",\n \"confianza\": \"media\",\n \"evidencias\": [\n  {\"fuente\": \"S1\", \"descripcion\": \"Se analizaron 30 commits.\"},\n  {\"fuente\": \"S3\", \"descripcion\": \"El 78% de los archivos tocados corresponden a infraestructura, integracion continua, contenedores y migraciones.\"}\n ],\n \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "D3",
+   "esperada": "Druid",
+   "segundos": 7.6,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 800
+   },
+   "alias": "dev_08",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.82,
+    "Cleric": 0.13,
+    "Bard": 0.05
+   },
+   "dominante": "Druid",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "30 commits analizados que sustentan el volumen de actividad"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "79% de los archivos tocados son de infraestructura"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "79 revisiones de PR ajenos como indicador secundario de soporte"
+    }
+   ],
+   "razonamiento": "30 commits y 79 revisiones suman un volumen de 109, pero como no hay dato del repositorio se acota la confianza a media. El 79 % de archivos en infraestructura es una señal abrumadora para Druid, a pesar de las revisiones de Cleric. Druid 0.82, Cleric 0.13, Bard 0.05; la diferencia es 0.69, dominante Druid.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.7833133918284144,
+     "cleric": 0.1869405300008863,
+     "bard": 0.02974607817069928
+    },
+    "estado": "dominante",
+    "dominante": "druid",
+    "confianza": "media",
+    "tendencia": "druid",
+    "margen": 0.5963728618275281,
+    "evidencia": 1.008536312849162,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_08",
+    "dominante_llm": "Druid",
+    "dominante_reglas": "Druid",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.057
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"30 commits y 79 revisiones suman un volumen de 109, pero como no hay dato del repositorio se acota la confianza a media. El 79 % de archivos en infraestructura es una señal abrumadora para Druid, a pesar de las revisiones de Cleric. Druid 0.82, Cleric 0.13, Bard 0.05; la diferencia es 0.69, dominante Druid.\",\n \"mezcla\": {\n  \"Druid\": 0.82,\n  \"Cleric\": 0.13,\n  \"Bard\": 0.05\n },\n \"dominante\": \"Druid\",\n \"confianza\": \"media\",\n \"evidencias\": [\n  {\n   \"fuente\": \"S1\",\n   \"descripcion\": \"30 commits analizados que sustentan el volumen de actividad\"\n  },\n  {\n   \"fuente\": \"S3\",\n   \"descripcion\": \"79% de los archivos tocados son de infraestructura\"\n  },\n  {\n   \"fuente\": \"S2\",\n   \"descripcion\": \"79 revisiones de PR ajenos como indicador secundario de soporte\"\n  }\n ],\n \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "D4",
+   "esperada": "Druid",
+   "segundos": 7.6,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 921
+   },
+   "alias": "dev_13",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.85,
+    "Cleric": 0.1,
+    "Bard": 0.05
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "Se analizaron 20 commits en total."
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "El 98% de los archivos tocados corresponden a infraestructura, integraciones continuas, contenedores y migraciones."
+    }
+   ],
+   "razonamiento": "Con solo 20 commits y 7 revisiones, el volumen es de 27, lo que da una confianza baja. La abrumadora mayoría de archivos en infraestructura (98%) apunta claramente a Druid, sin competencia de otras áreas: Druid 0.85, Cleric 0.10, Bard 0.05. Aunque la diferencia es amplia, la escasa actividad global justifica mantener precaución y dejar claro qué falta.",
+   "faltante": "Más commits, mayor historial de revisiones de código y participación en issues o documentación para consolidar el perfil con confianza media o alta.",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.9739921976592977,
+     "cleric": 0.026007802340702206,
+     "bard": 0.0
+    },
+    "estado": "dominante",
+    "dominante": "druid",
+    "confianza": "baja",
+    "tendencia": "druid",
+    "margen": 0.9479843953185955,
+    "evidencia": 1.0061682242990655,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_13",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "Druid",
+    "estado_reglas": "dominante",
+    "difiere_dominante": true,
+    "confianza_llm": "baja",
+    "confianza_reglas": "baja",
+    "max_diferencia_mezcla": 0.124
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"Con solo 20 commits y 7 revisiones, el volumen es de 27, lo que da una confianza baja. La abrumadora mayoría de archivos en infraestructura (98%) apunta claramente a Druid, sin competencia de otras áreas: Druid 0.85, Cleric 0.10, Bard 0.05. Aunque la diferencia es amplia, la escasa actividad global justifica mantener precaución y dejar claro qué falta.\",\n \"mezcla\": {\n  \"Druid\": 0.85,\n  \"Cleric\": 0.10,\n  \"Bard\": 0.05\n },\n \"dominante\": \"Druid\",\n \"confianza\": \"baja\",\n \"evidencias\": [\n  {\n   \"fuente\": \"S1\",\n   \"descripcion\": \"Se analizaron 20 commits en total.\"\n  },\n  {\n   \"fuente\": \"S3\",\n   \"descripcion\": \"El 98% de los archivos tocados corresponden a infraestructura, integraciones continuas, contenedores y migraciones.\"\n  }\n ],\n \"faltante\": \"Más commits, mayor historial de revisiones de código y participación en issues o documentación para consolidar el perfil con confianza media o alta.\"\n}",
+   "correcciones": [
+    "dominante derivado: el LLM dijo 'Druid', la regla da 'mixto'"
+   ],
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "D5",
+   "esperada": "Druid",
+   "segundos": 7.3,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 659
+   },
+   "alias": "dev_19",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.55,
+    "Cleric": 0.35,
+    "Bard": 0.1
+   },
+   "dominante": "Druid",
+   "confianza": "alta",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "90% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "94 revisiones de PR ajenos"
+    }
+   ],
+   "razonamiento": "20 commits y 94 revisiones arrojan un volumen total de 114, situando la confianza en alta. La infraestructura domina con el 90% de los archivos (Druid), pero hay una fuerte actividad de revisiones y correcciones (Cleric): Druid 0.55, Cleric 0.35, Bard 0.10. La diferencia de 0.20 permite declarar a Druid como dominante.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.664788303381054,
+     "cleric": 0.3352116966189461,
+     "bard": 0.0
+    },
+    "estado": "dominante",
+    "dominante": "druid",
+    "confianza": "media",
+    "tendencia": "druid",
+    "margen": 0.32957660676210787,
+    "evidencia": 1.3538144329896906,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_19",
+    "dominante_llm": "Druid",
+    "dominante_reglas": "Druid",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "alta",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.115
+   },
+   "texto_crudo": "{\"razonamiento\": \"20 commits y 94 revisiones arrojan un volumen total de 114, situando la confianza en alta. La infraestructura domina con el 90% de los archivos (Druid), pero hay una fuerte actividad de revisiones y correcciones (Cleric): Druid 0.55, Cleric 0.35, Bard 0.10. La diferencia de 0.20 permite declarar a Druid como dominante.\",\n \"mezcla\": {\"Druid\": 0.55, \"Cleric\": 0.35, \"Bard\": 0.10},\n \"dominante\": \"Druid\",\n \"confianza\": \"alta\",\n \"evidencias\": [{\"fuente\": \"S3\", \"descripcion\": \"90% de los archivos tocados son de infraestructura (CI, contenedores, migraciones)\"}, {\"fuente\": \"S2\", \"descripcion\": \"94 revisiones de PR ajenos\"}],\n \"faltante\": \"\"}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "B1",
+   "esperada": "Bard",
+   "segundos": 7.1,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 767
+   },
+   "alias": "dev_21",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.1,
+    "Cleric": 0.25,
+    "Bard": 0.65
+   },
+   "dominante": "Bard",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "Muestra un total de 30 commits analizados."
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "El 76% de los archivos tocados son de documentación."
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "El 37% de los commits corresponden a corrección de errores."
+    }
+   ],
+   "razonamiento": "30 commits, 1 revisión, 76% de archivos en documentación y 37% de correcciones. Volumen total de actividad menor a 50 pero suficiente para confianza media en la tendencia de documentación. Bard domina claramente debido a la fuerte proporción de documentación: Bard 0.65, Cleric 0.25, Druid 0.10; la diferencia es 0.40, dominante Bard.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.16663047726581837,
+     "bard": 0.8333695227341816
+    },
+    "estado": "dominante",
+    "dominante": "bard",
+    "confianza": "media",
+    "tendencia": "bard",
+    "margen": 0.6667390454683633,
+    "evidencia": 0.911960396039604,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_21",
+    "dominante_llm": "Bard",
+    "dominante_reglas": "Bard",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.183
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"30 commits, 1 revisión, 76% de archivos en documentación y 37% de correcciones. Volumen total de actividad menor a 50 pero suficiente para confianza media en la tendencia de documentación. Bard domina claramente debido a la fuerte proporción de documentación: Bard 0.65, Cleric 0.25, Druid 0.10; la diferencia es 0.40, dominante Bard.\",\n \"mezcla\": {\"Druid\": 0.10, \"Cleric\": 0.25, \"Bard\": 0.65},\n \"dominante\": \"Bard\",\n \"confianza\": \"media\",\n \"evidencias\": [\n  {\"fuente\": \"S1\", \"descripcion\": \"Muestra un total de 30 commits analizados.\"},\n  {\"fuente\": \"S3\", \"descripcion\": \"El 76% de los archivos tocados son de documentación.\"},\n  {\"fuente\": \"S5\", \"descripcion\": \"El 37% de los commits corresponden a corrección de errores.\"}\n ],\n \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "B2",
+   "esperada": "Bard",
+   "segundos": 7.3,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 935
+   },
+   "alias": "dev_09",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.1,
+    "Cleric": 0.3,
+    "Bard": 0.6
+   },
+   "dominante": "Bard",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S3",
+     "descripcion": "El 85% de los archivos tocados son de documentacion"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "296 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "37% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Con 30 commits y 296 revisiones, el volumen total supera 100, pero como no hay dato del número de repositorios, la confianza máxima es media. La documentación es muy fuerte (85% de archivos, Bard), pero hay una cantidad notable de revisiones (296) y correcciones (Cleric). Como el peso de los archivos de documentación domina sobre las revisiones según las reglas, Bard es la primera clase y Cleric la segunda; la diferencia es moderada pero el archivo pesa más, dando Bard 0.60, Cleric 0.30, Druid 0.10, con dominante Bard y confianza media.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.34463637638043026,
+     "bard": 0.6553636236195698
+    },
+    "estado": "dominante",
+    "dominante": "bard",
+    "confianza": "media",
+    "tendencia": "bard",
+    "margen": 0.3107272472391395,
+    "evidencia": 1.296989898989899,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_09",
+    "dominante_llm": "Bard",
+    "dominante_reglas": "Bard",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.1
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"Con 30 commits y 296 revisiones, el volumen total supera 100, pero como no hay dato del número de repositorios, la confianza máxima es media. La documentación es muy fuerte (85% de archivos, Bard), pero hay una cantidad notable de revisiones (296) y correcciones (Cleric). Como el peso de los archivos de documentación domina sobre las revisiones según las reglas, Bard es la primera clase y Cleric la segunda; la diferencia es moderada pero el archivo pesa más, dando Bard 0.60, Cleric 0.30, Druid 0.10, con dominante Bard y confianza media.\",\n \"mezcla\": {\"Druid\": 0.10, \"Cleric\": 0.30, \"Bard\": 0.60},\n \"dominante\": \"Bard\",\n \"confianza\": \"media\",\n \"evidencias\": [\n  {\"fuente\": \"S3\", \"descripcion\": \"El 85% de los archivos tocados son de documentacion\"},\n  {\"fuente\": \"S2\", \"descripcion\": \"296 revisiones de PR ajenos\"},\n  {\"fuente\": \"S5\", \"descripcion\": \"37% de los commits corrigen errores\"}\n ],\n \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "B3",
+   "esperada": "Bard",
+   "segundos": 7.1,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 782
+   },
+   "alias": "dev_20",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.1,
+    "Cleric": 0.25,
+    "Bard": 0.65
+   },
+   "dominante": "Bard",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S4",
+     "descripcion": "El 67% de los archivos tocados son de documentación"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "102 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S6",
+     "descripcion": "47% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "El 67% de los archivos en documentación apunta fuertemente a Bard, respaldado por un gran volumen de revisiones y correcciones de errores que suman peso a Cleric. Con un volumen total moderado-alto, la documentación domina claramente. Puntajes: Bard 0.65, Cleric 0.25, Druid 0.10. La diferencia de 0.40 supera el umbral, resultando en Bard dominante.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.11666859189095531,
+     "cleric": 0.3249888612023301,
+     "bard": 0.5583425469067147
+    },
+    "estado": "dominante",
+    "dominante": "bard",
+    "confianza": "media",
+    "tendencia": "bard",
+    "margen": 0.23335368570438458,
+    "evidencia": 1.199980198019802,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_20",
+    "dominante_llm": "Bard",
+    "dominante_reglas": "Bard",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.092
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"El 67% de los archivos en documentación apunta fuertemente a Bard, respaldado por un gran volumen de revisiones y correcciones de errores que suman peso a Cleric. Con un volumen total moderado-alto, la documentación domina claramente. Puntajes: Bard 0.65, Cleric 0.25, Druid 0.10. La diferencia de 0.40 supera el umbral, resultando en Bard dominante.\",\n \"mezcla\": {\n  \"Druid\": 0.10,\n  \"Cleric\": 0.25,\n  \"Bard\": 0.65\n },\n \"dominante\": \"Bard\",\n \"confianza\": \"media\",\n \"evidencias\": [\n  {\n   \"fuente\": \"S4\",\n   \"descripcion\": \"El 67% de los archivos tocados son de documentación\"\n  },\n  {\n   \"fuente\": \"S2\",\n   \"descripcion\": \"102 revisiones de PR ajenos\"\n  },\n  {\n   \"fuente\": \"S6\",\n   \"descripcion\": \"47% de los commits corrigen errores\"\n  }\n ],\n \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "B4",
+   "esperada": "Bard",
+   "segundos": 7.4,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 701
+   },
+   "alias": "dev_23",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.05,
+    "Cleric": 0.25,
+    "Bard": 0.7
+   },
+   "dominante": "Bard",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S2",
+     "descripcion": "4503 revisiones de PR ajenos apuntan a Cleric"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "El 100% de los archivos tocados son de documentacion, señal fuerte de Bard"
+    }
+   ],
+   "razonamiento": "Con 20 commits y 4503 revisiones, el volumen total es mas de 100 pero la confianza se limita a media por falta de datos de repositorios; la documentacion al 100% apunta fuertemente a Bard y las revisiones masivas a Cleric: Bard 0.70, Cleric 0.25, Druid 0.05, con una diferencia de 0.45 que hace dominante a Bard.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.28125292776615346,
+     "bard": 0.7187470722338466
+    },
+    "estado": "dominante",
+    "dominante": "bard",
+    "confianza": "media",
+    "tendencia": "bard",
+    "margen": 0.43749414446769314,
+    "evidencia": 1.3913100152074733,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_23",
+    "dominante_llm": "Bard",
+    "dominante_reglas": "Bard",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.05
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"Con 20 commits y 4503 revisiones, el volumen total es mas de 100 pero la confianza se limita a media por falta de datos de repositorios; la documentacion al 100% apunta fuertemente a Bard y las revisiones masivas a Cleric: Bard 0.70, Cleric 0.25, Druid 0.05, con una diferencia de 0.45 que hace dominante a Bard.\",\n \"mezcla\": {\n  \"Druid\": 0.05,\n  \"Cleric\": 0.25,\n  \"Bard\": 0.70\n },\n \"dominante\": \"Bard\",\n \"confianza\": \"media\",\n \"evidencias\": [\n  {\n   \"fuente\": \"S2\",\n   \"descripcion\": \"4503 revisiones de PR ajenos apuntan a Cleric\"\n  },\n  {\n   \"fuente\": \"S3\",\n   \"descripcion\": \"El 100% de los archivos tocados son de documentacion, señal fuerte de Bard\"\n  }\n ],\n \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "B5",
+   "esperada": "Bard",
+   "segundos": 7.3,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 771
+   },
+   "alias": "dev_22",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.07,
+    "Cleric": 0.28,
+    "Bard": 0.65
+   },
+   "dominante": "Bard",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S2",
+     "descripcion": "333 revisiones de PR ajenos muestran actividad constante de revisión"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "77% de los archivos tocados son de documentación"
+    }
+   ],
+   "razonamiento": "Con 20 commits y 333 revisiones, el volumen total supera 300, pero la falta de desglose de otros eventos limita la confianza a media. El 77% de archivos en documentación apunta fuertemente a Bard, mientras que las 333 revisiones son una señal secundaria muy fuerte de Cleric. Bard domina por los archivos pero Cleric tiene peso sustancial: Bard 0.65, Cleric 0.28, Druid 0.07; la diferencia es 0.37, dominante Bard.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.2854632348213712,
+     "bard": 0.7145367651786287
+    },
+    "estado": "dominante",
+    "dominante": "bard",
+    "confianza": "media",
+    "tendencia": "bard",
+    "margen": 0.42907353035725754,
+    "evidencia": 1.077621247113164,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_22",
+    "dominante_llm": "Bard",
+    "dominante_reglas": "Bard",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.07
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"Con 20 commits y 333 revisiones, el volumen total supera 300, pero la falta de desglose de otros eventos limita la confianza a media. El 77% de archivos en documentación apunta fuertemente a Bard, mientras que las 333 revisiones son una señal secundaria muy fuerte de Cleric. Bard domina por los archivos pero Cleric tiene peso sustancial: Bard 0.65, Cleric 0.28, Druid 0.07; la diferencia es 0.37, dominante Bard.\",\n \"mezcla\": {\"Druid\": 0.07, \"Cleric\": 0.28, \"Bard\": 0.65},\n \"dominante\": \"Bard\",\n \"confianza\": \"media\",\n \"evidencias\": [\n  {\"fuente\": \"S2\", \"descripcion\": \"333 revisiones de PR ajenos muestran actividad constante de revisión\"},\n  {\"fuente\": \"S3\", \"descripcion\": \"77% de los archivos tocados son de documentación\"}\n ],\n \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "C1",
+   "esperada": "Cleric",
+   "segundos": 7.0,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 742
+   },
+   "alias": "dev_05",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.15,
+    "Cleric": 0.7,
+    "Bard": 0.15
+   },
+   "dominante": "Cleric",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "30 commits analizados"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "1170 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "42% de los archivos tocados son de pruebas"
+    },
+    {
+     "fuente": "S7",
+     "descripcion": "70% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Con 30 commits y 1170 revisiones, el volumen es alto pero sin datos de repositorios se limita a media; las masivas revisiones y correcciones superan el 42% de pruebas en archivos, señalando a Cleric como dominante por amplio margen. Cleric 0.70, Druid 0.15, Bard 0.15; la diferencia es 0.55, dominante Cleric.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.13822377013495865,
+     "cleric": 0.7341850574327718,
+     "bard": 0.1275911724322695
+    },
+    "estado": "dominante",
+    "dominante": "cleric",
+    "confianza": "media",
+    "tendencia": "cleric",
+    "margen": 0.5959612872978132,
+    "evidencia": 0.940503937007874,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_05",
+    "dominante_llm": "Cleric",
+    "dominante_reglas": "Cleric",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.034
+   },
+   "texto_crudo": "{\"razonamiento\": \"Con 30 commits y 1170 revisiones, el volumen es alto pero sin datos de repositorios se limita a media; las masivas revisiones y correcciones superan el 42% de pruebas en archivos, señalando a Cleric como dominante por amplio margen. Cleric 0.70, Druid 0.15, Bard 0.15; la diferencia es 0.55, dominante Cleric.\",\n \"mezcla\": {\"Druid\": 0.15, \"Cleric\": 0.70, \"Bard\": 0.15},\n \"dominante\": \"Cleric\",\n \"confianza\": \"media\",\n \"evidencias\": [{\"fuente\": \"S1\", \"descripcion\": \"30 commits analizados\"}, {\"fuente\": \"S2\", \"descripcion\": \"1170 revisiones de PR ajenos\"}, {\"fuente\": \"S5\", \"descripcion\": \"42% de los archivos tocados son de pruebas\"}, {\"fuente\": \"S7\", \"descripcion\": \"70% de los commits corrigen errores\"}],\n \"faltante\": \"\"}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "C2",
+   "esperada": "Cleric",
+   "segundos": 7.2,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 1002
+   },
+   "alias": "dev_12",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.25,
+    "Cleric": 0.45,
+    "Bard": 0.3
+   },
+   "dominante": "mixto",
+   "confianza": "alta",
+   "evidencias": [
+    {
+     "fuente": "S2",
+     "descripcion": "583 revisiones de PR ajenos, fuerte señal de soporte y Cleric"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "31% de archivos de documentación, señal importante de Bard"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "25% de archivos de infraestructura, señal de Druid"
+    },
+    {
+     "fuente": "S7",
+     "descripcion": "30% de commits que corrigen errores, señal de Cleric"
+    }
+   ],
+   "razonamiento": "Alto volumen con 30 commits y 583 revisiones (volumen 613, confianza alta). Las revisiones masivas y las pruebas/correcciones apuntan a Cleric, mientras que la documentación y la infraestructura están repartidas sin una dominación clara de archivos (31% doc, 25% infra). Las clases están equilibradas: Cleric 0.45, Bard 0.30, Druid 0.25; la diferencia entre las dos primeras es 0.15, menor a 0.20, por lo que el dominante es mixto.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.24051531550820215,
+     "cleric": 0.4612456932616271,
+     "bard": 0.29823899123017067
+    },
+    "estado": "mixto",
+    "dominante": null,
+    "confianza": "media",
+    "tendencia": "cleric",
+    "margen": 0.16300670203145645,
+    "evidencia": 1.0394348462664715,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_12",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "mixto",
+    "difiere_dominante": false,
+    "confianza_llm": "alta",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.011
+   },
+   "texto_crudo": "{\n  \"razonamiento\": \"Alto volumen con 30 commits y 583 revisiones (volumen 613, confianza alta). Las revisiones masivas y las pruebas/correcciones apuntan a Cleric, mientras que la documentación y la infraestructura están repartidas sin una dominación clara de archivos (31% doc, 25% infra). Las clases están equilibradas: Cleric 0.45, Bard 0.30, Druid 0.25; la diferencia entre las dos primeras es 0.15, menor a 0.20, por lo que el dominante es mixto.\",\n  \"mezcla\": {\n    \"Druid\": 0.25,\n    \"Cleric\": 0.45,\n    \"Bard\": 0.30\n  },\n  \"dominante\": \"mixto\",\n  \"confianza\": \"alta\",\n  \"evidencias\": [\n    {\"fuente\": \"S2\", \"descripcion\": \"583 revisiones de PR ajenos, fuerte señal de soporte y Cleric\"},\n    {\"fuente\": \"S4\", \"descripcion\": \"31% de archivos de documentación, señal importante de Bard\"},\n    {\"fuente\": \"S3\", \"descripcion\": \"25% de archivos de infraestructura, señal de Druid\"},\n    {\"fuente\": \"S7\", \"descripcion\": \"30% de commits que corrigen errores, señal de Cleric\"}\n  ],\n  \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": false,
+   "acierta_reglas": false
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "C3",
+   "esperada": "Cleric",
+   "segundos": 7.5,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 1161
+   },
+   "alias": "dev_02",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.1,
+    "Cleric": 0.42,
+    "Bard": 0.48
+   },
+   "dominante": "mixto",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S2",
+     "descripcion": "1136 revisiones de PR ajenos, señal fuerte para el arquetipo Cleric."
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "42% de los archivos tocados son de documentacion, señal fuerte para el arquetipo Bard."
+    },
+    {
+     "fuente": "S7",
+     "descripcion": "40% de los commits corrigen errores, respaldando el perfil Cleric."
+    }
+   ],
+   "razonamiento": "El volumen de actividad es alto con 30 commits y 1136 revisiones de PR ajenos, pero las señales se dividen entre documentación (Bard con 42% de archivos) y una fuerte labor de revisión y corrección de errores (Cleric con 1136 revisiones y 40% de commits de corrección). La diferencia entre Bard y Cleric no es concluyente por la fuerte presencia de ambas señales, resultando en un perfil mixto. Puntajes: Bard 0.48, Cleric 0.42, Druid 0.10. Confianza media por limitaciones en la diversidad de repositorios.",
+   "faltante": "Datos sobre la participación en issues y desglose del código general para inclinar la balanza entre Bard y Cleric.",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.04017526295944769,
+     "cleric": 0.5379844759663516,
+     "bard": 0.4218402610742007
+    },
+    "estado": "mixto",
+    "dominante": null,
+    "confianza": "media",
+    "tendencia": "cleric",
+    "margen": 0.11614421489215088,
+    "evidencia": 0.9956375404530744,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_02",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "mixto",
+    "difiere_dominante": false,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.118
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"El volumen de actividad es alto con 30 commits y 1136 revisiones de PR ajenos, pero las señales se dividen entre documentación (Bard con 42% de archivos) y una fuerte labor de revisión y corrección de errores (Cleric con 1136 revisiones y 40% de commits de corrección). La diferencia entre Bard y Cleric no es concluyente por la fuerte presencia de ambas señales, resultando en un perfil mixto. Puntajes: Bard 0.48, Cleric 0.42, Druid 0.10. Confianza media por limitaciones en la diversidad de repositorios.\",\n \"mezcla\": {\n  \"Druid\": 0.10,\n  \"Cleric\": 0.42,\n  \"Bard\": 0.48\n },\n \"dominante\": \"mixto\",\n \"confianza\": \"media\",\n \"evidencias\": [\n  {\n   \"fuente\": \"S2\",\n   \"descripcion\": \"1136 revisiones de PR ajenos, señal fuerte para el arquetipo Cleric.\"\n  },\n  {\n   \"fuente\": \"S4\",\n   \"descripcion\": \"42% de los archivos tocados son de documentacion, señal fuerte para el arquetipo Bard.\"\n  },\n  {\n   \"fuente\": \"S7\",\n   \"descripcion\": \"40% de los commits corrigen errores, respaldando el perfil Cleric.\"\n  }\n ],\n \"faltante\": \"Datos sobre la participación en issues y desglose del código general para inclinar la balanza entre Bard y Cleric.\"\n}",
+   "correcciones": [],
+   "acierta_llm": false,
+   "acierta_reglas": false
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "C4",
+   "esperada": "Cleric",
+   "segundos": 7.3,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 797
+   },
+   "alias": "dev_07",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.08,
+    "Cleric": 0.85,
+    "Bard": 0.07
+   },
+   "dominante": "Cleric",
+   "confianza": "alta",
+   "evidencias": [
+    {
+     "fuente": "S2",
+     "descripcion": "943 revisiones de PR ajenos muestran un enfoque masivo en soporte y revisión de código"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "30% de los commits dedicados a corregir errores refuerzan la faceta Cleric"
+    }
+   ],
+   "razonamiento": "Con 20 commits y 943 revisiones (volumen total 963), la actividad de revisión de PR ajenos es abrumadora. Las revisiones masivas superan con creces los archivos de código general, lo que apunta firmemente a Cleric. Druid y Bard no tienen señales de peso en los archivos. Cleric 0.85, Druid 0.08, Bard 0.07; la diferencia es 0.77, dominante Cleric con confianza alta por el volumen masivo de revisiones.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 1.0,
+     "bard": 0.0
+    },
+    "estado": "dominante",
+    "dominante": "cleric",
+    "confianza": "media",
+    "tendencia": "cleric",
+    "margen": 1.0,
+    "evidencia": 0.4816490891658677,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_07",
+    "dominante_llm": "Cleric",
+    "dominante_reglas": "Cleric",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "alta",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.15
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"Con 20 commits y 943 revisiones (volumen total 963), la actividad de revisión de PR ajenos es abrumadora. Las revisiones masivas superan con creces los archivos de código general, lo que apunta firmemente a Cleric. Druid y Bard no tienen señales de peso en los archivos. Cleric 0.85, Druid 0.08, Bard 0.07; la diferencia es 0.77, dominante Cleric con confianza alta por el volumen masivo de revisiones.\",\n \"mezcla\": {\"Druid\": 0.08, \"Cleric\": 0.85, \"Bard\": 0.07},\n \"dominante\": \"Cleric\",\n \"confianza\": \"alta\",\n \"evidencias\": [{\"fuente\": \"S2\", \"descripcion\": \"943 revisiones de PR ajenos muestran un enfoque masivo en soporte y revisión de código\"}, {\"fuente\": \"S4\", \"descripcion\": \"30% de los commits dedicados a corregir errores refuerzan la faceta Cleric\"}],\n \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "positivo",
+   "alias_etiqueta": "C5",
+   "esperada": "Cleric",
+   "segundos": 6.9,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 561
+   },
+   "alias": "dev_03",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.1,
+    "Cleric": 0.85,
+    "Bard": 0.05
+   },
+   "dominante": "Cleric",
+   "confianza": "alta",
+   "evidencias": [
+    {
+     "fuente": "S2",
+     "descripcion": "883 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "35% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Se analizaron 20 commits y 883 revisiones, superando 100 actividades totales. Las revisiones masivas dominan junto con una proporción de corrección de errores, apuntando firmemente a Cleric: Cleric 0.85, Druid 0.10, Bard 0.05; la diferencia es 0.75, dominante Cleric.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 1.0,
+     "bard": 0.0
+    },
+    "estado": "dominante",
+    "dominante": "cleric",
+    "confianza": "media",
+    "tendencia": "cleric",
+    "margen": 1.0,
+    "evidencia": 0.4993082400813835,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_03",
+    "dominante_llm": "Cleric",
+    "dominante_reglas": "Cleric",
+    "estado_reglas": "dominante",
+    "difiere_dominante": false,
+    "confianza_llm": "alta",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.15
+   },
+   "texto_crudo": "{\"razonamiento\": \"Se analizaron 20 commits y 883 revisiones, superando 100 actividades totales. Las revisiones masivas dominan junto con una proporción de corrección de errores, apuntando firmemente a Cleric: Cleric 0.85, Druid 0.10, Bard 0.05; la diferencia es 0.75, dominante Cleric.\",\n \"mezcla\": {\"Druid\": 0.10, \"Cleric\": 0.85, \"Bard\": 0.05},\n \"dominante\": \"Cleric\",\n \"confianza\": \"alta\",\n \"evidencias\": [{\"fuente\": \"S2\", \"descripcion\": \"883 revisiones de PR ajenos\"}, {\"fuente\": \"S4\", \"descripcion\": \"35% de los commits corrigen errores\"}],\n \"faltante\": \"\"}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "mixto",
+   "alias_etiqueta": "M1",
+   "esperada": "mixto",
+   "segundos": 7.5,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 1015
+   },
+   "alias": "dev_11",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.15,
+    "Cleric": 0.6,
+    "Bard": 0.25
+   },
+   "dominante": "Cleric",
+   "confianza": "alta",
+   "evidencias": [
+    {
+     "fuente": "S2",
+     "descripcion": "462 revisiones de PR ajenos, lo que constituye una señal muy fuerte de la clase Cleric"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "28% de los archivos tocados son de documentación, aportando a la faceta Bard"
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "10% de los commits corrigen errores, reforzando el rol de soporte propio de Cleric"
+    }
+   ],
+   "razonamiento": "30 commits, 462 revisiones y otras señales. Volumen total alto, pero hay una gran cantidad de revisiones de PR ajenos (462) frente a señales moderadas de documentación y código general sin infraestructura clara. Las revisiones intensas apuntan fuertemente a Cleric, mientras que la documentación y código general aportan una mezcla equilibrada con Bard y Druid. Cleric 0.60, Bard 0.25, Druid 0.15; diferencia 0.35, dominante Cleric con confianza alta.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.5684510750329091,
+     "bard": 0.4315489249670908
+    },
+    "estado": "mixto",
+    "dominante": null,
+    "confianza": "media",
+    "tendencia": "cleric",
+    "margen": 0.13690215006581835,
+    "evidencia": 0.6488256227758008,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_11",
+    "dominante_llm": "Cleric",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "mixto",
+    "difiere_dominante": true,
+    "confianza_llm": "alta",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.182
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"30 commits, 462 revisiones y otras señales. Volumen total alto, pero hay una gran cantidad de revisiones de PR ajenos (462) frente a señales moderadas de documentación y código general sin infraestructura clara. Las revisiones intensas apuntan fuertemente a Cleric, mientras que la documentación y código general aportan una mezcla equilibrada con Bard y Druid. Cleric 0.60, Bard 0.25, Druid 0.15; diferencia 0.35, dominante Cleric con confianza alta.\",\n \"mezcla\": {\n  \"Druid\": 0.15,\n  \"Cleric\": 0.60,\n  \"Bard\": 0.25\n },\n \"dominante\": \"Cleric\",\n \"confianza\": \"alta\",\n \"evidencias\": [\n  {\n   \"fuente\": \"S2\",\n   \"descripcion\": \"462 revisiones de PR ajenos, lo que constituye una señal muy fuerte de la clase Cleric\"\n  },\n  {\n   \"fuente\": \"S3\",\n   \"descripcion\": \"28% de los archivos tocados son de documentación, aportando a la faceta Bard\"\n  },\n  {\n   \"fuente\": \"S5\",\n   \"descripcion\": \"10% de los commits corrigen errores, reforzando el rol de soporte propio de Cleric\"\n  }\n ],\n \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "mixto",
+   "alias_etiqueta": "M2",
+   "esperada": "mixto",
+   "segundos": 6.7,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 879
+   },
+   "alias": "dev_06",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.45,
+    "Cleric": 0.1,
+    "Bard": 0.45
+   },
+   "dominante": "mixto",
+   "confianza": "media",
+   "evidencias": [
+    {
+     "fuente": "S2",
+     "descripcion": "119 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "38% de los archivos tocados son de infraestructura"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "47% de los archivos tocados son de documentacion"
+    }
+   ],
+   "razonamiento": "Con 30 commits y 119 revisiones, el volumen total supera 100, pero como no hay dato del número de repositorios, la confianza máxima es media. Los archivos se dividen entre documentación (47%) e infraestructura (38%), generando una mezcla equilibrada entre Bard y Druid, con pocas revisiones de código de error (Cleric). La diferencia entre Bard y Druid es pequeña, por lo que la dominante es mixto: Druid 0.45, Bard 0.45, Cleric 0.10.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.35602139037433156,
+     "cleric": 0.20363636363636367,
+     "bard": 0.44034224598930477
+    },
+    "estado": "mixto",
+    "dominante": null,
+    "confianza": "media",
+    "tendencia": "bard",
+    "margen": 0.08432085561497321,
+    "evidencia": 1.067351598173516,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_06",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "mixto",
+    "difiere_dominante": false,
+    "confianza_llm": "media",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.104
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"Con 30 commits y 119 revisiones, el volumen total supera 100, pero como no hay dato del número de repositorios, la confianza máxima es media. Los archivos se dividen entre documentación (47%) e infraestructura (38%), generando una mezcla equilibrada entre Bard y Druid, con pocas revisiones de código de error (Cleric). La diferencia entre Bard y Druid es pequeña, por lo que la dominante es mixto: Druid 0.45, Bard 0.45, Cleric 0.10.\",\n \"mezcla\": {\n  \"Druid\": 0.45,\n  \"Cleric\": 0.10,\n  \"Bard\": 0.45\n },\n \"dominante\": \"mixto\",\n \"confianza\": \"media\",\n \"evidencias\": [\n  {\n   \"fuente\": \"S2\",\n   \"descripcion\": \"119 revisiones de PR ajenos\"\n  },\n  {\n   \"fuente\": \"S3\",\n   \"descripcion\": \"38% de los archivos tocados son de infraestructura\"\n  },\n  {\n   \"fuente\": \"S4\",\n   \"descripcion\": \"47% de los archivos tocados son de documentacion\"\n  }\n ],\n \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "mixto",
+   "alias_etiqueta": "M3",
+   "esperada": "mixto",
+   "segundos": 7.2,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 887
+   },
+   "alias": "dev_01",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.25,
+    "Cleric": 0.15,
+    "Bard": 0.6
+   },
+   "dominante": "mixto",
+   "confianza": "baja",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "20 commits analizados"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "33% de los archivos tocados son de documentacion"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "67% de los archivos tocados son de codigo general"
+    }
+   ],
+   "razonamiento": "Se analizaron 20 commits y no hay revisiones de PR ajenos ni correcciones de errores. El 67% de los archivos son de código general y el 33% de documentación, lo que apunta débilmente hacia Bard pero sin claridad suficiente. Con un volumen total bajo y señales divididas, la confianza es baja y la clase dominante es mixta.",
+   "faltante": "Se requiere mayor actividad documentada, como revisión de PRs, participación en issues o contribuciones específicas en infraestructura y frontend, para consolidar un perfil firme.",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.0,
+     "bard": 1.0
+    },
+    "estado": "mixto",
+    "dominante": null,
+    "confianza": "baja",
+    "tendencia": "bard",
+    "margen": 1.0,
+    "evidencia": 0.33,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_01",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "mixto",
+    "difiere_dominante": false,
+    "confianza_llm": "baja",
+    "confianza_reglas": "baja",
+    "max_diferencia_mezcla": 0.4
+   },
+   "texto_crudo": "{\"razonamiento\": \"Se analizaron 20 commits y no hay revisiones de PR ajenos ni correcciones de errores. El 67% de los archivos son de código general y el 33% de documentación, lo que apunta débilmente hacia Bard pero sin claridad suficiente. Con un volumen total bajo y señales divididas, la confianza es baja y la clase dominante es mixta.\",\n \"mezcla\": {\"Druid\": 0.25, \"Cleric\": 0.15, \"Bard\": 0.60},\n \"dominante\": \"mixto\",\n \"confianza\": \"baja\",\n \"evidencias\": [{\"fuente\": \"S1\", \"descripcion\": \"20 commits analizados\"}, {\"fuente\": \"S3\", \"descripcion\": \"33% de los archivos tocados son de documentacion\"}, {\"fuente\": \"S4\", \"descripcion\": \"67% de los archivos tocados son de codigo general\"}],\n \"faltante\": \"Se requiere mayor actividad documentada, como revisión de PRs, participación en issues o contribuciones específicas en infraestructura y frontend, para consolidar un perfil firme.\"}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "mixto",
+   "alias_etiqueta": "M4",
+   "esperada": "mixto",
+   "segundos": 6.4,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 897
+   },
+   "alias": "dev_16",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.65,
+    "Cleric": 0.3,
+    "Bard": 0.05
+   },
+   "dominante": "Druid",
+   "confianza": "alta",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "Se analizaron 30 commits."
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "Se registraron 825 revisiones de PR ajenos."
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "El 80% de los archivos tocados corresponden a infraestructura, CI, contenedores y migraciones."
+    },
+    {
+     "fuente": "S5",
+     "descripcion": "El 45% de los commits se centran en la corrección de errores."
+    }
+   ],
+   "razonamiento": "30 commits, 825 revisiones, 80% de archivos en infraestructura y 45% de commits de corrección. Volumen muy alto (855+): confianza alta. El peso principal de la infraestructura apunta a Druid, mientras que el volumen masivo de revisiones y correcciones aporta con fuerza a Cleric: Druid 0.65, Cleric 0.30, Bard 0.05; la diferencia es 0.35, dominante Druid.",
+   "faltante": "",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": false,
+   "cumplia_guardia": null,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.5984634047715325,
+     "cleric": 0.40153659522846746,
+     "bard": 0.0
+    },
+    "estado": "mixto",
+    "dominante": null,
+    "confianza": "media",
+    "tendencia": "druid",
+    "margen": 0.19692680954306502,
+    "evidencia": 1.3367567567567569,
+    "eventos_faltantes": 0
+   },
+   "discrepancia": {
+    "alias": "dev_16",
+    "dominante_llm": "Druid",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "mixto",
+    "difiere_dominante": true,
+    "confianza_llm": "alta",
+    "confianza_reglas": "media",
+    "max_diferencia_mezcla": 0.102
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"30 commits, 825 revisiones, 80% de archivos en infraestructura y 45% de commits de corrección. Volumen muy alto (855+): confianza alta. El peso principal de la infraestructura apunta a Druid, mientras que el volumen masivo de revisiones y correcciones aporta con fuerza a Cleric: Druid 0.65, Cleric 0.30, Bard 0.05; la diferencia es 0.35, dominante Druid.\",\n \"mezcla\": {\"Druid\": 0.65, \"Cleric\": 0.30, \"Bard\": 0.05},\n \"dominante\": \"Druid\",\n \"confianza\": \"alta\",\n \"evidencias\": [\n  {\"fuente\": \"S1\", \"descripcion\": \"Se analizaron 30 commits.\"},\n  {\"fuente\": \"S2\", \"descripcion\": \"Se registraron 825 revisiones de PR ajenos.\"},\n  {\"fuente\": \"S3\", \"descripcion\": \"El 80% de los archivos tocados corresponden a infraestructura, CI, contenedores y migraciones.\"},\n  {\"fuente\": \"S5\", \"descripcion\": \"El 45% de los commits se centran en la corrección de errores.\"}\n ],\n \"faltante\": \"\"\n}",
+   "correcciones": [],
+   "acierta_llm": false,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "poca_actividad",
+   "alias_etiqueta": "L1",
+   "esperada": "mixto",
+   "segundos": 7.8,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 863
+   },
+   "alias": "dev_18",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.7,
+    "Cleric": 0.2,
+    "Bard": 0.1
+   },
+   "dominante": "mixto",
+   "confianza": "datos_insuficientes",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "Solo 4 commits analizados, lo que indica un volumen de actividad muy bajo."
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "El 50% de los archivos tocados corresponden a infraestructura."
+    }
+   ],
+   "razonamiento": "Con solo 4 commits y sin revisiones, el volumen total es 4, lo que cae en datos insuficientes. El 50 % de archivos en infraestructura apunta a Druid, pero la escasez de datos impide una confianza firme. Druid 0.70, Cleric 0.20, Bard 0.10; la diferencia es 0.50 pero la confianza es baja por volumen. Dominante Druid con prudencia.",
+   "faltante": "Se requiere mayor cantidad de commits, revisiones de código y participación en issues para consolidar el perfil.",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": true,
+   "cumplia_guardia": true,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.8333333333333334,
+     "cleric": 0.16666666666666669,
+     "bard": 0.0
+    },
+    "estado": "datos_insuficientes",
+    "dominante": null,
+    "confianza": "baja",
+    "tendencia": "druid",
+    "margen": 0.6666666666666667,
+    "evidencia": 0.6,
+    "eventos_faltantes": 6
+   },
+   "discrepancia": {
+    "alias": "dev_18",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "datos_insuficientes",
+    "difiere_dominante": false,
+    "confianza_llm": "datos_insuficientes",
+    "confianza_reglas": "baja",
+    "max_diferencia_mezcla": 0.133
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"Con solo 4 commits y sin revisiones, el volumen total es 4, lo que cae en datos insuficientes. El 50 % de archivos en infraestructura apunta a Druid, pero la escasez de datos impide una confianza firme. Druid 0.70, Cleric 0.20, Bard 0.10; la diferencia es 0.50 pero la confianza es baja por volumen. Dominante Druid con prudencia.\",\n \"mezcla\": {\n  \"Druid\": 0.70,\n  \"Cleric\": 0.20,\n  \"Bard\": 0.10\n },\n \"dominante\": \"Druid\",\n \"confianza\": \"datos_insuficientes\",\n \"evidencias\": [\n  {\n   \"fuente\": \"S1\",\n   \"descripcion\": \"Solo 4 commits analizados, lo que indica un volumen de actividad muy bajo.\"\n  },\n  {\n   \"fuente\": \"S3\",\n   \"descripcion\": \"El 50% de los archivos tocados corresponden a infraestructura.\"\n  }\n ],\n \"faltante\": \"Se requiere mayor cantidad de commits, revisiones de código y participación en issues para consolidar el perfil.\"\n}",
+   "correcciones": [
+    "dominante derivado: el LLM dijo 'Druid', la regla da 'mixto'"
+   ],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "poca_actividad",
+   "alias_etiqueta": "L2",
+   "esperada": "mixto",
+   "segundos": 7.3,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 1002
+   },
+   "alias": "dev_17",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.1,
+    "Cleric": 0.15,
+    "Bard": 0.75
+   },
+   "dominante": "mixto",
+   "confianza": "datos_insuficientes",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "3 commits analizados que muestran una actividad muy baja"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "1 revisión de PR ajeno"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "100% de los archivos tocados son de documentación"
+    }
+   ],
+   "razonamiento": "Con solo 4 unidades de actividad total (3 commits y 1 revisión), el volumen es extremadamente bajo y los datos son insuficientes. El 100 % de los archivos en documentación apunta inicialmente a Bard, pero la escasez de evidencia obliga a usar confianza baja y dejar la mezcla equilibrada con Bard predominante. Se requiere mayor actividad en múltiples PRs y commits para un perfil firme.",
+   "faltante": "Se necesita un historial de decenas de commits en diversos tipos de archivos, más revisiones de código y participación en issues para consolidar el perfil.",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": true,
+   "cumplia_guardia": true,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 0.0039447731755424065,
+     "bard": 0.9960552268244576
+    },
+    "estado": "datos_insuficientes",
+    "dominante": null,
+    "confianza": "baja",
+    "tendencia": "bard",
+    "margen": 0.9921104536489151,
+    "evidencia": 1.003960396039604,
+    "eventos_faltantes": 6
+   },
+   "discrepancia": {
+    "alias": "dev_17",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "datos_insuficientes",
+    "difiere_dominante": false,
+    "confianza_llm": "datos_insuficientes",
+    "confianza_reglas": "baja",
+    "max_diferencia_mezcla": 0.246
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"Con solo 4 unidades de actividad total (3 commits y 1 revisión), el volumen es extremadamente bajo y los datos son insuficientes. El 100 % de los archivos en documentación apunta inicialmente a Bard, pero la escasez de evidencia obliga a usar confianza baja y dejar la mezcla equilibrada con Bard predominante. Se requiere mayor actividad en múltiples PRs y commits para un perfil firme.\",\n \"mezcla\": {\n  \"Druid\": 0.10,\n  \"Cleric\": 0.15,\n  \"Bard\": 0.75\n },\n \"dominante\": \"Bard\",\n \"confianza\": \"datos_insuficientes\",\n \"evidencias\": [\n  {\n   \"fuente\": \"S1\",\n   \"descripcion\": \"3 commits analizados que muestran una actividad muy baja\"\n  },\n  {\n   \"fuente\": \"S2\",\n   \"descripcion\": \"1 revisión de PR ajeno\"\n  },\n  {\n   \"fuente\": \"S3\",\n   \"descripcion\": \"100% de los archivos tocados son de documentación\"\n  }\n ],\n \"faltante\": \"Se necesita un historial de decenas de commits en diversos tipos de archivos, más revisiones de código y participación en issues para consolidar el perfil.\"\n}",
+   "correcciones": [
+    "dominante derivado: el LLM dijo 'Bard', la regla da 'mixto'"
+   ],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "poca_actividad",
+   "alias_etiqueta": "L3",
+   "esperada": "mixto",
+   "segundos": 7.2,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 971
+   },
+   "alias": "dev_04",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.35,
+    "Cleric": 0.35,
+    "Bard": 0.3
+   },
+   "dominante": "mixto",
+   "confianza": "datos_insuficientes",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "6 commits analizados"
+    },
+    {
+     "fuente": "S2",
+     "descripcion": "2 revisiones de PR ajenos"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "100% de los archivos tocados son de codigo general"
+    },
+    {
+     "fuente": "S4",
+     "descripcion": "50% de los commits corrigen errores"
+    }
+   ],
+   "razonamiento": "Con solo 8 actividades (6 commits, 2 revisiones), el volumen es menor a 10: datos_insuficientes. Hay mezcla de código general sin especialización clara de infraestructura o frontend, con correcciones de errores, por lo que los puntajes se reparten de manera equilibrada. Druid 0.35, Cleric 0.35, Bard 0.30; dominante mixto.",
+   "faltante": "Mayor cantidad de commits, historial de revisiones de PR, issues y archivos categorizados en infraestructura, documentación o frontend.",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": true,
+   "cumplia_guardia": true,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.0,
+     "cleric": 1.0,
+     "bard": 0.0
+    },
+    "estado": "datos_insuficientes",
+    "dominante": null,
+    "confianza": "baja",
+    "tendencia": "cleric",
+    "margen": 1.0,
+    "evidencia": 0.20784313725490197,
+    "eventos_faltantes": 2
+   },
+   "discrepancia": {
+    "alias": "dev_04",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "datos_insuficientes",
+    "difiere_dominante": false,
+    "confianza_llm": "datos_insuficientes",
+    "confianza_reglas": "baja",
+    "max_diferencia_mezcla": 0.65
+   },
+   "texto_crudo": "{\n \"razonamiento\": \"Con solo 8 actividades (6 commits, 2 revisiones), el volumen es menor a 10: datos_insuficientes. Hay mezcla de código general sin especialización clara de infraestructura o frontend, con correcciones de errores, por lo que los puntajes se reparten de manera equilibrada. Druid 0.35, Cleric 0.35, Bard 0.30; dominante mixto.\",\n \"mezcla\": {\n  \"Druid\": 0.35,\n  \"Cleric\": 0.35,\n  \"Bard\": 0.30\n },\n \"dominante\": \"mixto\",\n \"confianza\": \"datos_insuficientes\",\n \"evidencias\": [\n  {\n   \"fuente\": \"S1\",\n   \"descripcion\": \"6 commits analizados\"\n  },\n  {\n   \"fuente\": \"S2\",\n   \"descripcion\": \"2 revisiones de PR ajenos\"\n  },\n  {\n   \"fuente\": \"S3\",\n   \"descripcion\": \"100% de los archivos tocados son de codigo general\"\n  },\n  {\n   \"fuente\": \"S4\",\n   \"descripcion\": \"50% de los commits corrigen errores\"\n  }\n ],\n \"faltante\": \"Mayor cantidad de commits, historial de revisiones de PR, issues y archivos categorizados en infraestructura, documentación o frontend.\"\n}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  },
+  {
+   "grupo": "poca_actividad",
+   "alias_etiqueta": "L4",
+   "esperada": "mixto",
+   "segundos": 7.3,
+   "ultima_llamada": {
+    "proveedor": "gemini",
+    "largo_contenido": 759
+   },
+   "alias": "dev_14",
+   "valida": true,
+   "mezcla": {
+    "Druid": 0.34,
+    "Cleric": 0.33,
+    "Bard": 0.33
+   },
+   "dominante": "mixto",
+   "confianza": "datos_insuficientes",
+   "evidencias": [
+    {
+     "fuente": "S1",
+     "descripcion": "Solo 2 commits analizados"
+    },
+    {
+     "fuente": "S3",
+     "descripcion": "100% de los archivos tocados son de codigo general sin categoría específica"
+    }
+   ],
+   "razonamiento": "Con solo 2 commits y sin revisiones, el volumen total es de 2, lo cual indica datos insuficientes. Los archivos son de código general sin señales claras de infraestructura, documentación o pruebas. Se asigna una distribución equilibrada y confianza baja por escasez de datos.",
+   "faltante": "Se requiere mayor actividad de commits, revisiones de PR, archivos de infraestructura o documentación para determinar un perfil.",
+   "intentos": 1,
+   "errores": [],
+   "guardia_aplicada": true,
+   "cumplia_guardia": true,
+   "perfil": {
+    "puntajes": {
+     "druid": 0.3333333333333333,
+     "cleric": 0.3333333333333333,
+     "bard": 0.3333333333333333
+    },
+    "estado": "datos_insuficientes",
+    "dominante": null,
+    "confianza": "baja",
+    "tendencia": null,
+    "margen": 0.0,
+    "evidencia": 0.0,
+    "eventos_faltantes": 8
+   },
+   "discrepancia": {
+    "alias": "dev_14",
+    "dominante_llm": "mixto",
+    "dominante_reglas": "mixto",
+    "estado_reglas": "datos_insuficientes",
+    "difiere_dominante": false,
+    "confianza_llm": "datos_insuficientes",
+    "confianza_reglas": "baja",
+    "max_diferencia_mezcla": 0.007
+   },
+   "texto_crudo": "{\"razonamiento\": \"Con solo 2 commits y sin revisiones, el volumen total es de 2, lo cual indica datos insuficientes. Los archivos son de código general sin señales claras de infraestructura, documentación o pruebas. Se asigna una distribución equilibrada y confianza baja por escasez de datos.\", \"mezcla\": {\"Druid\": 0.34, \"Cleric\": 0.33, \"Bard\": 0.33}, \"dominante\": \"mixto\", \"confianza\": \"datos_insuficientes\", \"evidencias\": [{\"fuente\": \"S1\", \"descripcion\": \"Solo 2 commits analizados\"}, {\"fuente\": \"S3\", \"descripcion\": \"100% de los archivos tocados son de codigo general sin categor\\u00eda espec\\u00edfica\"}], \"faltante\": \"Se requiere mayor actividad de commits, revisiones de PR, archivos de infraestructura o documentaci\\u00f3n para determinar un perfil.\"}",
+   "correcciones": [],
+   "acierta_llm": true,
+   "acierta_reglas": true
+  }
+ ]
+}

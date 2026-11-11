@@ -197,3 +197,104 @@ Paquete `src/devmetrics/recuperacion/`.
   fidelidad de las citas se miden en el issue 16); la deteccion de "evidencia insuficiente" del LLM
   busca la frase en las dos primeras lineas (tolera markdown); los avisos de fuentes caidas se
   muestran al usuario en la respuesta determinista; sin herramienta en vivo integrada en la cadena (solo via el recuperador).
+
+## Issue 13: clasificacion por arquetipos con razonamiento (IE1, IE2)
+
+- `devmetrics.agente.clasificar(alias, senales, llm, config, tecnica="cot")` arma la evidencia a
+  partir de las senales (lineas citables `[S1]`, `[S2]`, ...), usa el prompt
+  `clasificacion_arquetipo` (v1.0.0, tecnica CoT: clave `razonamiento` primero), normaliza los
+  identificadores citados (`[S1]`, `S1 `), valida con `validar_arquetipo` (margen leido de la
+  configuracion, fuentes restringidas al contexto) y repite una vez con los errores si falla. Dos
+  fallos devuelven una `Clasificacion` con `valida=False`, sin lanzar.
+- El LLM no recibe el perfil de reglas: la comparacion es independiente. Cada resultado trae un
+  registro de discrepancias (dominante, estado y confianza de reglas frente a LLM, diferencia
+  maxima de la mezcla).
+- Guardia de poca actividad: si el perfil de reglas tiene volumen menor al minimo (10 eventos), el
+  resultado final es `mixto` con confianza `baja` y `faltante`, incluso si la salida del LLM es
+  invalida. `cumplia_guardia` registra si la salida cruda del LLM ya lo cumplia; la cifra "con
+  guardia" mide la regla, no el modelo.
+- Con la guardia se fuerza `dominante` y `confianza`, pero la `mezcla` del LLM se conserva como
+  tendencia y puede no coincidir con `mixto`.
+- Pruebas: `tests/test_clasificacion.py` (19, LLM falso): salida valida, reintento, doble fallo,
+  cita fuera de contexto, normalizacion, margen de la configuracion, dominante derivado de la mezcla,
+  mezcla renormalizada, guardia (valida e invalida), discrepancias y respuesta cruda registrada.
+
+### Evaluacion con LLM real (`scripts/evaluar_clasificacion.py`)
+
+Conjunto: 15 positivos (5 por clase, `tests/muestra_agregados.py`, agregados de la muestra piloto),
+4 mixtos (M1 a M4) y 4 de poca actividad (L1 a L4). **L1 a L4 son sinteticos, no medidos**; aqui
+"poca actividad" significa volumen menor a 10 eventos. La decision pendiente del equipo (usuario con
+324 commits sin revisiones) no se resuelve aqui. Un `mixto` del LLM sobre un positivo cuenta como
+desacuerdo. Modelo `qwen3:4b` (Ollama, CPU), temperatura 0.3, semilla 1, prompt 1.0.0, CoT.
+
+El LLM recibe alias neutros (`dev_01` a `dev_23`, asignacion barajada con semilla 13), porque el
+alias de la muestra (D1, B3, C5) delata la clase; el registro conserva el alias de la etiqueta.
+Ademas la evidencia omite comentarios, issues y numero de repositorios, que la muestra agregada no
+midio (con el valor por defecto de `clasificar` se mostrarian como cero y empujan a "poca actividad").
+Desde la serie con Gemini, el codigo normaliza la mezcla si no suma 1 y deriva la clase dominante de
+la mezcla con la regla del margen (0,20; confianza baja o insuficiente impone `mixto`); cada ajuste
+queda en `correcciones`. Las corridas con qwen3 son anteriores a ese ajuste.
+
+Series medidas (2026-11-11). Archivos en `documentacion/`:
+
+| Medida | qwen3:4b, prompt 1.0.0 | Gemini, prompt 1.1.0 | Gemini, prompt 1.2.0 | Reglas (issue 4) |
+|---|---|---|---|---|
+| Clase dominante, 15 positivos | 1/15 (6,7 %) | 7/15 (46,7 %) | **12/15 (80,0 %)** | 13/15 (86,7 %) |
+| Salidas validas en positivos | 11/15 | 15/15 | 15/15 | n/a |
+| Tendencia (mayor puntaje de la mezcla) | 6/11 | 13/15 | 14/15 | 15/15 |
+| Positivos "de ajuste" (9) / "de prueba" (6) | n/a | 5/9 / 2/6 | 7/9 / 5/6 | n/a |
+| Mixtos M1 a M4 | 3/4 | 3/4 | 2/4 | 4/4 |
+| Poca actividad (sinteticos): confianza baja o insuficiente en la salida del LLM | 4/4 | 4/4 | 4/4 | n/a |
+| Discrepancias de dominante frente a reglas (de 23) | 13 | 9 | 3 | n/a |
+
+Archivos: `clasificacion_resultados_qwen3-4b_esquema.json` (y `..._evidencia_con_ceros.json`, corrida
+previa con ceros inventados en la evidencia, tambien 1/15), `clasificacion_resultados_gemini_v1.1.0.json`
+y `clasificacion_resultados_gemini_v1.2.0.json`. Gemini: `gemini-3.5-flash-lite`, sin respaldo.
+
+Que cambio entre prompts: la v1.0.0 no daba criterios para pasar de senales a clases. La v1.1.0 agrego
+los criterios por clase (tomados de la configuracion del issue 4, no de las etiquetas), los umbrales
+de confianza por volumen, cuatro ejemplos de razonamiento con datos inventados y la instruccion de no
+usar `mixto` por precaucion. La v1.2.0 agrego los pesos relativos (los archivos pesan mas que las
+revisiones, como en la configuracion): sin ellos, los Bard con miles de revisiones quedaban casi
+empatados con Cleric y salian `mixto`.
+
+Lectura: con la v1.2.0 y Gemini el acuerdo de la clase dominante es 80 %, cerca del 86,7 % del modelo
+de reglas, y la tendencia acierta en 14 de 15. Errores restantes: D4 (volumen 27: la regla de la
+biblioteca de prompts impone `mixto` con confianza baja, mientras el modelo del issue 4 si declara
+Druid; es una tension entre los issues 4 y 5 que queda para el equipo), C2 y C3 (Cleric con margen
+bajo) y, en los mixtos, M1 y M4, donde el LLM declara una clase. En poca actividad el LLM informo
+confianza `datos_insuficientes` en los cuatro; en L1 y L2 ademas declaro una clase dominante que el
+codigo corrigio a `mixto`, de modo que la salida cruda cumplia el criterio de confianza pero no el de
+dominante en 2 de 4. Con qwen3:4b el modelo se quedaba sin tokens razonando y respondia `mixto` casi
+siempre: el cuello de botella era el modelo, no el clasificador.
+
+Reproduccion (necesita `GOOGLE_API_KEY` en `.env`; unos 6 minutos):
+`python scripts/evaluar_clasificacion.py --proveedor gemini --max-tokens 2048 --salida
+documentacion/clasificacion_resultados_gemini_v1.2.0.json`. Con Ollama: `--modelo qwen3:4b --esquema`
+(unos 40 minutos en CPU).
+
+Corridas exploratorias, descartadas como medicion (con el alias de la etiqueta, de modo que su 5/15 y su "5 de 5 entre las validas" estan contaminados; los archivos no se conservan; el codigo era anterior a
+la guardia sobre salidas invalidas y a `texto_crudo`):
+
+- qwen3:4b sin restringir la salida: 14 de 23 sin salida valida (5/15 en positivos, 5 de 5 entre
+  las validas). Causa confirmada con un caso instrumentado: `done_reason=length` a 1500 tokens; el
+  modelo escribe razonamiento libre en el contenido (4661 caracteres) y se corta antes del JSON;
+  `think:false` y `/no_think` no lo evitan. Cada llamada tardo unos 265 s.
+- qwen3:0.6b: 2/15 en positivos, 10 de 23 sin salida valida.
+
+### Limites
+
+- **Sobreajuste del prompt**: se iteraron dos versiones sobre los mismos 15 positivos. La separacion
+  ajuste (9) y prueba (6) se declaro antes de medir, pero al diagnosticar la v1.1.0 se vieron los
+  resultados de los 15, asi que el 5/6 de prueba no es una medicion limpia. La cifra de 80 % es optimista.
+  La v1.2.0 tambien bajo los mixtos (3/4 a 2/4): el prompt empuja hacia declarar una clase.
+- Los positivos son los mismos que calibraron el modelo de reglas, por lo que su 13/15 tambien es
+  optimista. L1 a L4 son sinteticos. Un modelo, una corrida por prompt: `gemini-3.5-flash-lite`
+  ignora la temperatura (muestreo fijo), por lo que la repeticion exacta no esta garantizada.
+- El ajuste en codigo (renormalizar y derivar el dominante) oculta errores del LLM: se registran en
+  `correcciones` (3 casos en la v1.2.0: D4, L1, L2). Con qwen3 se uso `format` de Ollama (distinto de
+  la decision del issue 5) y `/no_think`, que viven solo en el script.
+- Las senales son agregados sobre 20 a 30 commits; no se evaluo desde commits crudos ni con
+  fragmentos recuperados (`contexto_extra` existe pero no se probo con LLM real).
+- Capa gratuita de Gemini: limites bajos y uso de los datos para mejorar productos; aqui solo viajan
+  senales agregadas con alias neutros. Los datos de uso exacto no se midieron.
