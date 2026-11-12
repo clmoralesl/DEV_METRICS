@@ -320,3 +320,83 @@ Limites:
   logins de la cache, o `--login`). No elimina perfiles que ya no estan en la cache.
 - Sin prueba automatica del modo `main` con argumentos reales (solo manual); GITHUB_TOKEN sin
   verificar (regla de denegacion sobre .env).
+
+## Issue 16: evaluacion del agente
+
+`python scripts/evaluar_agente.py` regenera esta tabla y `documentacion/evaluacion_resultados.json`
+(respuestas completas). Casos en `tests/casos_agente.json` (24: 9 perfiles claros, 3 mixtos,
+4 de poca actividad, 1 login sin datos, 3 requerimientos, 1 criterio, 2 recomendaciones, 1 mas de
+Bard); pruebas de las metricas en `tests/test_evaluacion.py` (sin red). Corpus: la base interna
+real y 23 perfiles sinteticos redactados desde los agregados de `tests/muestra_agregados.py` con
+alias neutros (un documento por persona, no eventos crudos).
+
+Definiciones: precision de contexto = precision media en los rangos relevantes; recall = fraccion de
+las fuentes esperadas recuperadas (ambas contra `fuentes_esperadas`, sin LLM). Fidelidad = fraccion
+de afirmaciones de la respuesta que el juez respalda con el contexto; relevancia = coseno medio
+entre la pregunta y 3 preguntas que el juez deduce de la respuesta (embeddings locales). Perfil =
+la respuesta nombra primero la clase esperada (o "mixto" o se abstiene); Abstencion = declara
+evidencia insuficiente o confianza baja. Fidelidad y relevancia no se calculan si la respuesta se
+abstiene. La media de la columna Perfil incluye los casos de abstencion esperada.
+
+Lectura de la corrida (Gemini `gemini-3.5-flash-lite` como agente y como juez, una corrida):
+- Los 4 casos de poca actividad y el login inexistente se abstienen (5/5); los 3 casos mixtos: 2/3
+  (Q12 declara confianza media-alta); en las clases claras el perfil acierta 8/9 (Q03, D5, la
+  respuesta declara Cleric dominante, el mismo caso dificil del issue 13).
+- Recall medio 0.73: el recuperador suele traer el perfil de la persona pero no el documento de su
+  arquetipo (`k_interna=2`); es la debilidad medible del recuperador, no del juez. La precision alta
+  (0.95) se debe en parte a que los filtros por desarrollador acotan la fuente externa.
+- Fidelidad 0.77 con mucha varianza (Q08 y Q22 0.50). Q05 da 0.00 aunque el contexto si contiene
+  las 4503 revisiones de ese perfil: la causa mas probable es el juez (o su lectura de "presencia
+  de Cleric"), no una alucinacion comprobada; no se reviso afirmacion por afirmacion.
+
+Limites:
+- El juez es el mismo modelo que el agente (sesgo de autoevaluacion), con una sola corrida y sin
+  repeticion: `gemini-3.5-flash-lite` ignora la temperatura. Con 24 casos las medias no son
+  concluyentes; no se calibro el juez contra etiquetas humanas.
+- El corpus de perfiles es sintetico y los casos se redactaron conociendo las etiquetas; los
+  positivos tambien calibraron las reglas del issue 4. No mide recuperacion sobre eventos crudos.
+- `fuentes_esperadas` incluye el documento del arquetipo o los criterios: es una decision de
+  diseno del conjunto que condiciona el recall. Las heuristicas de texto (`coincide_perfil`,
+  `es_abstencion`) no detectan negaciones: Q21 responde citando "evidencia insuficiente" como
+  regla y se trata como abstencion, por lo que no se juzgo su fidelidad (la columna Abstencion
+  solo se muestra con perfil esperado).
+- `mixto` se cumple tambien al abstenerse: Q10 y Q11 cuentan como correctos por abstencion sin decir
+  "mixto", asi que el 2/3 de mixtos sobrestima el acierto. En Q15 el agente se abstiene pero nombra
+  una tendencia hacia Cleric; ninguna metrica lo penaliza. La precision cuenta una vez cada fuente
+  (varios chunks del mismo documento no suman).
+- `Conversacion` aun no llama a `clasificar`: el perfil se evalua en la respuesta del chat, no en
+  la salida estructurada del issue 13. LangSmith (`--trazas`) esta implementado pero no se probo
+  (sin clave). Cuota de Gemini: la corrida completa uso 56 llamadas reales (entradas de la cache) con pausa de 5 s
+  sin agotar la cuota; el consumo exacto no se midio.
+
+<!-- evaluacion:inicio -->
+Generada por `python scripts/evaluar_agente.py` (2026-11-11; agente y juez: gemini:gemini-3.5-flash-lite; 24 casos; juez en 16).
+
+| Caso | Grupo | Precision | Recall | Fidelidad | Relevancia | Perfil | Abstencion |
+|---|---|---|---|---|---|---|---|
+| Q01 | perfil_druid | 1.00 | 0.50 | 0.75 | 0.85 | si | no |
+| Q02 | perfil_druid | 1.00 | 0.50 | 0.57 | 0.64 | si | no |
+| Q03 | perfil_druid | 1.00 | 0.50 | 1.00 | 0.68 | no | no |
+| Q04 | perfil_bard | 1.00 | 0.50 | 1.00 | 0.71 | si | no |
+| Q05 | perfil_bard | 1.00 | 0.50 | 0.00 | 0.70 | si | no |
+| Q06 | perfil_bard | 0.58 | 1.00 | 1.00 | 0.54 | si | no |
+| Q07 | perfil_cleric | 1.00 | 0.50 | 1.00 | 0.67 | si | no |
+| Q08 | perfil_cleric | 1.00 | 0.50 | 0.50 | 0.63 | si | no |
+| Q09 | perfil_cleric | 1.00 | 1.00 | 0.83 | 0.69 | si | no |
+| Q10 | perfil_mixto | 1.00 | 1.00 | - | - | si | si |
+| Q11 | perfil_mixto | 1.00 | 1.00 | - | - | si | si |
+| Q12 | perfil_mixto | 1.00 | 0.50 | 0.71 | 0.74 | no | no |
+| Q13 | poca_actividad | 1.00 | 1.00 | - | - | si | si |
+| Q14 | poca_actividad | 0.83 | 1.00 | - | - | si | si |
+| Q15 | poca_actividad | 1.00 | 0.50 | - | - | si | si |
+| Q16 | poca_actividad | 1.00 | 1.00 | - | - | si | si |
+| Q17 | sin_datos | - | - | - | - | si | si |
+| Q18 | requerimiento | 1.00 | 1.00 | 1.00 | 0.63 | - | - |
+| Q19 | requerimiento | 0.50 | 1.00 | 1.00 | 0.64 | - | - |
+| Q20 | requerimiento | 1.00 | 1.00 | 1.00 | 0.61 | - | - |
+| Q21 | criterio | 1.00 | 1.00 | - | - | - | - |
+| Q22 | recomendacion | 1.00 | 0.50 | 0.50 | 0.72 | si | no |
+| Q23 | recomendacion | 1.00 | 0.33 | 0.50 | 0.57 | - | - |
+| Q24 | perfil_bard | 1.00 | 0.50 | 1.00 | 0.63 | si | no |
+| **Media** | | **0.95** | **0.73** | **0.77** | **0.67** | **0.89** | |
+<!-- evaluacion:fin -->
