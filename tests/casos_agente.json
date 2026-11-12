@@ -1,0 +1,29 @@
+{
+ "descripcion": "Conjunto de evaluacion del agente (issue 16). Desarrolladores con alias neutros dev_NN del corpus sintetico de scripts/evaluar_agente.py (agregados de tests/muestra_agregados.py). perfil_esperado: druid, bard, cleric, mixto o insuficiente (confianza baja o evidencia insuficiente); null si la pregunta no es sobre un perfil. fuentes_esperadas: ids de documento interno o dev:<alias>; vacio si no hay referencia.",
+ "casos": [
+  {"id": "Q01", "grupo": "perfil_druid", "pregunta": "¿Qué perfil de arquetipos tiene dev_10 y con qué confianza?", "desarrollador": "dev_10", "perfil_esperado": "druid", "fuentes_esperadas": ["dev:dev_10", "arquetipo-druid"]},
+  {"id": "Q02", "grupo": "perfil_druid", "pregunta": "¿Dev_08 trabaja más en infraestructura o en documentación?", "desarrollador": "dev_08", "perfil_esperado": "druid", "fuentes_esperadas": ["dev:dev_08", "arquetipo-druid"]},
+  {"id": "Q03", "grupo": "perfil_druid", "pregunta": "Describe el estilo de trabajo de dev_19.", "desarrollador": "dev_19", "perfil_esperado": "druid", "fuentes_esperadas": ["dev:dev_19", "arquetipo-druid"]},
+  {"id": "Q04", "grupo": "perfil_bard", "pregunta": "¿Qué arquetipo domina en la actividad de dev_09?", "desarrollador": "dev_09", "perfil_esperado": "bard", "fuentes_esperadas": ["dev:dev_09", "arquetipo-bard"]},
+  {"id": "Q05", "grupo": "perfil_bard", "pregunta": "¿Cómo describirías el perfil de dev_23?", "desarrollador": "dev_23", "perfil_esperado": "bard", "fuentes_esperadas": ["dev:dev_23", "arquetipo-bard"]},
+  {"id": "Q06", "grupo": "perfil_bard", "pregunta": "¿Dev_21 se parece más a un Druid, un Cleric o un Bard?", "desarrollador": "dev_21", "perfil_esperado": "bard", "fuentes_esperadas": ["dev:dev_21", "arquetipo-bard"]},
+  {"id": "Q07", "grupo": "perfil_cleric", "pregunta": "¿Qué perfil tiene dev_05 según su actividad?", "desarrollador": "dev_05", "perfil_esperado": "cleric", "fuentes_esperadas": ["dev:dev_05", "arquetipo-cleric"]},
+  {"id": "Q08", "grupo": "perfil_cleric", "pregunta": "¿Dev_02 se dedica más a revisar y corregir que a construir?", "desarrollador": "dev_02", "perfil_esperado": "cleric", "fuentes_esperadas": ["dev:dev_02", "arquetipo-cleric"]},
+  {"id": "Q09", "grupo": "perfil_cleric", "pregunta": "Resume el perfil de dev_12 e indica la confianza.", "desarrollador": "dev_12", "perfil_esperado": "cleric", "fuentes_esperadas": ["dev:dev_12", "arquetipo-cleric"]},
+  {"id": "Q10", "grupo": "perfil_mixto", "pregunta": "¿Qué perfil tiene dev_11?", "desarrollador": "dev_11", "perfil_esperado": "mixto", "fuentes_esperadas": ["dev:dev_11", "criterios-asignacion"]},
+  {"id": "Q11", "grupo": "perfil_mixto", "pregunta": "¿Se puede asignar a dev_16 a un único tipo de proyecto?", "desarrollador": "dev_16", "perfil_esperado": "mixto", "fuentes_esperadas": ["dev:dev_16", "criterios-asignacion"]},
+  {"id": "Q12", "grupo": "perfil_mixto", "pregunta": "Describe la mezcla de arquetipos de dev_06.", "desarrollador": "dev_06", "perfil_esperado": "mixto", "fuentes_esperadas": ["dev:dev_06", "criterios-asignacion"]},
+  {"id": "Q13", "grupo": "poca_actividad", "pregunta": "¿Qué perfil tiene dev_18?", "desarrollador": "dev_18", "perfil_esperado": "insuficiente", "fuentes_esperadas": ["dev:dev_18", "criterios-asignacion"]},
+  {"id": "Q14", "grupo": "poca_actividad", "pregunta": "¿Puedes recomendar a dev_17 para un proyecto de documentación?", "desarrollador": "dev_17", "perfil_esperado": "insuficiente", "fuentes_esperadas": ["dev:dev_17", "criterios-asignacion"]},
+  {"id": "Q15", "grupo": "poca_actividad", "pregunta": "¿Cuál es el arquetipo dominante de dev_04?", "desarrollador": "dev_04", "perfil_esperado": "insuficiente", "fuentes_esperadas": ["dev:dev_04", "criterios-asignacion"]},
+  {"id": "Q16", "grupo": "poca_actividad", "pregunta": "Dame el perfil de dev_14 y qué actividad faltaría para afirmarlo.", "desarrollador": "dev_14", "perfil_esperado": "insuficiente", "fuentes_esperadas": ["dev:dev_14", "criterios-asignacion"]},
+  {"id": "Q17", "grupo": "sin_datos", "pregunta": "¿Qué perfil tiene dev_99?", "desarrollador": "dev_99", "perfil_esperado": "insuficiente", "fuentes_esperadas": []},
+  {"id": "Q18", "grupo": "requerimiento", "pregunta": "¿Qué requerimiento exige experiencia con Terraform y pipelines de despliegue?", "perfil_esperado": null, "fuentes_esperadas": ["req-migracion-nube"]},
+  {"id": "Q19", "grupo": "requerimiento", "pregunta": "¿De qué trata el requerimiento sobre las caídas de facturación y cuántas personas pide?", "perfil_esperado": null, "fuentes_esperadas": ["req-estabilizacion-microservicios"]},
+  {"id": "Q20", "grupo": "requerimiento", "pregunta": "¿Qué se necesita para el portal de documentación para desarrolladores?", "perfil_esperado": null, "fuentes_esperadas": ["req-portal-documentacion"]},
+  {"id": "Q21", "grupo": "criterio", "pregunta": "¿Cuántos eventos de actividad se necesitan como mínimo para recomendar a alguien?", "perfil_esperado": null, "fuentes_esperadas": ["criterios-asignacion"]},
+  {"id": "Q22", "grupo": "recomendacion", "pregunta": "¿Qué perfil de arquetipo conviene para el requerimiento de migración a la nube?", "perfil_esperado": "druid", "fuentes_esperadas": ["req-migracion-nube", "arquetipo-druid"]},
+  {"id": "Q23", "grupo": "recomendacion", "pregunta": "¿Qué arquetipos pide la estabilización de microservicios de facturación?", "perfil_esperado": null, "fuentes_esperadas": ["req-estabilizacion-microservicios", "arquetipo-cleric", "arquetipo-druid"]},
+  {"id": "Q24", "grupo": "perfil_bard", "pregunta": "¿Dev_20 es adecuado para escribir guías y documentación?", "desarrollador": "dev_20", "perfil_esperado": "bard", "fuentes_esperadas": ["dev:dev_20", "arquetipo-bard"]}
+ ]
+}

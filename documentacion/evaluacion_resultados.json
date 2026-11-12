@@ -1,0 +1,558 @@
+{
+ "meta": {
+  "fecha": "2026-11-11",
+  "modelo": "gemini:gemini-3.5-flash-lite",
+  "parado": null
+ },
+ "resumen": {
+  "casos": 24,
+  "context_precision": 0.9528985507246377,
+  "context_recall": 0.7318840579710144,
+  "faithfulness": 0.7730654761904762,
+  "answer_relevancy": 0.6658117882044043,
+  "perfil_correcto": 0.8947368421052632,
+  "abstencion_poca_actividad": 1.0,
+  "n_con_juez": 16
+ },
+ "casos": [
+  {
+   "id": "Q01",
+   "grupo": "perfil_druid",
+   "pregunta": "¿Qué perfil de arquetipos tiene dev_10 y con qué confianza?",
+   "perfil_esperado": "druid",
+   "fuentes_esperadas": [
+    "dev:dev_10",
+    "arquetipo-druid"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_10",
+    "criterios-asignacion",
+    "criterios-asignacion"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 0.5,
+   "faithfulness": 0.75,
+   "answer_relevancy": 0.8541192359337092,
+   "perfil_correcto": true,
+   "abstiene": false,
+   "respuesta": "Basado en la actividad analizada, el perfil de **dev_10** muestra la siguiente mezcla de arquetipos y nivel de confianza:\n\n- **Mezcla de arquetipos:** Predominio claro de **Druid** (96 % de los archivos tocados en infraestructura y despliegue), con una baja participación en Bard (1 % en documentación y frontend) y Cleric (17 % de commits en corrección de errores y 9 revisiones de PRs).\n- **Confianza:** Alta, respaldada por una muestra de 30 commits recientes [1].\n\nFuentes usadas:\n- [1] GitHub: muestra-piloto / resumen / @dev_10"
+  },
+  {
+   "id": "Q02",
+   "grupo": "perfil_druid",
+   "pregunta": "¿Dev_08 trabaja más en infraestructura o en documentación?",
+   "perfil_esperado": "druid",
+   "fuentes_esperadas": [
+    "dev:dev_08",
+    "arquetipo-druid"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_08",
+    "req-portal-documentacion",
+    "req-migracion-nube"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 0.5,
+   "faithfulness": 0.5714285714285714,
+   "answer_relevancy": 0.6388820185945122,
+   "perfil_correcto": true,
+   "abstiene": false,
+   "respuesta": "Basándonos en la actividad registrada, **dev_08** trabaja mayoritariamente en infraestructura. El 79 % de los archivos tocados corresponden a infraestructura y despliegue, mientras que la documentación y el frontend representan solo un 3% [1].\n\n**Mezcla de arquetipos y confianza:**\n- **Druid:** Dominante, reflejado en el alto porcentaje de trabajo en infraestructura y despliegue, además de una fuerte actividad en revisiones de pull requests ajenos [1].\n- **Cleric y Bard:** Presencia menor (soporte y documentación).\n- **Confianza:** Alta (respaldada por una muestra de 30 commits y 79 revisiones analizadas) [1].\n\n**Fuentes usadas:**\n- [1] GitHub: muestra-piloto / resumen / @dev_08"
+  },
+  {
+   "id": "Q03",
+   "grupo": "perfil_druid",
+   "pregunta": "Describe el estilo de trabajo de dev_19.",
+   "perfil_esperado": "druid",
+   "fuentes_esperadas": [
+    "dev:dev_19",
+    "arquetipo-druid"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_19",
+    "req-estabilizacion-microservicios",
+    "arquetipo-bard"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 0.5,
+   "faithfulness": 1.0,
+   "answer_relevancy": 0.6841661583765787,
+   "perfil_correcto": false,
+   "abstiene": false,
+   "respuesta": "Hola, soy DevMetrics. A partir de los metadatos públicos de GitHub, aquí tienes el estilo de trabajo para `dev_19`:\n\n**Mezcla de arquetipos:** \n- **Cleric (dominante):** Evidenciado por un 65 % de commits dedicados a la corrección de errores y 94 revisiones de pull requests ajenos [1].\n- **Druid:** Presente a través de un 90 % de archivos tocados en infraestructura y despliegue [1].\n\n**Confianza:** Alta (respaldada por 20 commits recientes analizados y un volumen significativo de revisiones) [1].\n\n**Fuentes usadas:**\n- [1] GitHub: muestra-piloton / resumen / @dev_19"
+  },
+  {
+   "id": "Q04",
+   "grupo": "perfil_bard",
+   "pregunta": "¿Qué arquetipo domina en la actividad de dev_09?",
+   "perfil_esperado": "bard",
+   "fuentes_esperadas": [
+    "dev:dev_09",
+    "arquetipo-bard"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_09",
+    "req-estabilizacion-microservicios",
+    "arquetipo-cleric"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 0.5,
+   "faithfulness": 1.0,
+   "answer_relevancy": 0.7122443929699611,
+   "perfil_correcto": true,
+   "abstiene": false,
+   "respuesta": "Basado en la actividad analizada, `dev_09` muestra una mezcla de arquetipos con una fuerte inclinación hacia el rol de Bard (85 % de archivos en documentación y frontend, además de 296 revisiones de PRs y 37 % de commits de corrección de errores que aportan elementos de Cleric). \n\nNivel de confianza: Medio-alto (respaldado por una muestra de 30 commits y 296 revisiones) [1].\n\nFuentes usadas:\n- [1] GitHub: muestra-piloto / resumen / @dev_09"
+  },
+  {
+   "id": "Q05",
+   "grupo": "perfil_bard",
+   "pregunta": "¿Cómo describirías el perfil de dev_23?",
+   "perfil_esperado": "bard",
+   "fuentes_esperadas": [
+    "dev:dev_23",
+    "arquetipo-bard"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_23",
+    "criterios-asignacion",
+    "arquetipo-cleric"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 0.5,
+   "faithfulness": 0.0,
+   "answer_relevancy": 0.6972433417746363,
+   "perfil_correcto": true,
+   "abstiene": false,
+   "respuesta": "Basándonos en la actividad pública analizada, el perfil de `dev_23` muestra una clara inclinación hacia el arquetipo **Bard** (centrado en documentación y frontend) y una fuerte presencia del arquetipo **Cleric** debido al alto volumen de revisiones de pull requests ajenos [1]. \n\n- **Mezcla de arquetipos:** Predominio de Bard (100% en documentación y frontend) combinado con Cleric (4,503 revisiones de pull requests) [1].\n- **Nivel de confianza:** Alto, sustentado en un volumen considerable de revisiones analizadas (4,503) y 20 commits recientes [1].\n\n**Fuentes usadas:**\n- [1] GitHub: muestra-piloto / resumen / @dev_23"
+  },
+  {
+   "id": "Q06",
+   "grupo": "perfil_bard",
+   "pregunta": "¿Dev_21 se parece más a un Druid, un Cleric o un Bard?",
+   "perfil_esperado": "bard",
+   "fuentes_esperadas": [
+    "dev:dev_21",
+    "arquetipo-bard"
+   ],
+   "fuentes_recuperadas": [
+    "arquetipo-druid",
+    "arquetipo-bard",
+    "dev:dev_21"
+   ],
+   "context_precision": 0.5833333333333333,
+   "context_recall": 1.0,
+   "faithfulness": 1.0,
+   "answer_relevancy": 0.5385840005592942,
+   "perfil_correcto": true,
+   "abstiene": false,
+   "respuesta": "Basado en la actividad analizada, el perfil de `dev_21` muestra una mezcla de arquetipos con predominio de Bard (76 % en documentación y frontend), combinado con corrección de errores (37 % de commits de corrección) y sin actividad en infraestructura, lo que descarta al Druid. \n\nDebido a que la muestra se basa en un volumen limitado de 30 commits recientes y una sola revisión de pull request [3], el nivel de confianza es moderado. Para obtener un perfil más firme, se requeriría analizar un historial de commits más amplio y un mayor volumen de revisiones en pull requests ajenos.\n\nFuentes usadas:\n- [3] GitHub: muestra-piloto / resumen / @dev_21"
+  },
+  {
+   "id": "Q07",
+   "grupo": "perfil_cleric",
+   "pregunta": "¿Qué perfil tiene dev_05 según su actividad?",
+   "perfil_esperado": "cleric",
+   "fuentes_esperadas": [
+    "dev:dev_05",
+    "arquetipo-cleric"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_05",
+    "criterios-asignacion",
+    "criterios-asignacion"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 0.5,
+   "faithfulness": 1.0,
+   "answer_relevancy": 0.6674404595838306,
+   "perfil_correcto": true,
+   "abstiene": false,
+   "respuesta": "Basado en los metadatos de actividad de GitHub, el perfil de **dev_05** muestra la siguiente mezcla de arquetipos:\n\n* **Cleric (Alto):** Destaca por un volumen muy elevado de revisiones de pull requests ajenos (1170) y una alta proporción de commits enfocados en corrección de errores (70 %) y pruebas (42 %), lo que refleja un fuerte enfoque en soporte, revisión y aseguramiento de calidad [1].\n* **Bard y Druid (Secundarios):** Participa en menor medida en documentación y frontend (12 %) e infraestructura y despliegue (13 %) [1].\n\n**Confianza:** Alta (respaldado por una muestra de 30 commits recientes y 1170 revisiones) [1].\n\nFuentes usadas:\n- [1] GitHub: muestra-piloto / resumen / @dev_05"
+  },
+  {
+   "id": "Q08",
+   "grupo": "perfil_cleric",
+   "pregunta": "¿Dev_02 se dedica más a revisar y corregir que a construir?",
+   "perfil_esperado": "cleric",
+   "fuentes_esperadas": [
+    "dev:dev_02",
+    "arquetipo-cleric"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_02",
+    "req-estabilizacion-microservicios",
+    "req-estabilizacion-microservicios"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 0.5,
+   "faithfulness": 0.5,
+   "answer_relevancy": 0.6267658093858332,
+   "perfil_correcto": true,
+   "abstiene": false,
+   "respuesta": "Hola. Soy DevMetrics. Con base en los datos disponibles, la actividad de `dev_02` muestra una fuerte orientación hacia la revisión y corrección: registra un alto volumen de revisiones de *pull requests* ajenos (1136) y un 40 % de sus commits están dedicados a la corrección de errores [1]. \n\nSu mezcla de arquetipos estimada es predominantemente **Cleric** (por el soporte, revisión y corrección de errores) con aportes de **Bard** (documentación y frontend) y una menor parte de **Druid** (infraestructura) [1]. El nivel de confianza para este perfil es **alto**, respaldado por una muestra amplia de 30 commits recientes y más de mil revisiones analizadas [1].\n\nFuentes usadas:\n- [1] GitHub: muestra-piloto / resumen / @dev_02"
+  },
+  {
+   "id": "Q09",
+   "grupo": "perfil_cleric",
+   "pregunta": "Resume el perfil de dev_12 e indica la confianza.",
+   "perfil_esperado": "cleric",
+   "fuentes_esperadas": [
+    "dev:dev_12",
+    "arquetipo-cleric"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_12",
+    "arquetipo-cleric",
+    "criterios-asignacion"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 1.0,
+   "faithfulness": 0.8333333333333334,
+   "answer_relevancy": 0.6923658689886518,
+   "perfil_correcto": true,
+   "abstiene": false,
+   "respuesta": "El perfil de `dev_12` muestra una alta participación en la revisión de pull requests ajenos (583 revisiones) y una presencia notable de commits de corrección de errores (30 %), lo cual se alinea con el arquetipo **Cleric**, orientado al soporte y la revisión [1, 2]. También presenta actividad en documentación, frontend, infraestructura y pruebas [1]. \n\nDado que cuenta con una cantidad suficiente de eventos analizados (30 commits recientes y 583 revisiones), se presenta con confianza media-alta [1].\n\nFuentes usadas:\n- [1] GitHub: muestra-piloto / resumen / @dev_12\n- [2] conocimiento interno: Definicion del arquetipo Cleric (arquetipo_cleric.md, fragmento 2/2)"
+  },
+  {
+   "id": "Q10",
+   "grupo": "perfil_mixto",
+   "pregunta": "¿Qué perfil tiene dev_11?",
+   "perfil_esperado": "mixto",
+   "fuentes_esperadas": [
+    "dev:dev_11",
+    "criterios-asignacion"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_11",
+    "criterios-asignacion",
+    "arquetipo-cleric"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 1.0,
+   "faithfulness": null,
+   "answer_relevancy": null,
+   "perfil_correcto": true,
+   "abstiene": true,
+   "respuesta": "Basado en la actividad pública registrada, el perfil de `dev_11` muestra una fuerte inclinación hacia el arquetipo Cleric, dado su alto volumen de revisiones de pull requests ajenos [1], el cual es una señal clave de este arquetipo [3]. Sin embargo, debido a que los datos provienen de una muestra limitada y no se detallan métricas de otros arquetipos, la confianza en el perfil es baja [1]. \n\n**Mezcla de arquetipos y confianza:**\n- **Cleric:** Alta presencia (respaldada por 462 revisiones de pull requests) [1].\n- **Druid / Bard:** Datos insuficientes en la muestra para determinar su peso exacto.\n- **Confianza:** Baja (requiere una muestra más amplia y análisis de issues o pruebas para un perfil más firme).\n\n**Fuentes usadas:**\n- [1] GitHub: muestra-piloto / resumen / @dev_11\n- [3] conocimiento interno: Definicion del arquetipo Cleric (arquetipo_cleric.md, fragmento 2/2)"
+  },
+  {
+   "id": "Q11",
+   "grupo": "perfil_mixto",
+   "pregunta": "¿Se puede asignar a dev_16 a un único tipo de proyecto?",
+   "perfil_esperado": "mixto",
+   "fuentes_esperadas": [
+    "dev:dev_16",
+    "criterios-asignacion"
+   ],
+   "fuentes_recuperadas": [
+    "criterios-asignacion",
+    "dev:dev_16",
+    "req-portal-documentacion"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 1.0,
+   "faithfulness": null,
+   "answer_relevancy": null,
+   "perfil_correcto": true,
+   "abstiene": true,
+   "respuesta": "Basado en la actividad pública registrada para `dev_16`, quien cuenta con 30 commits analizados y 825 revisiones de pull requests ajenos [2], presenta la siguiente mezcla de arquetipos y nivel de confianza:\n\n- **Mezcla de arquetipos:** Predominio del arquetipo **Druid** debido a su enfoque en infraestructura y despliegue (80% de los archivos tocados), combinado con rasgos de **Cleric** por su alta participación en revisiones y corrección de errores (45% de los commits) [2]. El componente **Bard** es nulo (0% en documentación y frontend) [2].\n- **Confianza:** Alta, sustentada en un volumen significativo de revisiones y commits analizados [2].\n\nRespecto a si se puede asignar a un único tipo de proyecto, el contexto recuperado no contiene información sobre los criterios o restricciones de asignación a proyectos específicos por parte de la organización (el fragmento disponible sobre criterios no detalla esta regla) [1]. \n\n*Evidencia insuficiente:* Falta información sobre los criterios de la organización para la asignación de talento y las restricciones de proyectos para determinar si puede asignarse a un único tipo.\n\n**Fuentes usadas:**\n- [2] GitHub: muestra-piloto / resumen / @dev_16"
+  },
+  {
+   "id": "Q12",
+   "grupo": "perfil_mixto",
+   "pregunta": "Describe la mezcla de arquetipos de dev_06.",
+   "perfil_esperado": "mixto",
+   "fuentes_esperadas": [
+    "dev:dev_06",
+    "criterios-asignacion"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_06",
+    "arquetipo-bard",
+    "arquetipo-druid"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 0.5,
+   "faithfulness": 0.7142857142857143,
+   "answer_relevancy": 0.7432281006914577,
+   "perfil_correcto": false,
+   "abstiene": false,
+   "respuesta": "Para describir la mezcla de arquetipos de `dev_06`, se observa una distribución en su actividad que abarca tanto la infraestructura como el frontend y la documentación [1]. \n\n* **Druid:** Presente con un 38 % de su actividad enfocada en infraestructura y despliegue [1].\n* **Bard:** Presente con un 47 % de su actividad centrada en documentación y frontend [1], alineándose con las señales de este arquetipo [2].\n* **Cleric:** No muestra actividad registrada en corrección de errores (0 %) [1].\n\n**Nivel de confianza:** Media-alta, basada en una muestra analizada de 30 commits recientes y 119 revisiones de pull requests ajenos [1].\n\n**Fuentes usadas:**\n- [1] GitHub: muestra-piloto / resumen / @dev_06\n- [2] conocimiento interno: Definicion del arquetipo Bard (arquetipo_bard.md, fragmento 1/1)"
+  },
+  {
+   "id": "Q13",
+   "grupo": "poca_actividad",
+   "pregunta": "¿Qué perfil tiene dev_18?",
+   "perfil_esperado": "insuficiente",
+   "fuentes_esperadas": [
+    "dev:dev_18",
+    "criterios-asignacion"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_18",
+    "criterios-asignacion",
+    "arquetipo-cleric"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 1.0,
+   "faithfulness": null,
+   "answer_relevancy": null,
+   "perfil_correcto": true,
+   "abstiene": true,
+   "respuesta": "Para `@dev_18`, la actividad pública disponible es muy baja (solo 4 commits analizados), por lo que se informa **confianza baja o datos insuficientes**. \n\nSe observa la siguiente tendencia:\n- **Druid:** 50% de los archivos tocados corresponden a infraestructura y despliegue [1].\n- **Cleric:** 25% de los commits son de corrección de errores, aunque no registra revisiones de pull requests ajenos [1].\n- **Bard:** 0% en documentación y frontend [1].\n\nPara obtener un perfil más firme y determinar una clase dominante, se requeriría actividad adicional, como un mayor volumen de commits, revisiones de pull requests de otras personas, interacción en issues y archivos de pruebas [1, 3].\n\n**Fuentes usadas:**\n- [1] GitHub: muestra-piloto / resumen / @dev_18\n- [3] conocimiento interno: Definicion del arquetipo Cleric (arquetipo_cleric.md, fragmento 2/2)"
+  },
+  {
+   "id": "Q14",
+   "grupo": "poca_actividad",
+   "pregunta": "¿Puedes recomendar a dev_17 para un proyecto de documentación?",
+   "perfil_esperado": "insuficiente",
+   "fuentes_esperadas": [
+    "dev:dev_17",
+    "criterios-asignacion"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_17",
+    "req-portal-documentacion",
+    "criterios-asignacion"
+   ],
+   "context_precision": 0.8333333333333333,
+   "context_recall": 1.0,
+   "faithfulness": null,
+   "answer_relevancy": null,
+   "perfil_correcto": true,
+   "abstiene": true,
+   "respuesta": "Basándonos en la actividad pública registrada para `@dev_17`, el 100% de los archivos tocados corresponden a documentación y frontend, y cuenta con 3 commits recientes [1]. Sin embargo, debido a que el volumen total analizado es muy bajo (solo 3 commits y 1 revisión de pull request), la **confianza es baja** [1]. \n\nSu mezcla de arquetipos observada muestra una fuerte inclinación hacia **Bard** (frontend, documentación y trabajo en equipo), sin una clase dominante absoluta debido a los datos insuficientes [1]. \n\nPara obtener un perfil más firme y confirmar su idoneidad para el *Requerimiento REQ-2026-021: portal de documentación y guías para desarrolladores* [2], se requeriría una actividad adicional mayor en commits de documentación y colaboración en el repositorio.\n\nFuentes usadas:\n- [1] GitHub: muestra-piloto / resumen / @dev_17\n- [2] conocimiento interno: Portal de documentacion y guias para desarrolladores (req_portal_documentacion.md, fragmento 1/3)"
+  },
+  {
+   "id": "Q15",
+   "grupo": "poca_actividad",
+   "pregunta": "¿Cuál es el arquetipo dominante de dev_04?",
+   "perfil_esperado": "insuficiente",
+   "fuentes_esperadas": [
+    "dev:dev_04",
+    "criterios-asignacion"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_04",
+    "arquetipo-druid",
+    "req-estabilizacion-microservicios"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 0.5,
+   "faithfulness": null,
+   "answer_relevancy": null,
+   "perfil_correcto": true,
+   "abstiene": true,
+   "respuesta": "Con base en la actividad pública registrada, `dev_04` presenta datos insuficientes para declarar un arquetipo dominante debido a su baja actividad analizada (6 commits recientes y 2 revisiones) [1]. \n\nLa mezcla de arquetipos observada muestra una tendencia hacia el rol de **Cleric**, debido a que el 50 % de sus commits corresponden a corrección de errores y cuenta con revisiones de pull requests ajenos [1]. No registra actividad en infraestructura ni despliegue (característico del Druid), ni en documentación o frontend (característico del Bard) [1]. \n\nLa confianza en esta tendencia es **baja** [1]. Para obtener un perfil más firme, se requeriría analizar una mayor cantidad de commits, así como su participación en archivos de infraestructura, pruebas, documentación o frontend [1].\n\nFuentes usadas:\n- [1] Actividad de dev_04 en muestra-piloto (resumen de commits y revisiones)"
+  },
+  {
+   "id": "Q16",
+   "grupo": "poca_actividad",
+   "pregunta": "Dame el perfil de dev_14 y qué actividad faltaría para afirmarlo.",
+   "perfil_esperado": "insuficiente",
+   "fuentes_esperadas": [
+    "dev:dev_14",
+    "criterios-asignacion"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_14",
+    "criterios-asignacion",
+    "criterios-asignacion"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 1.0,
+   "faithfulness": null,
+   "answer_relevancy": null,
+   "perfil_correcto": true,
+   "abstiene": true,
+   "respuesta": "Para **dev_14**, la actividad pública analizada es de únicamente 2 commits recientes y 0 revisiones de pull requests ajenos [1]. \n\nDebido a que cuenta con menos de 10 eventos de actividad, la organización establece que se debe declarar evidencia insuficiente y no se puede determinar una clase dominante [3]. La tendencia observada muestra commits de código general sin actividad en infraestructura, documentación, frontend, pruebas ni corrección de errores [1].\n\nPara obtener un perfil más firme y superar la confianza baja, se requeriría alcanzar o superar los 10 eventos de actividad pública registrados en el repositorio [3].\n\n**Fuentes usadas:**\n- [1] GitHub: muestra-piloto / resumen / @dev_14\n- [3] conocimiento interno: Criterios de la organizacion para recomendar perfiles (criterios_asignacion.md, fragmento 2/3)"
+  },
+  {
+   "id": "Q17",
+   "grupo": "sin_datos",
+   "pregunta": "¿Qué perfil tiene dev_99?",
+   "perfil_esperado": "insuficiente",
+   "fuentes_esperadas": [],
+   "fuentes_recuperadas": [
+    "criterios-asignacion",
+    "arquetipo-cleric"
+   ],
+   "context_precision": null,
+   "context_recall": null,
+   "faithfulness": null,
+   "answer_relevancy": null,
+   "perfil_correcto": true,
+   "abstiene": true,
+   "respuesta": "Evidencia insuficiente. \n\nFalta información en el contexto sobre la actividad pública de `dev_99` en GitHub para poder determinar su mezcla de arquetipos y su nivel de confianza.\n\nFuentes usadas:\n- [1] [Criterios de la organizacion para recomendar perfiles]\n- [2] [Definicion del arquetipo Cleric]"
+  },
+  {
+   "id": "Q18",
+   "grupo": "requerimiento",
+   "pregunta": "¿Qué requerimiento exige experiencia con Terraform y pipelines de despliegue?",
+   "perfil_esperado": null,
+   "fuentes_esperadas": [
+    "req-migracion-nube"
+   ],
+   "fuentes_recuperadas": [
+    "req-migracion-nube",
+    "req-migracion-nube",
+    "dev:dev_05",
+    "dev:dev_16",
+    "dev:dev_15",
+    "dev:dev_12"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 1.0,
+   "faithfulness": 1.0,
+   "answer_relevancy": 0.6282942124848317,
+   "perfil_correcto": null,
+   "abstiene": null,
+   "respuesta": "El requerimiento que exige experiencia con Terraform y pipelines de despliegue es la \"Migración de la plataforma de datos a la nube\" (req_migracion_nube.md), el cual contempla definir la infraestructura con Terraform, archivos YAML y automatizar pipelines de integración y entrega continua con GitHub Actions y Docker [1].\n\nFuentes usadas:\n- [1] conocimiento interno: Migracion de la plataforma de datos a la nube (req_migracion_nube.md, fragmento 2/3)"
+  },
+  {
+   "id": "Q19",
+   "grupo": "requerimiento",
+   "pregunta": "¿De qué trata el requerimiento sobre las caídas de facturación y cuántas personas pide?",
+   "perfil_esperado": null,
+   "fuentes_esperadas": [
+    "req-estabilizacion-microservicios"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_12",
+    "req-estabilizacion-microservicios",
+    "dev:dev_05",
+    "dev:dev_16",
+    "dev:dev_09",
+    "req-estabilizacion-microservicios"
+   ],
+   "context_precision": 0.5,
+   "context_recall": 1.0,
+   "faithfulness": 1.0,
+   "answer_relevancy": 0.6375800747922553,
+   "perfil_correcto": null,
+   "abstiene": null,
+   "respuesta": "El requerimiento sobre las caídas de facturación (REQ-2026-014) trata sobre la estabilización de los microservicios de facturación y cobranza de la Dirección de Finanzas de Andes Soluciones Digitales, los cuales presentan caídas intermitentes en el cierre mensual, errores de tiempo de espera, colas saturadas y fallas en despliegues por configuración inconsistente [2]. \n\nPara este proyecto se solicita un equipo de 2 personas [2].\n\nFuentes usadas:\n- [2] Conocimiento interno: Estabilizacion de microservicios de facturacion (req_estabilizacion_microservicios.md, fragmento 1/3)"
+  },
+  {
+   "id": "Q20",
+   "grupo": "requerimiento",
+   "pregunta": "¿Qué se necesita para el portal de documentación para desarrolladores?",
+   "perfil_esperado": null,
+   "fuentes_esperadas": [
+    "req-portal-documentacion"
+   ],
+   "fuentes_recuperadas": [
+    "req-portal-documentacion",
+    "req-portal-documentacion",
+    "dev:dev_05",
+    "dev:dev_04",
+    "dev:dev_06",
+    "dev:dev_12"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 1.0,
+   "faithfulness": 1.0,
+   "answer_relevancy": 0.6080731316204603,
+   "perfil_correcto": null,
+   "abstiene": null,
+   "respuesta": "Para el Requerimiento REQ-2026-021 (Portal de documentación y guías para desarrolladores), se solicita un equipo de 1 persona por un estimado de 6 semanas [1]. \n\nLos criterios de aceptación son:\n- Publicar una guía de inicio para todas las APIs internas [2].\n- Reducir el tiempo de incorporación de un equipo nuevo a menos de una semana [2].\n\nFuentes usadas:\n- [1] conocimiento interno: Portal de documentacion y guias para desarrolladores (req_portal_documentacion.md, fragmento 1/3)\n- [2] conocimiento interno: Portal de documentacion y guias para desarrolladores (req_portal_documentacion.md, fragmento 3/3)"
+  },
+  {
+   "id": "Q21",
+   "grupo": "criterio",
+   "pregunta": "¿Cuántos eventos de actividad se necesitan como mínimo para recomendar a alguien?",
+   "perfil_esperado": null,
+   "fuentes_esperadas": [
+    "criterios-asignacion"
+   ],
+   "fuentes_recuperadas": [
+    "criterios-asignacion",
+    "criterios-asignacion",
+    "dev:dev_09",
+    "dev:dev_12",
+    "dev:dev_20",
+    "dev:dev_05"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 1.0,
+   "faithfulness": null,
+   "answer_relevancy": null,
+   "perfil_correcto": null,
+   "abstiene": null,
+   "respuesta": "Como asistente DevMetrics, te informo que se necesitan como mínimo 10 eventos de actividad para poder recomendar a alguien; por debajo de esa cantidad se declara evidencia insuficiente [1].\n\nFuentes usadas:\n- [1] conocimiento interno: Criterios de la organizacion para recomendar perfiles (criterios_asignacion.md, fragmento 2/3)"
+  },
+  {
+   "id": "Q22",
+   "grupo": "recomendacion",
+   "pregunta": "¿Qué perfil de arquetipo conviene para el requerimiento de migración a la nube?",
+   "perfil_esperado": "druid",
+   "fuentes_esperadas": [
+    "req-migracion-nube",
+    "arquetipo-druid"
+   ],
+   "fuentes_recuperadas": [
+    "req-migracion-nube",
+    "req-migracion-nube",
+    "dev:dev_05",
+    "dev:dev_16",
+    "dev:dev_08",
+    "dev:dev_12"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 0.5,
+   "faithfulness": 0.5,
+   "answer_relevancy": 0.7210714726467589,
+   "perfil_correcto": true,
+   "abstiene": false,
+   "respuesta": "Para el requerimiento de migración de la plataforma de datos a la nube, que se enfoca en infraestructura como código, despliegues y migración de datos [1, 2], conviene principalmente el arquetipo **Druid** (especializado en bases de datos, arquitectura e infraestructura). \n\nFuentes usadas: [1], [2]."
+  },
+  {
+   "id": "Q23",
+   "grupo": "recomendacion",
+   "pregunta": "¿Qué arquetipos pide la estabilización de microservicios de facturación?",
+   "perfil_esperado": null,
+   "fuentes_esperadas": [
+    "req-estabilizacion-microservicios",
+    "arquetipo-cleric",
+    "arquetipo-druid"
+   ],
+   "fuentes_recuperadas": [
+    "req-estabilizacion-microservicios",
+    "req-estabilizacion-microservicios",
+    "dev:dev_16",
+    "dev:dev_02",
+    "dev:dev_05",
+    "dev:dev_18"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 0.3333333333333333,
+   "faithfulness": 0.5,
+   "answer_relevancy": 0.5682801463851704,
+   "perfil_correcto": null,
+   "abstiene": null,
+   "respuesta": "Para el requerimiento de estabilización de microservicios de facturación, el alcance técnico solicita:\n\n- Estabilizar la infraestructura (pipelines de despliegue, archivos de Docker y Kubernetes, migraciones de base de datos y monitoreo), lo cual corresponde al arquetipo **Druid** [2].\n- Corregir errores recurrentes y realizar revisiones rigurosas de pull requests, alineado con el arquetipo **Cleric** [2].\n- Ampliar la cobertura de pruebas de los servicios críticos, tarea que también se asocia al soporte y aseguramiento de calidad del **Cleric** [2].\n\nFuentes usadas: [2]."
+  },
+  {
+   "id": "Q24",
+   "grupo": "perfil_bard",
+   "pregunta": "¿Dev_20 es adecuado para escribir guías y documentación?",
+   "perfil_esperado": "bard",
+   "fuentes_esperadas": [
+    "dev:dev_20",
+    "arquetipo-bard"
+   ],
+   "fuentes_recuperadas": [
+    "dev:dev_20",
+    "req-portal-documentacion",
+    "req-portal-documentacion"
+   ],
+   "context_precision": 1.0,
+   "context_recall": 0.5,
+   "faithfulness": 1.0,
+   "answer_relevancy": 0.634650186482527,
+   "perfil_correcto": true,
+   "abstiene": false,
+   "respuesta": "Hola. Soy DevMetrics. Con base en los metadatos públicos de GitHub, aquí tienes el análisis para tu consulta:\n\n**Mezcla de arquetipos y confianza para `dev_20`:**\n- **Bard:** 67 % (alta actividad en documentación y frontend).\n- **Cleric:** 47 % (constancia en corrección de errores y 102 revisiones de PRs ajenos).\n- **Druid:** 14 % (baja participación en infraestructura).\n- **Confianza:** Alta (basada en una muestra de 30 commits y 102 revisiones) [1].\n\n**Evaluación para el requerimiento:**\nSí, `dev_20` es adecuado para escribir guías y documentación. Su perfil muestra una fuerte inclinación hacia tareas del arquetipo Bard (67 % de los archivos tocados corresponden a documentación y frontend) [1], lo cual coincide directamente con el perfil buscado para el proyecto de portal de documentación, que requiere redacción de guías, tutoriales y componentes de interfaz [3].\n\n**Fuentes usadas:**\n- [1] GitHub: muestra-piloto / resumen / @dev_20\n- [3] conocimiento interno: Portal de documentacion y guias para desarrolladores (req_portal_documentacion.md, fragmento 2/3)"
+  }
+ ]
+}

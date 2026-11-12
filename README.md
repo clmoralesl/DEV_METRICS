@@ -88,6 +88,21 @@ python scripts/consola.py chat --pregunta "que actividad tiene clmoralesl"   # u
 - Por el streaming, el texto se muestra antes de validarlo: una cita que el modelo invente aparece en pantalla aunque no figure en la linea `Fuentes:` (solo lista las recuperadas). Si el proveedor se corta a mitad de la respuesta queda el texto parcial, un aviso de error y el turno no entra en la memoria.
 - Con Ollama y un modelo de razonamiento (qwen3) el streaming puede llegar vacio (el razonamiento no es contenido): usar Gemini (`DEVMETRICS_LLM_PROVIDER=gemini`) para la demo.
 
+## Evaluacion del agente
+
+```
+python scripts/evaluar_agente.py
+```
+
+Evalua las 24 preguntas de `tests/casos_agente.json` sobre un corpus sintetico (la base interna y
+23 perfiles derivados de `tests/muestra_agregados.py` con alias neutros) y regenera la tabla de
+`documentacion/pruebas.md` (seccion del issue 16) y `documentacion/evaluacion_resultados.json`.
+Precision y recall de contexto son deterministas; fidelidad y relevancia usan el LLM como juez
+(Gemini, `GOOGLE_API_KEY`) con cache en `data/evaluacion/`: repetir la orden no gasta cuota para lo ya
+pedido. Opciones: `--limite N`, `--solo-recuperacion` (sin LLM ni clave), `--pausa S` (segundos entre
+llamadas), `--proveedor ollama`, `--trazas` (LangSmith; requiere `LANGSMITH_API_KEY`). Si la cuota se
+agota, el script guarda lo avanzado y se detiene sin reintentos.
+
 ## Verificacion
 
 ```
