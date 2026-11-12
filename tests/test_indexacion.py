@@ -287,3 +287,10 @@ def test_documento_sin_una_de_las_fechas(indice):
     indice.indexar(segmentar([d]))
     assert indice.consultar("issue", hasta="2026-06-01") == []
     assert len(indice.consultar("issue", desde="2026-04-01")) == 1
+
+
+def test_cada_indice_en_memoria_tiene_su_propio_sistema_de_chroma():
+    """Regresion: compartir sistema causaba "Error finding id" al azar con filtros (issue 18)."""
+    a = IndiceVectorial(EmbeddingsBolsa(), ruta=None)
+    b = IndiceVectorial(EmbeddingsBolsa(), ruta=None)
+    assert a._cliente._server is not b._cliente._server

@@ -74,7 +74,7 @@ tamano, 600 con solapamiento de 120 supera a 600 sin solapar en precision y cobe
 ## Pruebas automaticas
 
 `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verificar.ps1` (lint con ruff y
-pytest). Estado tras el issue 8: lint sin errores, 224 pruebas pasadas y 3 omitidas.
+pytest). Estado vigente en la seccion del issue 18 (al final).
 `tests/test_perfiles.py` cubre documentos de perfil (atribucion, metadatos, revisiones de PR
 propios, issues) y segmentacion (metadatos, tamano maximo, configuracion invalida) con datos
 sinteticos.
@@ -400,3 +400,70 @@ Generada por `python scripts/evaluar_agente.py` (2026-11-11; agente y juez: gemi
 | Q24 | perfil_bard | 1.00 | 0.50 | 1.00 | 0.63 | si | no |
 | **Media** | | **0.95** | **0.73** | **0.77** | **0.67** | **0.89** | |
 <!-- evaluacion:fin -->
+
+## Issue 18: pruebas de software y evidencia (IE5)
+
+Estado medido el 2026-11-11: lint sin errores, 484 pruebas pasadas y 5 omitidas, cobertura de
+lineas 99,80 % de `src/devmetrics` (4 lineas sin cubrir de 1989), estable en 3 corridas seguidas.
+Las 5 omitidas son pruebas de integracion con embeddings o servicios reales, que solo corren con
+`DEVMETRICS_INTEGRACION=1`; la CI no usa red ni claves.
+
+### Reproduccion
+
+```
+python -m pytest -q --cov            # cobertura con umbral (fail_under = 95 en pyproject.toml)
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verificar.ps1
+```
+
+`scripts/verificar.config.json` (paso que lee `verificar.ps1`) y la CI ejecutan ahora `pytest --cov`, de modo que una caida de la
+cobertura bajo 95 % deja la verificacion en rojo. `pytest-cov` se agrego a `.[dev]`.
+
+### Estructura de la evidencia
+
+| Nivel | Donde | Que cubre |
+|---|---|---|
+| Unidad | `tests/test_<modulo>.py` (senales, perfil, prompts, llm, ingesta, indexacion, evaluacion, ...) | funciones puras y clases con dobles |
+| Integracion con fixtures | `tests/fixtures/github/`, `tests/github_falso.py`, `tests/embeddings_falsos.py`, `tests/muestra_agregados.py`, `test_integracion_cache_indice_y_consulta_simulada` | ingesta con HTTP falso, cache local, indice, recuperador y chat simulado sin red |
+| Casos limite y errores | `tests/test_casos_limite.py` (56) y `tests/test_casos_limite_2.py` (43) | configuracion invalida, consultas vacias, salidas del juez o del LLM mal formadas, limites de tasa, versiones de esquema, TOML invalido, fallos de proveedor, comandos de consola mal formados |
+| Integracion real (opt-in) | `test_*_integracion.py` | embeddings y LLM reales, omitidas por defecto |
+
+Antes de este issue la cobertura era 95 % (384 pruebas); los huecos estaban en la consola
+(74 %: ramas de error, `construir` y `main`) y en `llm/embeddings.py` (67 %, carga perezosa del
+motor). Ambos quedaron cubiertos con dobles de `fastembed` y de `truststore`, sin descargar modelos.
+
+### Defecto encontrado y corregido: prueba intermitente de chromadb
+
+`tests/test_conocimiento.py` fallaba en aproximadamente 1 de cada 3 corridas completas con
+`chromadb.errors.InternalError: Error finding id` (consultas con filtro). Diagnostico:
+- Con un solo indice efimero: 0 fallos en 600 construcciones. Con dos indices vivos en el mismo
+  proceso (conocimiento y perfiles): 9 fallos en 600. Cualquier consulta con filtro fallaba sobre
+  el indice afectado y las consultas sin filtro funcionaban; reintentar no ayudaba.
+- Causa: los clientes efimeros de chromadb 1.5.9 comparten un sistema por proceso. Hipotesis
+  consistente con los datos, no confirmada en el codigo de chromadb.
+- Correccion: `IndiceVectorial(ruta=None)` vacia la cache de sistemas antes de crear su cliente
+  (`SharedSystemClient.clear_system_cache()`), y cada indice efimero queda con su propio sistema.
+  Medido: 0 fallos en 600 construcciones y 0 de 15 corridas de la suite completa (mediciones manuales
+  con scripts desechables, no versionados). La prueba determinista
+  `test_cada_indice_en_memoria_tiene_su_propio_sistema_de_chroma` (`tests/test_indexacion.py`) verifica
+  que cada indice efimero usa su propio servidor de Chroma, lo que falla si se quita la correccion.
+- Alcance: solo afecta a indices en memoria (pruebas y usos sin `ruta`). Los indices persistentes
+  de la consola no cambian.
+
+### Limites
+
+- Cobertura de lineas, no de ramas ni de mutaciones: 99,80 % no implica que cada comportamiento
+  este verificado. Las pruebas de integracion usan embeddings falsos (bolsa de palabras con hash),
+  que validan el flujo y los filtros, no la calidad semantica de la recuperacion (eso lo mide la
+  seccion del issue 16, con Gemini).
+- Lineas sin cubrir: `validadores.py:56` es inalcanzable (codigo muerto tras `isinstance(objeto,
+  dict)`); las otras tres son rutas de reintento con `Retry-After`, 5xx y el exito de la consulta en
+  vivo, cubiertas parcialmente por pruebas anteriores. No se fuerzan.
+- Observaciones de comportamiento sin corregir (fuera del alcance del issue): `_espera_limite`
+  en `ingesta/cliente.py` convierte `X-RateLimit-Reset` con `float(...)` sin proteger un valor no
+  numerico (lanzaria `ValueError` sin tipar, a diferencia de `Retry-After`), y con
+  `X-RateLimit-Remaining: 0` sin `Reset` espera 1 s. GitHub siempre envia ambas cabeceras, por lo
+  que el riesgo es bajo.
+- `scripts/` (CLI) no entra en la cobertura medida; se prueba por los modulos que reutiliza y, la
+  consola, por `tests/test_consola.py`.
+- No se ejecuto la CI en GitHub: pendiente tras el push. El PR #38 muestra el job de SonarCloud
+  en rojo; es ajeno a este issue y no se investigo.
