@@ -2,6 +2,6 @@
   "lineasPorFalla": 15,
   "pasos": [
     { "nombre": "lint", "comando": "python -m ruff check .", "siExiste": "pyproject.toml" },
-    { "nombre": "pruebas", "comando": "python -m pytest -q --tb=short", "siExiste": "tests" }
+    { "nombre": "pruebas", "comando": "python -m pytest -q --tb=short --cov --cov-report=term:skip-covered", "siExiste": "tests" }
   ]
 }

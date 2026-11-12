@@ -19,6 +19,16 @@ CLAVES_GRUPO = ("desarrollador", "repositorio", "tipo_fuente")
 _LOTE = 64
 
 
+def _aislar_sistema_efimero() -> None:
+    """Da a cada cliente efimero su propio sistema de Chroma (ver `IndiceVectorial`)."""
+    try:
+        from chromadb.api.shared_system_client import SharedSystemClient
+
+        SharedSystemClient.clear_system_cache()
+    except ImportError:  # ruta interna de Chroma: si cambia en otra version, se omite el ajuste
+        pass
+
+
 @dataclass(frozen=True)
 class ResultadoIndexado:
     nuevos: int = 0
@@ -99,8 +109,11 @@ class IndiceVectorial:
         self._claves = tuple(claves_grupo)
         ajustes = Settings(anonymized_telemetry=False)
         if ruta is None:
+            # Los clientes efimeros comparten un sistema por proceso; con dos indices vivos, Chroma
+            # 1.5 fallaba al azar ("Error finding id") en consultas con filtro. Vaciar la cache da
+            # a cada indice su propio sistema (medido: 9 fallos en 600 construcciones a 0).
+            _aislar_sistema_efimero()
             self._cliente = chromadb.EphemeralClient(settings=ajustes)
-            # El cliente efimero comparte estado en el proceso: un nombre unico aisla cada indice.
             coleccion = f"{coleccion}-{uuid.uuid4().hex}"
         else:
             self._cliente = chromadb.PersistentClient(path=ruta, settings=ajustes)
